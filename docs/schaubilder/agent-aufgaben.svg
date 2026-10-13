@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="pfeil" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 4 L0 8 Z" fill="#6B7C93"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#F3F6F5"/>
+
+  <!-- Titel -->
+  <text x="80" y="92" font-size="56" font-weight="700" fill="#0F1B2D">Was der Agent lösen soll</text>
+
+  <!-- Eingang und Leitsatz -->
+  <rect x="80" y="150" width="420" height="90" rx="16" fill="#0F1B2D"/>
+  <text x="290" y="192" font-size="32" font-weight="700" fill="#FFFFFF" text-anchor="middle">Kundenäußerung</text>
+  <text x="290" y="224" font-size="24" fill="#C9D6E6" text-anchor="middle">Mail · Ticket · Gespräch</text>
+  <rect x="560" y="150" width="1280" height="90" rx="16" fill="#E4EAE8"/>
+  <text x="590" y="208" font-size="32" font-weight="700" fill="#0F1B2D">Der Agent schlägt vor, ein Mensch entscheidet.</text>
+
+  <!-- Pfeile zwischen den Schritten -->
+  <g stroke="#6B7C93" stroke-width="3" fill="none" marker-end="url(#pfeil)">
+    <path d="M290 240 V283"/>
+    <path d="M290 435 V469"/>
+    <path d="M290 621 V655"/>
+    <path d="M290 807 V841"/>
+    <path d="M500 360 H556"/>
+    <path d="M500 546 H556"/>
+    <path d="M500 732 H556"/>
+    <path d="M500 918 H556"/>
+  </g>
+  <g font-size="22" fill="#44566B">
+    <text x="306" y="458">Auftrag</text>
+    <text x="306" y="644">Änderung oder Feature</text>
+    <text x="306" y="830">Extra</text>
+  </g>
+
+  <!-- Bänder -->
+  <rect x="560" y="285" width="1280" height="150" rx="18" fill="#E4EAE8"/>
+  <rect x="560" y="471" width="1280" height="150" rx="18" fill="#E4EAE8"/>
+  <rect x="560" y="657" width="1280" height="150" rx="18" fill="#E4EAE8"/>
+  <rect x="560" y="843" width="1280" height="150" rx="18" fill="#E4EAE8"/>
+
+  <!-- Prüfschritte -->
+  <g>
+    <rect x="80" y="285" width="420" height="150" rx="16" fill="#0E7C70"/>
+    <text x="104" y="337" font-size="32" font-weight="700" fill="#FFFFFF">1 · Verbindlichkeit</text>
+    <text x="104" y="377" font-size="24" fill="#DDF1EE">Überlegung, Wunsch</text>
+    <text x="104" y="407" font-size="24" fill="#DDF1EE">oder Auftrag?</text>
+
+    <rect x="80" y="471" width="420" height="150" rx="16" fill="#0E7C70"/>
+    <text x="104" y="523" font-size="32" font-weight="700" fill="#FFFFFF">2 · Art des Anliegens</text>
+    <text x="104" y="563" font-size="24" fill="#DDF1EE">Änderung, Fehler</text>
+    <text x="104" y="593" font-size="24" fill="#DDF1EE">oder Reklamation?</text>
+
+    <rect x="80" y="657" width="420" height="150" rx="16" fill="#0E7C70"/>
+    <text x="104" y="709" font-size="32" font-weight="700" fill="#FFFFFF">3 · Vertrag</text>
+    <text x="104" y="749" font-size="24" fill="#DDF1EE">Im Vertrag enthalten,</text>
+    <text x="104" y="779" font-size="24" fill="#DDF1EE">extra oder unklar?</text>
+
+    <rect x="80" y="843" width="420" height="150" rx="16" fill="#0E7C70"/>
+    <text x="104" y="895" font-size="32" font-weight="700" fill="#FFFFFF">4 · Kontingent</text>
+    <text x="104" y="935" font-size="24" fill="#DDF1EE">Reicht das Restkontingent?</text>
+    <text x="104" y="965" font-size="24" fill="#DDF1EE">(Regel, kein Modell)</text>
+  </g>
+
+  <!-- Zeile 1: Verbindlichkeit -->
+  <g>
+    <rect x="580" y="295" width="400" height="130" rx="14" fill="#DDF1EE" stroke="#0E7C70" stroke-width="3"/>
+    <text x="600" y="331" font-size="28" font-weight="700" fill="#0F1B2D">Überlegung</text>
+    <text x="600" y="363" font-size="24" fill="#0F1B2D">Notieren, kein Preis</text>
+    <text x="600" y="391" font-size="22" fill="#44566B">→ Projektleiterin</text>
+
+    <rect x="1000" y="295" width="400" height="130" rx="14" fill="#DDF1EE" stroke="#0E7C70" stroke-width="3"/>
+    <text x="1020" y="331" font-size="28" font-weight="700" fill="#0F1B2D">Wunsch</text>
+    <text x="1020" y="363" font-size="24" fill="#0F1B2D">Rückfrage an den Kunden</text>
+    <text x="1020" y="391" font-size="22" fill="#44566B">→ Projektleiterin</text>
+
+    <rect x="1420" y="295" width="400" height="130" rx="14" fill="#F3F6F5" stroke="#8795A8" stroke-width="3" stroke-dasharray="8 6"/>
+    <text x="1440" y="331" font-size="28" font-weight="700" fill="#0F1B2D">Auftrag</text>
+    <text x="1440" y="363" font-size="24" fill="#0F1B2D">Weiter zu Schritt 2</text>
+  </g>
+
+  <!-- Zeile 2: Art -->
+  <g>
+    <rect x="580" y="481" width="400" height="130" rx="14" fill="#F6E6D8" stroke="#A8480A" stroke-width="3"/>
+    <text x="600" y="517" font-size="28" font-weight="700" fill="#0F1B2D">Fehler</text>
+    <text x="600" y="549" font-size="24" fill="#0F1B2D">Weiterleiten</text>
+    <text x="600" y="577" font-size="22" fill="#44566B">→ Senior-Entwicklung</text>
+
+    <rect x="1000" y="481" width="400" height="130" rx="14" fill="#F6E6D8" stroke="#A8480A" stroke-width="3"/>
+    <text x="1020" y="517" font-size="28" font-weight="700" fill="#0F1B2D">Reklamation</text>
+    <text x="1020" y="549" font-size="24" fill="#0F1B2D">Weiterleiten</text>
+    <text x="1020" y="577" font-size="22" fill="#44566B">→ Projektleiterin,</text>
+    <text x="1020" y="601" font-size="22" fill="#44566B">Vertragsfrage: Geschäftsführer</text>
+
+    <rect x="1420" y="481" width="400" height="130" rx="14" fill="#F3F6F5" stroke="#8795A8" stroke-width="3" stroke-dasharray="8 6"/>
+    <text x="1440" y="517" font-size="28" font-weight="700" fill="#0F1B2D">Änderung oder Feature</text>
+    <text x="1440" y="549" font-size="24" fill="#0F1B2D">Weiter zu Schritt 3</text>
+  </g>
+
+  <!-- Zeile 3: Vertrag -->
+  <g>
+    <rect x="580" y="667" width="400" height="130" rx="14" fill="#DDF1EE" stroke="#0E7C70" stroke-width="3"/>
+    <text x="600" y="703" font-size="28" font-weight="700" fill="#0F1B2D">Inklusive</text>
+    <text x="600" y="735" font-size="24" fill="#0F1B2D">Einplanen</text>
+    <text x="600" y="763" font-size="22" fill="#44566B">→ Projektleiterin</text>
+
+    <rect x="1000" y="667" width="400" height="130" rx="14" fill="#F3F6F5" stroke="#8795A8" stroke-width="3" stroke-dasharray="8 6"/>
+    <text x="1020" y="703" font-size="28" font-weight="700" fill="#0F1B2D">Extra</text>
+    <text x="1020" y="735" font-size="24" fill="#0F1B2D">Weiter zu Schritt 4</text>
+
+    <rect x="1420" y="667" width="400" height="130" rx="14" fill="#E6E3F6" stroke="#5B4BB7" stroke-width="3"/>
+    <text x="1440" y="703" font-size="28" font-weight="700" fill="#0F1B2D">Unklar</text>
+    <text x="1440" y="735" font-size="24" fill="#0F1B2D">Eskalieren</text>
+    <text x="1440" y="763" font-size="22" fill="#44566B">→ Projektleiterin,</text>
+    <text x="1440" y="787" font-size="22" fill="#44566B">Auslegung: Geschäftsführer</text>
+  </g>
+
+  <!-- Zeile 4: Kontingent -->
+  <g>
+    <rect x="580" y="853" width="400" height="130" rx="14" fill="#DDF1EE" stroke="#0E7C70" stroke-width="3"/>
+    <text x="600" y="889" font-size="28" font-weight="700" fill="#0F1B2D">Im Kontingent</text>
+    <text x="600" y="921" font-size="24" fill="#0F1B2D">Verbrauch buchen</text>
+    <text x="600" y="949" font-size="22" fill="#44566B">→ Projektleiterin</text>
+
+    <rect x="1000" y="853" width="400" height="130" rx="14" fill="#DCE3F0" stroke="#1E2F4D" stroke-width="3"/>
+    <text x="1020" y="889" font-size="28" font-weight="700" fill="#0F1B2D">Außerhalb oder keins</text>
+    <text x="1020" y="921" font-size="24" fill="#0F1B2D">Change-Request-Entwurf</text>
+    <text x="1020" y="949" font-size="22" fill="#44566B">→ Vertrieb, über 1.500 €:</text>
+    <text x="1020" y="973" font-size="22" fill="#44566B">Geschäftsführer</text>
+
+    <rect x="1420" y="853" width="400" height="130" rx="14" fill="#E6E3F6" stroke="#5B4BB7" stroke-width="3"/>
+    <text x="1440" y="889" font-size="28" font-weight="700" fill="#0F1B2D">Unsicher, in jedem Schritt</text>
+    <text x="1440" y="921" font-size="24" fill="#0F1B2D">Eskalieren</text>
+    <text x="1440" y="949" font-size="22" fill="#44566B">→ Projektleiterin</text>
+  </g>
+
+  <!-- Legende -->
+  <g font-size="22" fill="#44566B">
+    <rect x="80" y="1022" width="22" height="22" rx="5" fill="#DDF1EE" stroke="#0E7C70" stroke-width="2"/>
+    <text x="112" y="1041">intern erledigt</text>
+    <rect x="300" y="1022" width="22" height="22" rx="5" fill="#F6E6D8" stroke="#A8480A" stroke-width="2"/>
+    <text x="332" y="1041">weiterleiten</text>
+    <rect x="490" y="1022" width="22" height="22" rx="5" fill="#DCE3F0" stroke="#1E2F4D" stroke-width="2"/>
+    <text x="522" y="1041">Geld, Change Request</text>
+    <rect x="780" y="1022" width="22" height="22" rx="5" fill="#E6E3F6" stroke="#5B4BB7" stroke-width="2"/>
+    <text x="812" y="1041">eskalieren</text>
+    <rect x="960" y="1022" width="22" height="22" rx="5" fill="#F3F6F5" stroke="#8795A8" stroke-width="2" stroke-dasharray="4 3"/>
+    <text x="992" y="1041">weiter zum nächsten Schritt</text>
+    <text x="1840" y="1041" text-anchor="end">Entwurf 2026-10-13</text>
+  </g>
+</svg>
