@@ -1,0 +1,64 @@
+# Grundform, Stand 2026-10-13. Ziel: nichts Privates oder Fremdes im Repo, die MSIT liest mit.
+
+# Geheimnisse und Zugangsdaten (Beispieldatei .env.example bleibt erlaubt)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+credentials*.json
+*credentials*.json
+*.token
+
+# n8n: Credentials und lokale Daten gehören nie ins Repo, Workflow-Exporte (.json) schon
+.n8n/
+n8n-data/
+
+# Kursmaterial und Fremdformate: nicht unser Eigentum, Inhalte stehen als Markdown in docs/
+*.pdf
+*.pptx
+*.potx
+*.docx
+*.dotx
+*.xlsx
+*.xlsm
+
+# Lokale Arbeitsdaten und Datenbanken
+*.sqlite
+*.sqlite3
+*.db
+data/private/
+scratch/
+tmp/
+*.log
+*.bak
+
+# Archive
+*.zip
+*.7z
+*.tar
+*.tar.gz
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Node
+node_modules/
+
+# Editoren und Betriebssystem
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Lokale Konfiguration von KI-Werkzeugen
+.claude/
+CLAUDE.md
