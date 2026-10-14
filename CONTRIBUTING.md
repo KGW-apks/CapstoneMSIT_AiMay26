@@ -24,5 +24,5 @@ Am Ende liest die MSIT mit. Bei jedem Push prüft der Privatsphäre-Check, und e
 - **Commit-Mail:** nur die GitHub-noreply-Adresse. Einrichten unter GitHub, Settings, Emails: „Keep my email addresses private“ aktivieren, die angezeigte Adresse (`<nummer>+<name>@users.noreply.github.com`) dann im Repo setzen mit `git config user.email "<diese Adresse>"`.
 - **Keine echten Mailadressen** in Dateien. Für Testdaten Domains wie `example.com` oder `kunde.test` verwenden.
 - **Keine lokalen Pfade, Schlüssel, Tokens oder Passwörter.**
-- **Kein Kursmaterial und keine Fremdformate** (PDF, PowerPoint, Word, Excel). Inhalte als Markdown in `docs/`.
-
+- **Kein Kursmaterial von MSIT oder IHK** (Folien, Skripte, Aufgabenblätter). Eigene fiktive Unterlagen wie Verträge oder Leistungsbeschreibungen dürfen PDF, Word oder Excel sein.
+- **Keine Schlüssel- oder Datenbankdateien** (`.env`, `.pem`, `.key`, `.sqlite` und ähnliche).

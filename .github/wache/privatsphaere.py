@@ -7,7 +7,7 @@ Am Ende liest die MSIT mit, deshalb wird rot, was hier landet:
   anthropic.com fuer Co-Author-Zeilen, reservierte Testdomains wie example.com)
 - lokale Benutzerpfade, Schluessel und Tokens
 - Wikilinks in Markdown (Verweise aus privaten Notizsammlungen)
-- Fremdformate wie PDF, PPTX, DOCX, XLSX (Kursmaterial ist nicht unseres)
+- Schluessel- und Datenbankdateien (.env, .pem, .key, .sqlite, ...)
 
 Geprueft werden nur neue Commits: auf main die des Pushes, auf jedem anderen
 Branch alles, was noch nicht auf main liegt (also das, was gemerged wuerde).
@@ -38,10 +38,9 @@ MUSTER = [
         ),
     ),
 ]
-VERBOTENE_ENDUNGEN = (
-    ".pdf", ".pptx", ".potx", ".docx", ".dotx", ".xlsx", ".xlsm", ".env", ".pem", ".key",
-    ".p12", ".pfx", ".sqlite", ".db",
-)
+# Nur Schluessel- und Datenbankdateien. PDF, Word und Excel sind erlaubt: fiktive
+# Vertraege und Leistungsbeschreibungen sind echtes Projektmaterial (Knut, 2026-10-14).
+VERBOTENE_ENDUNGEN = (".env", ".pem", ".key", ".p12", ".pfx", ".sqlite", ".db")
 
 
 def maskiere(text):
@@ -74,6 +73,14 @@ def pruefe_patch(patch):
     """Sucht in neuen Zeilen und Dateinamen eines `git log -p`-Textes."""
     probleme, datei = [], ""
     for zeile in patch.splitlines():
+        # Binaerdateien haben keine +++-Zeile, nur "Binary files ... differ";
+        # der Name kommt deshalb auch aus der diff-Kopfzeile.
+        kopf = re.match(r"diff --git a/.* b/(.+)$", zeile)
+        if kopf:
+            datei = kopf.group(1).strip()
+            if datei.lower().endswith(VERBOTENE_ENDUNGEN):
+                probleme.append(f"verbotener Dateityp: {datei}")
+            continue
         if zeile.startswith("+++ "):
             datei = zeile[4:].strip()
             datei = datei[2:] if datei.startswith("b/") else datei

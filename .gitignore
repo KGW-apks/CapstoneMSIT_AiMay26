@@ -17,14 +17,10 @@ credentials*.json
 .n8n/
 n8n-data/
 
-# Kursmaterial und Fremdformate: nicht unser Eigentum, Inhalte stehen als Markdown in docs/
-*.pdf
-*.pptx
-*.potx
-*.docx
-*.dotx
-*.xlsx
-*.xlsm
+# PDF, Word und Excel sind erlaubt (fiktive Verträge und Unterlagen). Kursmaterial von
+# MSIT und IHK gehört trotzdem nicht ins Repo, das lässt sich am Format nicht erkennen.
+# Office-Sperrdateien beim Bearbeiten:
+~$*
 
 # Lokale Arbeitsdaten und Datenbanken
 *.sqlite

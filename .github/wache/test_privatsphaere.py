@@ -46,10 +46,19 @@ class Patch(unittest.TestCase):
         self.assertTrue(p.pruefe_patch(patch("docs/a.md", link)))
         self.assertEqual(p.pruefe_patch(patch("daten/x.json", '{"a": [[1, 2]]}')), [])
 
-    def test_fremdformate(self):
-        self.assertTrue(p.pruefe_patch("+++ b/material/folien.pptx"))
-        self.assertTrue(p.pruefe_patch("+++ b/Skript.PDF"))
-        self.assertEqual(p.pruefe_patch("+++ b/docs/bild.png"), [])
+    def test_schluessel_und_datenbankdateien(self):
+        self.assertTrue(p.pruefe_patch("+++ b/config/.env"))
+        self.assertTrue(p.pruefe_patch("+++ b/zugang.PEM"))
+        self.assertTrue(p.pruefe_patch("+++ b/daten/lokal.sqlite"))
+
+    def test_binaerdatei_ohne_plus_zeile_wird_erkannt(self):
+        binaer = ("diff --git a/geheim/zugang.p12 b/geheim/zugang.p12\nnew file mode 100644\n"
+                  "Binary files /dev/null and b/geheim/zugang.p12 differ")
+        self.assertEqual(p.pruefe_patch(binaer), ["verbotener Dateityp: geheim/zugang.p12"])
+
+    def test_office_und_pdf_sind_erlaubt(self):
+        for datei in ("vertraege/wartung-basis.pdf", "vertraege/projekt.docx", "daten/kunden.xlsx", "docs/bild.png"):
+            self.assertEqual(p.pruefe_patch(f"+++ b/{datei}"), [], datei)
 
     def test_geloeschte_zeilen_zaehlen_nicht(self):
         self.assertEqual(p.pruefe_patch("+++ b/a.md\n-" + PRIVAT), [])
