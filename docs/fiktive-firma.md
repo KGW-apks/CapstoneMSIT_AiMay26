@@ -21,13 +21,13 @@ Die Firma arbeitet mit Rollen. Für die IHK-Frage nach Prozessen "in jeder Abtei
 | Rolle | Anzahl | Bezug zum Agenten (Vorschlag) |
 |---|---|---|
 | Geschäftsführer | 1 | Gibt große Change Requests frei, entscheidet bei Auslegungsstreit und vertragsrelevanten Reklamationen |
-| Projektleiter | 1 | Annehmer: Alle Kundenäußerungen und Agent-Entwürfe landen zuerst bei ihm. Entscheidet allein bei inklusiven Wünschen und bei Wünschen im Kontingent, bestätigt bei unklaren Fällen die Größenklasse |
+| Projektleiter | 1 | Annehmer: Alle Kundenäußerungen und Agent-Entwürfe landen zuerst bei ihm. Entscheidet allein bei inklusiven Wünschen, bestätigt bei unklaren Fällen die Kategorie nach Vertrag |
 | Vertrieb | 1 | Akquise und Kundenbetreuung. Kommt nur dazu, wenn Geld verhandelt wird (Zusatzbudget, Angebot), nicht für den normalen Durchlauf |
 | Senior-Entwickler | 2 | Schätzen Aufwand für unklare Fälle, nehmen Fehlermeldungen an, setzen Change Requests um |
 | Junior-Entwickler | 3 | Setzen um, nehmen einfache Fehler an. Kein Freigaberecht |
-| Buchhaltung und Marketing | 1 (Vollzeit, zwei Rollen) | Rechnet Change Requests ab, pflegt Vertragsstände und Kontingente. Marketing hat mit dem Agenten nichts zu tun |
+| Buchhaltung und Marketing | 1 (Vollzeit, zwei Rollen) | Rechnet Change Requests ab, pflegt Vertragsstände. Marketing hat mit dem Agenten nichts zu tun |
 
-Neun Personen insgesamt. Der Projektleiter ist Annehmer, damit nicht alles am Vertrieb hängt. Einen CTO gibt es nicht: Er wäre für eine Firma dieser Größe zu aufwendig, und die Entwickler sollen nicht unter zusätzlichem Overhead leiden. Der Projektleiter trägt die technische Einordnung mit und zieht bei Bedarf einen Senior hinzu.
+Neun Personen insgesamt. Der Projektleiter ist Annehmer, damit nicht alles am Vertrieb hängt. Der Projektleiter trägt die technische Einordnung mit und zieht bei Bedarf einen Senior hinzu.
 
 ## Abteilungen und Personen
 
@@ -58,10 +58,10 @@ Als Bild: [organigramm.png](schaubilder/organigramm.png).
 
 | Abteilung | Personen | Aufgabe | Bezug zu Kundenwünschen |
 |---|---|---|---|
-| Geschäftsleitung | Markus Hellwig (Geschäftsführer, Gründer) | Strategie, Verträge, Freigabe großer Beträge | Entscheidet bei Auslegungsstreit und vertragsrelevanten Reklamationen, gibt Beträge über 1.500 Euro frei |
+| Geschäftsleitung | Markus Hellwig (Geschäftsführer, Gründer) | Strategie, Verträge, Freigabe großer Beträge | Entscheidet bei Auslegungsstreit und vertragsrelevanten Reklamationen, gibt große Beträge frei (Grenze offen, nicht im Vertrag) |
 | Projekte und Entwicklung | Sabine Roth (Projektleiterin), Tobias Nagel und Lena Brandt (Senior), Kai Petersen, Jonas Keller und Mira Yildiz (Junior) | Bau und Pflege der Kundensoftware | Projektleiterin nimmt alles an, bereitet vor, ordnet technisch ein. Seniors schätzen Aufwand und bearbeiten Fehler |
-| Vertrieb und Kundenbetreuung | Daniel Albrecht (Vertrieb) | Akquise, Angebote, Kundenbeziehung | Kommt nur bei Zusatzgeld dazu und entscheidet bis 1.500 Euro kommerziell |
-| Verwaltung und Marketing | Claudia Engel (Buchhaltung und Marketing, Vollzeit) | Rechnungen, Vertragsstände, Kontingente, Außenauftritt | Rechnet Change Requests ab und pflegt den Kontingentstand |
+| Vertrieb und Kundenbetreuung | Daniel Albrecht (Vertrieb) | Akquise, Angebote, Kundenbeziehung | Kommt nur bei Zusatzgeld dazu und entscheidet kommerziell (Grenze offen, nicht im Vertrag) |
+| Verwaltung und Marketing | Claudia Engel (Buchhaltung und Marketing, Vollzeit) | Rechnungen, Vertragsstände, Außenauftritt | Rechnet Change Requests ab und pflegt den Vertragsstand |
 
 Berichtswege: Projektleiterin, Vertrieb und Verwaltung berichten an den Geschäftsführer, die Seniors an die Projektleiterin, jeder Junior arbeitet einem Senior zu. Tobias Nagel hat zwei Juniors (Kai Petersen, Jonas Keller), Lena Brandt einen (Mira Yildiz).
 
@@ -73,14 +73,14 @@ Der Projektleiter ist im Kern Annehmer. In der Wartung mit Sonderbudget ist der 
 |---|---|---|---|
 | Wunsch inklusive, jede Vertragsart | Projektleiter | Projektleiter | Planung, kein Geld im Spiel |
 | Neubau, im Kontingent | Projektleiter | Projektleiter | Kontingent ist bereits vereinbart, nur Verbrauch buchen |
-| Neubau, außerhalb des Kontingents | Projektleiter bereitet Entwurf vor | Vertrieb bis 1.500 Euro, darüber Geschäftsführer | Zusatzgeld muss verhandelt werden |
-| Wartung, Wunsch außerhalb des Vertrags oder Sonderbudget nötig | Projektleiter bereitet Entwurf vor | Vertrieb bis 1.500 Euro, darüber Geschäftsführer | Neues Geschäft mit dem Kunden |
-| Wartung Plus, im Stundenkontingent | Projektleiter | Projektleiter | Kontingent ist vereinbart |
+| Neubau, außerhalb des Kontingents | Projektleiter bereitet Entwurf vor | Vertrieb, Betragsgrenze offen (nicht im Vertrag) | Zusatzgeld muss verhandelt werden |
+| Wartung, Wunsch außerhalb des Vertrags oder Sonderbudget nötig | Projektleiter bereitet Entwurf vor | Projektleiter oder Senior nach Ziffer 6.4, Vertrieb bei Zusatzgeld (Betragsgrenze offen) | Neues Geschäft mit dem Kunden |
+| Wartung Plus, im Stundenkontingent | Projektleiter | Projektleiter | Kontingent nicht im Vertrag geregelt, offen |
 | Fehler | Projektleiter leitet weiter | Senior-Entwickler (Fehlerliste) | Technische Einordnung |
 | Reklamation | Projektleiter | Projektleiter, Vertrieb wird informiert, bei Vertragsrelevanz entscheidet der Geschäftsführer | Kundenbeziehung, mögliche Fristen |
 | Unklar oder Auslegungsstreit | Projektleiter | Geschäftsführer bei Vertragsauslegung, Projektleiter mit einem Senior bei technischer Einordnung | Verantwortung bei der Leitung |
 
-**Schnittstelle in einem Satz:** Der Projektleiter bereitet jeden Fall mit Fundstelle, Größenklasse und Kontingentstand vor, der Vertrieb übernimmt nur die kommerzielle Entscheidung in den beiden Zeilen mit Zusatzgeld. So bekommt der Vertrieb weder die Annahme noch die inhaltliche Prüfung.
+**Schnittstelle in einem Satz:** Der Projektleiter bereitet jeden Fall mit Fundstelle, Kategorie und Vertragsstand vor, der Vertrieb übernimmt nur die kommerzielle Entscheidung in den beiden Zeilen mit Zusatzgeld. So bekommt der Vertrieb weder die Annahme noch die inhaltliche Prüfung.
 
 ## Kundenbestand
 
@@ -97,22 +97,22 @@ Bewusst klein gehalten, weil die Testmenge handhabbar sein muss. Acht Kunden, da
 | Autohaus Lindner | Handel | 35 MA | Terminassistent (im Bau) | Projektvertrag Festpreis |
 | Logistik Weidenmeyer | Spedition | 80 MA | Frachtpapier-Erfassung (im Bau) | Projektvertrag nach Aufwand mit Budgetrahmen |
 
-## Vertragsarten und Kontingente (Arbeitsstand, Platzhalter für die Vertragsrecherche)
+## Vertragsarten (Arbeitsstand, Platzhalter für die Vertragsrecherche)
 
-| Vertragsart (Arbeitsname) | Typische Abdeckung (Annahme) | Kontingent |
+| Vertragsart (Arbeitsname) | Typische Abdeckung (Annahme) | Abrechnung von Änderungen |
 |---|---|---|
 | Wartung Basis | Fehlerbehebung am Gelieferten, Sicherheitsupdates, Anpassung an geänderte Schnittstellen. Neue Features nicht enthalten | keins, jede Änderung ist Zusatzleistung |
-| Wartung Plus mit Stundenkontingent | wie Basis, dazu ein monatliches oder jährliches Stundenkontingent für kleine Änderungen | zum Beispiel 8 Stunden pro Quartal, verfällt nicht (Annahme) |
+| Wartung Plus mit Stundenkontingent | wie Basis, dazu ein monatliches oder jährliches Stundenkontingent für kleine Änderungen | Stundenkontingent nicht im Softwarepflegevertrag, offen (Annahme: 8 Stunden pro Quartal) |
 | Projektvertrag Festpreis | Leistung laut Leistungsbeschreibung, Änderungen außerhalb davon sind Change Requests | keins, aber ein vereinbartes Änderungsverfahren |
-| Projektvertrag nach Aufwand mit Budgetrahmen | Arbeit im Rahmen des Budgets, Überschreitung braucht Freigabe | Budget als Kontingent |
+| Projektvertrag nach Aufwand mit Budgetrahmen | Arbeit im Rahmen des Budgets, Überschreitung braucht Freigabe | Budgetrahmen, nicht im Softwarepflegevertrag geregelt (offen) |
 
 Ob diese Vertragsarten im Markt so üblich sind und wie die Klauseln lauten, ist ungeprüft und Aufgabe der Vertragsrecherche. Die rechtliche Einordnung ist nicht geprüft.
 
 ## Regeln der Firma, die der Agent anwendet (Annahmen)
 
 - **Stundensatz:** 110 Euro netto für Entwicklung (Annahme). Plausibilitätsprüfung 2026-10-13: Anbieter-Ratgeber nennen für Agenturen im DACH-Raum 80 bis 180 Euro netto, der Freelancer-Median liegt bei rund 90 Euro ([tech-now](https://tech-now.io/blog/softwareentwicklungskosten-deutschland/), [freelancermap](https://www.freelancermap.de/blog/?p=72121)). Die Quellen sind überwiegend Anbieter-Marketing, also Richtwerte. Projektleitung wird nicht gesondert berechnet.
-- **Größenklassen für Zusatzaufwand:** klein bis 4 Stunden, mittel 4 bis 16 Stunden, groß 16 bis 40 Stunden, darüber individuelles Angebot. Die Stunden folgen aus der Klasse per Regel, das Modell ordnet nur die Klasse zu (Details im Kandidatenbogen).
-- **Freigabegrenzen:** Kommerzielle Change Requests bis zu einem Betrag von 1.500 Euro gibt der Vertrieb frei, darüber der Geschäftsführer (Annahme). Inklusive Wünsche und Verbrauch im Kontingent entscheidet der Projektleiter allein.
+- **Kategorien für Änderungen (Vertrag, Source of Truth):** A bis 1.000 EUR ohne Auswirkung auf Architektur, Datenmodelle, Schnittstellen, Sicherheit oder Datenschutz, B Zusatzleistung, C größere Änderung (Ziffer 6.2). Die früheren Größenklassen (klein bis 4, mittel bis 16, groß bis 40 Stunden) sind ersetzt. Stunden folgen aus den Stundensätzen (Ziffer 7.4).
+- **Freigabegrenzen:** Der Vertrag regelt keine Betragsgrenzen für Vertrieb oder Geschäftsführung, die frühere 1.500-Euro-Grenze ist offen. Inklusive Wünsche entscheidet der Projektleiter allein.
 - **Kulanz:** Die Firma darf im Einzelfall kulant sein (zum Beispiel bei besonders kleinen Wünschen eines Stammkunden). Der Agent trifft diese Entscheidung nie, er markiert den Fall und gibt ihn an den Projektleiter, der ihn nach der Tabelle oben weiterreicht.
 - **Weiterleitung von Fehlern und Reklamationen (Vorschlag):** Es gibt keine eigene Support-Rolle. Der Projektleiter nimmt sie an, Fehler gehen an die Senior-Entwickler (Fehlerliste), Reklamationen bleiben beim Projektleiter, bei vertraglicher Relevanz entscheidet der Geschäftsführer. Der Agent verwirft sie nie.
 

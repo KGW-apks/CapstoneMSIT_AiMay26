@@ -75,10 +75,10 @@
   <text x="996" y="634" font-size="30" font-weight="700" fill="#0F1B2D">Wer macht was bei einem Kundenwunsch</text>
   <g font-size="26" fill="#2B3C52">
     <text x="996" y="690"><tspan font-weight="700">Projektleiterin:</tspan> nimmt alles an, bereitet vor</text>
-    <text x="996" y="740"><tspan font-weight="700">Vertrieb:</tspan> entscheidet bei Zusatzgeld bis 1.500 €</text>
-    <text x="996" y="790"><tspan font-weight="700">Geschäftsführer:</tspan> gibt Beträge darüber frei</text>
+    <text x="996" y="740"><tspan font-weight="700">Vertrieb:</tspan> entscheidet bei Zusatzgeld</text>
+    <text x="996" y="790"><tspan font-weight="700">Geschäftsführer:</tspan> entscheidet bei Reklamationen mit Vertragsbezug</text>
     <text x="996" y="840"><tspan font-weight="700">Senior-Entwicklung:</tspan> Fehler, Aufwandsschätzung</text>
-    <text x="996" y="890"><tspan font-weight="700">Verwaltung:</tspan> rechnet ab, pflegt Kontingente</text>
+    <text x="996" y="890"><tspan font-weight="700">Verwaltung:</tspan> rechnet ab, pflegt Vertragsstände</text>
   </g>
 
   <!-- Fußzeile -->

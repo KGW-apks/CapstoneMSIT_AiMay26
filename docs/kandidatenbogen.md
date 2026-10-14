@@ -8,7 +8,7 @@ Der Bogen beschreibt den Use Case der Gruppe: ein Agent, der Kundenwünsche zu S
 
 ## Name und Ein-Satz-Problem
 
-**Change-Request-Agent für ein Softwarehaus.** Kunden äußern mitten im Projekt Wünsche zu weiteren Features und Änderungen. Der Agent prüft sie gegen den vereinbarten Leistungsumfang, erkennt bezahlpflichtige Zusatzleistungen und bereitet einen Change-Request-Entwurf mit betroffenen Features, Aufwandsklasse und Preis vor. Der Projektleiter entscheidet und versendet. Der Arbeitstitel ist ein Vorschlag.
+**Change-Request-Agent für ein Softwarehaus.** Kunden äußern mitten im Projekt Wünsche zu weiteren Features und Änderungen. Der Agent prüft sie gegen den vereinbarten Leistungsumfang, erkennt bezahlpflichtige Zusatzleistungen und bereitet einen Change-Request-Entwurf mit betroffenen Features, Kategorie und Preis vor. Der Projektleiter entscheidet und versendet. Der Arbeitstitel ist ein Vorschlag.
 
 ## Unternehmen
 
@@ -63,7 +63,7 @@ Es gibt keine belegten Messwerte, weil das Unternehmen fiktiv ist. Statt Zahlen 
 | Verbindlichkeit bestimmen: Überlegung, Wunsch oder Auftrag | Nur Aufträge lösen eine Prüfung mit Preis aus | Synthetische Mails gut erzeugbar | Grenze zwischen Wunsch und Auftrag ist unscharf | mittel | Kernumfang mit Human Review |
 | Wunsch erfassen und strukturieren (Kern der Anfrage, Quelle, Art, Dubletten zum Backlog) | Vollständiger Eingang, weniger Verlust | Synthetische Mails gut erzeugbar | Wunsch falsch verstanden | hoch | Kernumfang |
 | Scope-Prüfung: im Umfang oder Zusatzleistung, mit Fundstelle im Vertrag (RAG) | Stoppt unbezahlte Mehrarbeit | Leistungsbeschreibung und Vertrag selbst erstellbar | Falsches Urteil, Auslegungsfrage | mittel | Kernumfang, immer mit Human Review |
-| Aufwandsklasse bestimmen (klein, mittel, groß) | Grundlage für die Kontingentrechnung | Klassen im Vertragswerk der Firma definiert | Falsche Klasse | mittel | Kernumfang mit Human Review |
+| Kategorie bestimmen (A, B, C nach Anlage 2 des Vertrags) | Grundlage für Freigabe und Angebot nach Vertrag | Kategorien im Softwarepflegevertrag definiert | Falsche Kategorie (Fehleinordnung nach Ziffer 6.8) | mittel | Kernumfang mit Human Review |
 | Angebotstext für den Change Request | Zeitersparnis beim Schreiben | Vorlagen selbst erstellbar | Falsche Zusage im Text | hoch | Nur mit Human Review |
 | Automatischer Versand von Angeboten oder Preiszusagen an den Kunden | Zeitersparnis | vorhanden | Rechtlich bindende Zusage, nicht kontrollierbarer Fehler | technisch hoch | **Ausgeschlossen** |
 | Priorisierung der Wünsche für die Roadmap | Planungshilfe | dünn | Strategische Entscheidung ohne Kontrolle | mittel | Nicht im ersten Umfang |
@@ -73,21 +73,21 @@ Die Scope-Prüfung ist der Messkern. Der Versand ist ausgeschlossen, weil hoher 
 ## Wo besser ohne KI
 
 - **Preisberechnung:** Stundensatz mal Aufwand ist eine Formel, kein Modellurteil. Die Zahl rechnet eine Regel in n8n.
-- **Kontingentprüfung:** Restkontingent minus Aufwand ist Rechnen mit Tabellenwerten.
+- **Kategorie nach Anlage 2:** feste Schwellen (1.000 EUR, Auswirkung auf Architektur), das Modell ordnet nur die Kategorie zu.
 - **Fristen und Abrechnungsstatus:** feste Regeln und Tabellenlogik.
 - **Dublettenerkennung bei identischen Ticket-IDs oder wörtlichen Duplikaten:** einfache Suche reicht. Für Beinahe-Dubletten brauchen Embeddings einen Zweitfilter, denn sie messen das Thema, nicht die Aussage (etwa bei Verneinung: "ohne Export" gegen "mit Export").
 - **Rechtliche Auslegung strittiger Fälle:** bleibt beim Menschen, das Modell liefert nur Fundstelle und Entwurf.
 
 ## Entscheidungsfolge des Agenten (Entwurf)
 
-Der Agent prüft, ob ein Wunsch inklusive oder extra zu berechnen ist, abhängig vom Vertrag. Er eskaliert, wenn er unsicher ist. Hat ein Kunde ein Kontingent für Zusatzaufwand eingeräumt bekommen, berechnet der Agent, ob der Wunsch im Rahmen des Kontingents liegt. Das Bild dazu: [schaubilder/agent-aufgaben.png](schaubilder/agent-aufgaben.png).
+Der Agent prüft, ob ein Wunsch inklusive oder extra zu berechnen ist, abhängig vom Vertrag. Er eskaliert, wenn er unsicher ist. Ein Kontingent ist im Softwarepflegevertrag nicht geregelt (siehe Ist-Soll-Kapitel, Quellenabgleich). Das Bild dazu: [schaubilder/agent-aufgaben.png](schaubilder/agent-aufgaben.png).
 
 0. **Verbindlichkeit bestimmen:** Ist die Kundenäußerung nur eine Überlegung, ein Wunsch oder ein echter Auftrag? Nur ein Auftrag löst die weitere Prüfung mit Preis aus. Überlegungen und Wünsche werden erfasst und beantwortet, aber nicht berechnet. Die Schwelle zwischen Wunsch und Auftrag ist die schwierigste Auslegungsfrage dieses Schritts und gehört in die Testmenge (Formulierungen wie "wäre schön, wenn", "könnten wir mal", "bitte setzt um"). Ob der Agent weitere Aufgaben bekommt, ist offen.
 1. **Art des Anliegens bestimmen:** Fehler am Gelieferten, Änderung am Bestehenden, neues Feature oder Reklamation. Die Unterscheidung zählt, weil ein Wartungsvertrag typischerweise Fehlerbehebung abdeckt, aber keine neuen Features. Ein als Wunsch formulierter Fehler wäre damit inklusive, und genau diese Verwechslung gehört als Testfall in die Testmenge. Fehler und Reklamationen können fälschlich beim Agenten landen. Sie werden ausgesiebt und an die zuständige Stelle weitergeleitet, nicht verworfen. Eine verschluckte Reklamation ist teurer als ein falsch einsortierter Wunsch, weil sie Fristen und Mängelrechte berühren kann (juristisch ungeprüft). Deshalb zählt der Recall für Reklamationen mehr als die Precision. Mischfälle, etwa eine Mail mit einem Fehler und einem Feature-Wunsch, müssen geteilt werden.
-2. **Kunde und Vertrag bestimmen:** Aus der Kundentabelle: Vertragsart, Laufzeit, Leistungsbeschreibung, Kontingent und bisher verbrauchter Anteil.
+2. **Kunde und Vertrag bestimmen:** Aus der Kundentabelle: Vertragsart, Laufzeit, Leistungsbeschreibung.
 3. **Scope-Urteil mit Fundstelle (RAG über den Vertragstext):** inklusive, berechenbar oder unklar.
-4. **Bei berechenbar: Aufwandsklasse bestimmen** (klein, mittel, groß, siehe unten).
-5. **Kontingentprüfung per Regel, nicht per Modell:** Restkontingent minus Aufwand.
+4. **Bei berechenbar: Kategorie bestimmen** (A, B oder C nach Anlage 2 des Vertrags).
+5. **Preis per Regel, nicht per Modell:** Stundensatz mal Aufwand nach Ziffer 7.4 des Vertrags.
 6. **Ausgang:**
 
 | Ergebnis | Aktion | Wer entscheidet |
@@ -96,11 +96,11 @@ Der Agent prüft, ob ein Wunsch inklusive oder extra zu berechnen ist, abhängig
 | Fehler | Weiterleiten | Senior-Entwickler |
 | Reklamation | Weiterleiten | Projektleiter, bei Vertragsfrage Geschäftsführer |
 | Inklusive | Wunsch einplanen, kein Change Request | Projektleiter bestätigt |
-| Berechenbar, im Kontingent | Verbrauch vom Kontingent vorschlagen | Projektleiter bestätigt |
-| Berechenbar, außerhalb des Kontingents oder ohne Kontingent | Change-Request-Entwurf mit Preis | Vertrieb bis 1.500 Euro, darüber Geschäftsführer |
+| Kategorie A | Mitteilung an den Kunden ohne Einzelangebot (Vertrag 6.2) | Projektleiter bestätigt |
+| Kategorie B oder C | Entwurf mit Preis, Umsetzung erst nach Bestätigung in Textform (Vertrag 6.4, 6.6) | Mitarbeiter nach Ziffer 6.4, Vertrieb bei Zusatzgeld (Betragsgrenze offen) |
 | Unklar oder geringe Sicherheit | Eskalation mit Begründung und Fundstelle | Projektleiter, bei Auslegungsfragen Geschäftsführer |
 
-Jede Zeile endet bei einem Menschen. Das deckt die Entscheidungsklassen der MSIT-Aufgabe: Kernumfang (Scope-Urteil, Kontingentrechnung), nur mit Human Review (Aufwandsklasse, Angebotstext), ausgeschlossen (automatischer Versand).
+Jede Zeile endet bei einem Menschen. Das deckt die Entscheidungsklassen der MSIT-Aufgabe: Kernumfang (Scope-Urteil, Kategorie), nur mit Human Review (Kategorie, Angebotstext), ausgeschlossen (automatischer Versand).
 
 **Fachlich zu klären (Vertragsrecherche):** Welche Vertragsarten es gibt (zum Beispiel Werk- oder Projektvertrag beim Neubau, Wartungs- oder Pflegevertrag im Bestand, Rahmenvertrag mit Stundenkontingent), was sie typischerweise abdecken und wie Kontingente üblicherweise formuliert sind. Die rechtliche Einordnung ist nicht geprüft. Dabei zeigt sich, dass Wartung in der Praxis oft auch "Betrieb und kleine Änderungen" umfasst. Die Annahme "Wartung Basis: keine neuen Features" ist deshalb plausibel, aber vereinfacht.
 
@@ -112,20 +112,20 @@ Die Testmenge ist ein Vorschlag: rund 60 selbst erstellte Kundenäußerungen zu 
 |---|---|---|---|
 | E1 | Scope-Urteil richtig: Trefferquote "im Umfang" gegen "Zusatzleistung", vor allem Recall der Zusatzleistungen (verpasste Change Requests sind der teure Fehler) | Agent gegen die gelabelte Testmenge | Manuelles Urteil eines Gruppenmitglieds auf derselben Menge, noch zu messen |
 | E2 | Zeit je Change-Request-Entwurf und je Kundenäußerung | Stoppuhr: manuell gegen Agent plus Review | Manuelle Zeit der Gruppe, noch zu messen |
-| E3 | Aufwandsklasse richtig: Trefferquote der Größenklasse | Agent gegen gelabelte Fälle | Manuelle Klassenzuordnung der Gruppe, noch zu messen |
+| E3 | Kategorie richtig: Trefferquote der Kategorie (A, B, C) | Agent gegen gelabelte Fälle | Manuelle Klassenzuordnung der Gruppe, noch zu messen |
 | E4 | Anteil der Fälle, die der Agent wegen geringer Sicherheit selbst an den Menschen gibt, und deren Fehlerquote | Konfidenz gegen Fehler in der Testmenge | noch zu messen |
 
 Wichtigster zu erwartender Fehlermodus (Annahme): Teil-im-Umfang-Fälle, bei denen der Wunsch zur Hälfte im Vertrag steht. Das gehört in den Evaluationsbericht als eigener Testfall.
 
 ## Daten und RAG-Quellen
 
-- **Selbst zu erstellen (synthetisch):** Leistungsbeschreibung und Vertragsauszug je fiktivem Projekt, Feature-Katalog, Backlog, Kundenmails und Meeting-Notizen mit den Wünschen, Stundensatz-Tabelle, Größenklassen. Keine echten Kundendaten und keine Unterlagen eines Arbeitgebers.
-- **Aufwand:** Die Kontingentprüfung nutzt feste Größenklassen (klein bis 4, mittel bis 16, groß bis 40 Stunden, darüber individuelles Angebot). Das Modell ordnet nur die Klasse zu, die Stunden folgen per Regel. Dadurch braucht es keine erfundenen Ist-Stunden für eine Schätzungsmessung.
+- **Selbst zu erstellen (synthetisch):** Leistungsbeschreibung und Vertragsauszug je fiktivem Projekt, Feature-Katalog, Backlog, Kundenmails und Meeting-Notizen mit den Wünschen, Stundensatz-Tabelle. Keine echten Kundendaten und keine Unterlagen eines Arbeitgebers.
+- **Aufwand:** Die Kategorie folgt aus Anlage 2 des Vertrags (A bis 1.000 EUR ohne Auswirkung auf Architektur, Datenmodelle, Schnittstellen, Sicherheit oder Datenschutz, B Zusatzleistung, C größere Änderung). Das Modell ordnet nur die Kategorie zu, der Preis folgt aus den Stundensätzen nach Ziffer 7.4. Dadurch braucht es keine erfundenen Ist-Stunden für eine Schätzungsmessung.
 - **Chunking der Verträge:** Klausel- und Abschnittsgrenzen beim Chunking beachten, damit die Fundstelle zitierbar bleibt.
 
 ## Output und Tabelle
 
-Strukturierte Ausgabe pro Wunsch in eine Change-Request-Tabelle, die Spalten sind ein Vorschlag: ID, Projekt, Kunde (fiktiv), Quelle des Wunsches, Wunsch in einem Satz, Verbindlichkeit, Art, Scope-Urteil (im Umfang, Zusatz, unklar), Fundstelle im Vertrag, Konfidenz, betroffene Features, Aufwandsklasse, Preis (gerechnet), zuständige Rolle, Status (neu, in Prüfung, freigegeben, abgelehnt), Prüfer, Datum. Die Tabelle prüft der Projektleiter. Sie ist zugleich Datenbasis für die Erfolgsmessung.
+Strukturierte Ausgabe pro Wunsch in eine Change-Request-Tabelle, die Spalten sind ein Vorschlag: ID, Projekt, Kunde (fiktiv), Quelle des Wunsches, Wunsch in einem Satz, Verbindlichkeit, Art, Scope-Urteil (im Umfang, Zusatz, unklar), Fundstelle im Vertrag, Konfidenz, betroffene Features, Kategorie, Preis (gerechnet), zuständige Rolle, Status (neu, in Prüfung, freigegeben, abgelehnt), Prüfer, Datum. Die Tabelle prüft der Projektleiter. Sie ist zugleich Datenbasis für die Erfolgsmessung.
 
 ## Human Review
 
@@ -169,7 +169,7 @@ Ob die Prüfenden Breite über mehrere Tool-Arten erwarten, ist eine offene Frag
 
 ## Vier-Wochen-Plan der kleinsten Version
 
-Die kleinste Version: Eingang einer Kundenmail oder eines Formulars, Einordnung nach Verbindlichkeit und Art, Scope-Prüfung per RAG mit Fundstelle, Kontingentrechnung per Regel, Eintrag in die Tabelle, Review durch den Projektleiter, Entwurf des Change Requests mit gerechnetem Preis.
+Die kleinste Version: Eingang einer Kundenmail oder eines Formulars, Einordnung nach Verbindlichkeit und Art, Scope-Prüfung per RAG mit Fundstelle, Kategorie nach Anlage 2, Eintrag in die Tabelle, Review durch den Projektleiter, Entwurf des Change Requests mit gerechnetem Preis.
 
 | Sprint | Ergebnis |
 |---|---|
