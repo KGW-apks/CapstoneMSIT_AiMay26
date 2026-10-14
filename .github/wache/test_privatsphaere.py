@@ -14,16 +14,6 @@ def patch(datei, *zeilen):
     return "\n".join([f"+++ b/{datei}"] + [f"+{z}" for z in zeilen])
 
 
-class Mails(unittest.TestCase):
-    def test_noreply_und_webcommits_sind_ok(self):
-        self.assertEqual(p.pruefe_mails([NOREPLY, p.WEB_COMMITTER, ""]), [])
-
-    def test_private_commit_mail_wird_maskiert_gemeldet(self):
-        probleme = p.pruefe_mails([PRIVAT, PRIVAT])
-        self.assertEqual(len(probleme), 1)
-        self.assertNotIn(PRIVAT, probleme[0])
-
-
 class Patch(unittest.TestCase):
     def test_fremde_mail_in_datei(self):
         self.assertTrue(p.pruefe_patch(patch("docs/a.md", "Kontakt: " + PRIVAT)))
@@ -83,9 +73,15 @@ class Bereich(unittest.TestCase):
 
 
 class Gesamt(unittest.TestCase):
+    def test_commit_mails_werden_nicht_geprueft(self):
+        # Seit 2026-10-14 gestrichen (Knut: die Mailadresse ist egal)
+        def git(args):
+            self.assertNotIn("--format=%ae%n%ce", args)
+            return ""
+        self.assertEqual(p.pruefe_bereich(["x..y"], git=git), [])
+
     def test_pruefe_bereich_sammelt_alles_ohne_dubletten(self):
         antworten = {
-            "%ae%n%ce": NOREPLY + "\n" + PRIVAT,
             "-p": patch("a.md", "Kontakt " + PRIVAT, "Kontakt " + PRIVAT),
             "%B": "Commit\n\nCo-authored-by: X <" + NOREPLY + ">",
         }
@@ -94,7 +90,7 @@ class Gesamt(unittest.TestCase):
             return next(v for k, v in antworten.items() if k in " ".join(args))
 
         probleme = p.pruefe_bereich(["x..y"], git=git)
-        self.assertEqual(len(probleme), 2)
+        self.assertEqual(len(probleme), 1)
 
 
 if __name__ == "__main__":

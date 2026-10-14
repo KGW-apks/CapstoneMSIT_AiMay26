@@ -2,7 +2,6 @@
 """Privatsphaere-Check: prueft jeden Push auf Dinge, die nicht ins Repo gehoeren.
 
 Am Ende liest die MSIT mit, deshalb wird rot, was hier landet:
-- Commit-Mails, die nicht die GitHub-noreply-Adresse sind
 - echte Mailadressen in Dateien oder Commit-Texten (erlaubt: noreply,
   anthropic.com fuer Co-Author-Zeilen, reservierte Testdomains wie example.com)
 - lokale Benutzerpfade, Schluessel und Tokens
@@ -18,8 +17,6 @@ import subprocess
 import sys
 
 NULL_SHA = "0" * 40
-NOREPLY_ENDE = "@users.noreply.github.com"
-WEB_COMMITTER = "noreply" + "@github.com"  # Commits ueber die Weboberflaeche; zerlegt, damit der Check sich nicht selbst meldet
 ERLAUBTE_DOMAINS = ("users.noreply.github.com", "anthropic.com")
 TEST_DOMAINS = ("example.com", "example.org", "example.net")
 TEST_ENDUNGEN = (".example", ".test", ".invalid", ".localhost")
@@ -52,16 +49,6 @@ def domain_erlaubt(domain):
     d = domain.lower()
     return (d.endswith(ERLAUBTE_DOMAINS) or d.endswith(TEST_ENDUNGEN)
             or any(d == t or d.endswith("." + t) for t in TEST_DOMAINS))
-
-
-def commit_mail_ok(mail):
-    m = mail.strip().lower()
-    return m.endswith(NOREPLY_ENDE) or m == WEB_COMMITTER
-
-
-def pruefe_mails(mails):
-    return [f"Commit-Mail ist nicht noreply: {maskiere(m)}" for m in sorted(set(mails))
-            if m.strip() and not commit_mail_ok(m)]
 
 
 def pruefe_text(text, wo):
@@ -116,10 +103,9 @@ def _git(args):
 
 
 def pruefe_bereich(rev, git=_git):
-    mails = git(["log", "--format=%ae%n%ce"] + rev).splitlines()
     patch = git(["log", "-p", "--no-color", "-U0", "--format="] + rev)
     meldungen = git(["log", "--format=%B"] + rev)
-    probleme = pruefe_mails(mails) + pruefe_patch(patch) + pruefe_text(meldungen, "Commit-Text")
+    probleme = pruefe_patch(patch) + pruefe_text(meldungen, "Commit-Text")
     return list(dict.fromkeys(probleme))
 
 
