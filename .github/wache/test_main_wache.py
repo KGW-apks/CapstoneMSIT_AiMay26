@@ -72,7 +72,7 @@ class Ausfuehrung(unittest.TestCase):
 
     def test_main_push_rettet_dreht_zurueck_und_klopft(self):
         vorher_issues = json.dumps([{"title": "Fingerklopfer Nr. 1 für @anna-gh", "assignees": [{"login": "anna-gh"}]}])
-        run = self.run_fake({"issue list": (0, vorher_issues)})
+        run = self.run_fake({"issue list": (0, vorher_issues), "issue create": (0, "https://x/issues/7\n")})
         code = w.fuehre_aus("zurueckdrehen", "anna-gh", "main", VORHER, NACHHER, TEAM, run=run)
         self.assertEqual(code, 1)
         rettung = f"{NACHHER}:refs/heads/gerettet/anna-gh-{NACHHER[:7]}"
@@ -84,7 +84,8 @@ class Ausfuehrung(unittest.TestCase):
                         reihenfolge.index(f"git push --force origin {VORHER}:refs/heads/main"))
         issue = next(c for c in self.aufrufe if c[:3] == ["gh", "issue", "create"])
         self.assertIn("Nr. 2", issue[issue.index("--title") + 1])
-        self.assertEqual(issue[issue.index("--assignee") + 1], "anna-gh")
+        self.assertIn("auf main", issue[issue.index("--title") + 1])
+        self.assertIn(["gh", "issue", "edit", "https://x/issues/7", "--add-assignee", "anna-gh"], self.aufrufe)
         text = issue[issue.index("--body") + 1]
         self.assertIn("git switch anna", text)
         self.assertIn(f"gerettet/anna-gh-{NACHHER[:7]}", text)
@@ -102,12 +103,15 @@ class Ausfuehrung(unittest.TestCase):
         w.fuehre_aus("zurueckdrehen", "anna-gh", "main", w.NULL_SHA, NACHHER, TEAM, run=self.run_fake())
         self.assertFalse(any("--force" in c for c in self.aufrufe))
 
-    def test_nicht_zuweisbar_versucht_ohne_assignee(self):
-        run = self.run_fake({"--assignee": (1, "")})
+    def test_genau_ein_issue_auch_wenn_zuweisung_scheitert(self):
+        run = self.run_fake({"issue create": (0, "https://x/issues/3\n"), "--add-assignee": (1, "")})
         w.fuehre_aus("fremder_branch", "fremd", "anna", VORHER, NACHHER, TEAM, run=run)
         erstellt = [c for c in self.aufrufe if c[:3] == ["gh", "issue", "create"]]
-        self.assertEqual(len(erstellt), 2)
-        self.assertNotIn("--assignee", erstellt[1])
+        self.assertEqual(len(erstellt), 1)
+        self.assertNotIn("--assignee", erstellt[0])
+
+    def test_testziel_steht_im_titel(self):
+        self.assertIn("auf wache-test", w.titel_main("x", 1, "wache-test"))
 
     def test_fremder_branch_dreht_nichts_zurueck(self):
         code = w.fuehre_aus("fremder_branch", "anna-gh", "ben", VORHER, NACHHER, TEAM, run=self.run_fake())

@@ -53,8 +53,8 @@ def zaehle_verstoesse(issues, actor):
     return n
 
 
-def titel_main(actor, nummer):
-    return f"{TITEL_MARKE} Nr. {nummer} für @{actor}: Push auf main zurückgedreht"
+def titel_main(actor, nummer, ziel="main"):
+    return f"{TITEL_MARKE} Nr. {nummer} für @{actor}: Push auf {ziel} zurückgedreht"
 
 
 def text_main(actor, ziel, before, after, rettung, eigener, zurueckgedreht):
@@ -114,9 +114,13 @@ def _run(cmd):
 
 
 def _issue(run, titel, text, actor):
-    code, _ = run(["gh", "issue", "create", "--title", titel, "--body", text, "--assignee", actor])
-    if code != 0:  # z. B. Account ist (noch) kein Collaborator und nicht zuweisbar
-        code, _ = run(["gh", "issue", "create", "--title", titel, "--body", text])
+    # Erst anlegen, dann zuweisen: `gh issue create --assignee` legt das Issue auch
+    # dann an, wenn die Zuweisung scheitert (Testlauf 2026-10-14), ein zweiter
+    # Versuch ergaebe eine Dublette.
+    code, out = run(["gh", "issue", "create", "--title", titel, "--body", text])
+    url = out.strip().splitlines()[-1] if code == 0 and out.strip() else ""
+    if url:
+        run(["gh", "issue", "edit", url, "--add-assignee", actor])
     return code
 
 
@@ -144,7 +148,7 @@ def fuehre_aus(aktion, actor, ziel, before, after, team, run=_run):
     except ValueError:
         bisher = 0
     text = text_main(actor, ziel, before or NULL_SHA, after, rettung, eigener, zurueckgedreht)
-    _issue(run, titel_main(actor, bisher + 1), text.replace("{owner}", team["owner"]), actor)
+    _issue(run, titel_main(actor, bisher + 1, ziel), text.replace("{owner}", team["owner"]), actor)
     return 1
 
 
