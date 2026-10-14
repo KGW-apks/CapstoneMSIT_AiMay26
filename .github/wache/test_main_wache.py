@@ -65,6 +65,28 @@ class Ausfuehrung(unittest.TestCase):
             return 0, ""
         return run
 
+    def test_owner_push_auf_main_merkt_guten_stand(self):
+        code = w.fuehre_aus("ok", "chef", "main", VORHER, NACHHER, TEAM, run=self.run_fake())
+        self.assertEqual(code, 0)
+        self.assertEqual(self.aufrufe, [["git", "push", "--force", "origin", f"{NACHHER}:refs/tags/{w.OK_TAG}"]])
+
+    def test_zuruecksetzen_auf_guten_stand_statt_before(self):
+        gut = "c" * 40
+        run = self.run_fake({"rev-parse": (0, gut + "\n")})
+        w.fuehre_aus("zurueckdrehen", "anna-gh", "main", VORHER, NACHHER, TEAM, run=run)
+        self.assertIn(["git", "push", "--force", "origin", f"{gut}:refs/heads/main"], self.aufrufe)
+        self.assertNotIn(["git", "push", "--force", "origin", f"{VORHER}:refs/heads/main"], self.aufrufe)
+
+    def test_ohne_guten_stand_gilt_before(self):
+        run = self.run_fake({"rev-parse": (1, "")})
+        w.fuehre_aus("zurueckdrehen", "anna-gh", "main", VORHER, NACHHER, TEAM, run=run)
+        self.assertIn(["git", "push", "--force", "origin", f"{VORHER}:refs/heads/main"], self.aufrufe)
+
+    def test_testziel_nutzt_keinen_main_stand(self):
+        run = self.run_fake({"rev-parse": (0, "c" * 40)})
+        w.fuehre_aus("zurueckdrehen", "x", "wache-test", VORHER, NACHHER, TEAM, run=run)
+        self.assertIn(["git", "push", "--force", "origin", f"{VORHER}:refs/heads/wache-test"], self.aufrufe)
+
     def test_ok_tut_nichts(self):
         code = w.fuehre_aus("ok", "anna-gh", "anna", VORHER, NACHHER, TEAM, run=self.run_fake())
         self.assertEqual(code, 0)
@@ -101,7 +123,7 @@ class Ausfuehrung(unittest.TestCase):
 
     def test_ohne_vorgaenger_kein_force_push(self):
         w.fuehre_aus("zurueckdrehen", "anna-gh", "main", w.NULL_SHA, NACHHER, TEAM, run=self.run_fake())
-        self.assertFalse(any("--force" in c for c in self.aufrufe))
+        self.assertFalse(any(c[:3] == ["git", "push", "--force"] for c in self.aufrufe))
 
     def test_genau_ein_issue_auch_wenn_zuweisung_scheitert(self):
         run = self.run_fake({"issue create": (0, "https://x/issues/3\n"), "--add-assignee": (1, "")})

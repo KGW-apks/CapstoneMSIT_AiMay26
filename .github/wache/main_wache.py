@@ -10,9 +10,12 @@ Laeuft als GitHub Action bei jedem Push. Regeln (Team in team.json):
 - Jedes Mitglied pusht nur in seinen Branch (`michi`, auch `michi/...`).
   Ein Push in einen fremden Branch wird nicht zurueckgedreht, aber gemeldet.
 
-Grenze: Die Wache reagiert nach dem Push, sie verhindert ihn nicht. Wer im
+Grenzen: Die Wache reagiert nach dem Push, sie verhindert ihn nicht. Wer im
 selben Push den Workflow aendert, schaltet sie aus. Sie schuetzt vor
-Versehen, nicht vor Absicht.
+Versehen, nicht vor Absicht. Laeufe sind serialisiert; kommen mehr als zwei
+Pushes in Sekunden, verwirft GitHub wartende Laeufe. Fuer Fremd-Pushes ist das
+unkritisch (der naechste Lauf rettet alles und setzt auf OK_TAG zurueck), faellt
+ein Owner-Lauf weg, bleibt OK_TAG bis zum naechsten Owner-Push zu alt.
 
 Testmodus (workflow_dispatch): WACHE_TESTZIEL nennt einen Test-Branch, der
 statt main zurueckgedreht wird. main ist als Testziel verboten.
@@ -24,6 +27,10 @@ import sys
 
 NULL_SHA = "0" * 40
 TITEL_MARKE = "Fingerklopfer"
+# Letzter Stand von main, den der Owner gepusht hat. Darauf wird zurueckgesetzt,
+# nicht auf `before`: bei zwei schnellen Fremd-Pushes waere `before` des zweiten
+# schon der erste Fremd-Commit (Testlauf 2026-10-14).
+OK_TAG = "wache-main-ok"
 
 
 def lade_team(pfad):
@@ -61,7 +68,7 @@ def text_main(actor, ziel, before, after, rettung, eigener, zurueckgedreht):
     eigen = eigener or "<dein-branch>"
     if zurueckgedreht:
         zustand = (
-            f"`{ziel}` steht wieder auf `{before[:7]}`, dem Stand vor deinem Push. "
+            f"`{ziel}` steht wieder auf `{before[:7]}`, dem letzten freigegebenen Stand. "
             "Deine Arbeit ist nicht verloren, sie liegt im Branch "
             f"`{rettung}`."
         )
@@ -126,8 +133,11 @@ def _issue(run, titel, text, actor):
 
 def fuehre_aus(aktion, actor, ziel, before, after, team, run=_run):
     """Fuehrt die Aktion aus. Rueckgabe: Exit-Code des Laufs (1 = Verstoss)."""
+    hauptbranch = team.get("hauptbranch", "main")
     if aktion == "ok":
         print(f"[wache] {actor} -> {ziel}: in Ordnung")
+        if actor == team["owner"] and ziel == hauptbranch and after and after != NULL_SHA:
+            run(["git", "push", "--force", "origin", f"{after}:refs/tags/{OK_TAG}"])
         return 0
     eigener = team.get("mitglieder", {}).get(actor)
     if aktion == "fremder_branch":
@@ -137,6 +147,11 @@ def fuehre_aus(aktion, actor, ziel, before, after, team, run=_run):
     rettung = f"gerettet/{actor}-{after[:7]}"
     run(["git", "push", "origin", f"{after}:refs/heads/{rettung}"])
     zurueckgedreht = False
+    if ziel == hauptbranch:
+        run(["git", "fetch", "--force", "origin", f"refs/tags/{OK_TAG}:refs/tags/{OK_TAG}"])
+        code, out = run(["git", "rev-parse", "--verify", "--quiet", f"refs/tags/{OK_TAG}^{{commit}}"])
+        if code == 0 and out.strip():
+            before = out.strip()
     if before and before != NULL_SHA:
         run(["git", "fetch", "origin", before])
         code, _ = run(["git", "push", "--force", "origin", f"{before}:refs/heads/{ziel}"])
