@@ -1,6 +1,6 @@
 # Kandidatenbogen: Change-Request-Agent
 
-Entwurf aus Sprint 1, mit KI-Unterstützung (Claude Code) erstellt und von der Gruppe noch nicht abgestimmt. Stand 2026-10-13. Das beschriebene Unternehmen und alle Zahlen sind fiktiv.
+Entwurf aus Sprint 1, mit KI-Unterstützung (Claude Code) erstellt und von der Gruppe noch nicht abgestimmt. Stand 2026-10-14. Das beschriebene Unternehmen und alle Zahlen sind fiktiv.
 
 Der Bogen beschreibt den Use Case der Gruppe: ein Agent, der Kundenwünsche zu Software-Änderungen gegen den Vertrag des Kunden prüft. Das Unternehmen steht in [fiktive-firma.md](fiktive-firma.md), die Aufgaben des Agenten als Bild in [schaubilder/agent-aufgaben.png](schaubilder/agent-aufgaben.png).
 
@@ -25,6 +25,14 @@ Der Bogen beschreibt den Use Case der Gruppe: ein Agent, der Kundenwünsche zu S
 | Michi | Recherchiert verschiedene Vertragsarten, gegen die der Agent prüfen kann |
 
 Der Agent prüft jeden Kundenwunsch gegen den Vertrag des Kunden: inklusive oder extra zu berechnen. Die Antwort hängt vom Vertrag ab. In einem Wartungsvertrag sind Feature-Wünsche typischerweise nicht enthalten, bei einem Neubauprojekt kommt es auf den vereinbarten Umfang an. Ob das im Einzelfall so ist, entscheidet der Vertragstext.
+
+## Ausgangssituation
+
+- **Bestandskunden** haben einen Wartungsvertrag. Sie melden sich, wenn ihnen ein Feature fehlt oder sie mit einem bestehenden unzufrieden sind und es angepasst haben wollen. Dann muss entschieden werden: im Vertrag inbegriffen oder gesondert abzurechnen.
+- **Neukunden** (Neubau) äußern Wünsche während der Entwicklung. Ein Teil der Anpassungen ist inbegriffen, etwa kleine Änderungen ohne echten Mehraufwand. Was darüber hinausgeht, muss auf Vertragsbasis abgegrenzt werden.
+- **Das Problem:** Die Abgrenzung ist jedes Mal ein Hin und Her mit Abgleich gegen den Vertrag und liegt beim Projektleiter, für ihn eine erhebliche Last.
+- **Die Unterstützung:** Der Agent sucht die passenden Vertragsstellen heraus. Ist der Fall eindeutig, gibt er die eindeutige Antwort mit Fundstelle. Ist er es nicht, legt er dem Projektleiter die relevanten Passagen vor und entscheidet nicht selbst.
+- **Erwarteter Nutzen:** deutliche Einsparung an Projektleiter-Aufwand. Das ist die Kernthese des Projekts und noch nicht gemessen. E2 und E4 prüfen sie (siehe Erfolgskriterien).
 
 ## Prozess heute in sieben Schritten
 
