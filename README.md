@@ -18,5 +18,8 @@ Sprint 1, Entwurfsphase (2026-10-13). Es ist noch nichts gebaut.
 
 Die Dokumente sind Entwürfe aus Sprint 1, mit KI-Unterstützung (Claude Code) erstellt und von der Gruppe noch nicht abgestimmt.
 
+## Mitarbeit
+Jede Person arbeitet in ihrem eigenen Branch, `main` pflegt Knut. Regeln und Einrichtung in [CONTRIBUTING.md](CONTRIBUTING.md). Zwei GitHub Actions wachen darüber (`.github/workflows/`): die Main-Wache und der Privatsphäre-Check.
+
 ## Hinweis
 Alle Unternehmen, Personen, Kunden und Zahlen sind frei erfunden. Annahmen sind als solche gekennzeichnet.

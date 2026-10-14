@@ -1,0 +1,39 @@
+# Haelt main frei von Pushes anderer und meldet Pushes in fremde Branches.
+# Logik und Grenzen: .github/wache/main_wache.py
+name: Main-Wache
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      actor:
+        description: "Testmodus: simulierter Account (nicht der Owner)"
+        required: true
+      testziel:
+        description: "Testmodus: Branch, der statt main zurückgedreht wird (nie main)"
+        required: true
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: main-wache
+  cancel-in-progress: false
+
+jobs:
+  wache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Wache
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WACHE_ACTOR: ${{ github.event_name == 'workflow_dispatch' && inputs.actor || github.actor }}
+          WACHE_TESTZIEL: ${{ inputs.testziel }}
+          WACHE_BRANCH: ${{ github.ref_name }}
+          WACHE_BEFORE: ${{ github.event.before }}
+          WACHE_AFTER: ${{ github.event.after }}
+        run: python3 .github/wache/main_wache.py

@@ -1,0 +1,25 @@
+# Prueft jeden Push auf private oder fremde Inhalte. Ein roter Haken heisst: nicht mergen.
+# Logik: .github/wache/privatsphaere.py
+name: Privatsphäre-Check
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Tests der Wache
+        run: python3 -m unittest discover -s .github/wache
+      - name: Privatsphäre-Check
+        env:
+          WACHE_BRANCH: ${{ github.ref_name }}
+          WACHE_BEFORE: ${{ github.event.before }}
+          WACHE_AFTER: ${{ github.event.after }}
+        run: python3 .github/wache/privatsphaere.py
