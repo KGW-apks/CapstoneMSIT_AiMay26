@@ -25,4 +25,4 @@ Am Ende liest die MSIT mit. Bei jedem Push prüft der Privatsphäre-Check, und e
 - **Keine echten Mailadressen** in Dateien. Für Testdaten Domains wie `example.com` oder `kunde.test` verwenden.
 - **Keine lokalen Pfade, Schlüssel, Tokens oder Passwörter.**
 - **Kein Kursmaterial und keine Fremdformate** (PDF, PowerPoint, Word, Excel). Inhalte als Markdown in `docs/`.
-- **Keine echten Personen- oder Kundendaten.** Alles im Projekt ist fiktiv.
+
