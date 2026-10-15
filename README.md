@@ -8,7 +8,7 @@ Change-Request-Agent für ein fiktives Softwarehaus. Ein n8n-Workflow ordnet Kun
 Knut, Michi, Sebastian
 
 ## Stand
-Sprint 1, Entwurfsphase (2026-10-13). Es ist noch nichts gebaut.
+Sprint 1, Entwurfsphase (2026-10-15), Architektur liegt als Entwurf vor. Es ist noch nichts gebaut.
 
 ## Inhalt
 - `docs/fiktive-firma.md`: das fiktive Softwarehaus mit Rollen, Abteilungen, Personen, Kunden, Vertragsarten und Regeln
@@ -16,6 +16,7 @@ Sprint 1, Entwurfsphase (2026-10-13). Es ist noch nichts gebaut.
 - `docs/notizen.md`: Sammelstelle für Festlegungen und Textstellen, die später im Workflow umgesetzt werden (Arbeitsdatei, wächst weiter)
 - `docs/schaubilder/organigramm`: Organigramm des fiktiven Softwarehauses (PNG und SVG)
 - `docs/schaubilder/agent-aufgaben`: Aufgaben und Ausgänge des Agenten (PNG und SVG)
+- `docs/schaubilder/architektur`: Ablauf des Agenten und die Umgebung jedes Schritts (PNG und SVG)
 
 Die Dokumente sind Entwürfe aus Sprint 1, mit KI-Unterstützung (Claude Code) erstellt und von der Gruppe noch nicht abgestimmt.
 

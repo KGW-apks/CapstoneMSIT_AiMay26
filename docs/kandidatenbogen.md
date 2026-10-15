@@ -1,6 +1,6 @@
 # Kandidatenbogen: Change-Request-Agent
 
-Entwurf aus Sprint 1, mit KI-Unterstützung (Claude Code) erstellt und von der Gruppe noch nicht abgestimmt. Stand 2026-10-14. Das beschriebene Unternehmen und alle Zahlen sind fiktiv.
+Entwurf aus Sprint 1, mit KI-Unterstützung (Claude Code) erstellt und von der Gruppe noch nicht abgestimmt. Stand 2026-10-15. Das beschriebene Unternehmen und alle Zahlen sind fiktiv.
 
 Der Bogen beschreibt den Use Case der Gruppe: ein Agent, der Kundenwünsche zu Software-Änderungen gegen den Vertrag des Kunden prüft. Das Unternehmen steht in [fiktive-firma.md](fiktive-firma.md), die Aufgaben des Agenten als Bild in [schaubilder/agent-aufgaben.png](schaubilder/agent-aufgaben.png).
 
@@ -131,13 +131,45 @@ Strukturierte Ausgabe pro Wunsch in eine Change-Request-Tabelle, die Spalten sin
 
 Der Projektleiter sieht jeden Fall, bevor irgendetwas den Kunden erreicht. Zusätzlich geht ein Fall mit Markierung in die Prüfwarteschlange, wenn das Scope-Urteil "unklar" ist oder die Konfidenz unter einer in der Evaluation festgelegten Schwelle liegt, die Fundstelle fehlt, die Äußerung mehrere Anliegen enthält, der Preis über einer Grenze liegt oder der Wunsch sicherheits- oder datenschutzrelevante Teile der Software betrifft. Die Schwellen sind Vorschläge und werden mit E4 kalibriert.
 
+## Architektur (Entwurf, Stand 2026-10-15)
+
+Entwurf von Knut, als Diagramm mit KI-Unterstützung (Claude Code) gezeichnet und von der Gruppe noch nicht abgestimmt. Das Bild zeigt den Ablauf von oben nach unten und die Umgebung, in der jeder Schritt läuft. Quelle als SVG: [schaubilder/architektur.svg](schaubilder/architektur.svg).
+
+![Architektur des Change-Request-Agenten](schaubilder/architektur.png)
+
+| Schritt | Umgebung | Was passiert |
+|---|---|---|
+| Eingang | Ticketsystem oder Mail | Ein Ticket oder eine vom Projektleiter weitergeleitete Mail. Der Kunde schreibt nicht direkt in den Agenten. Die Kunden-ID kommt aus dem Ticketfeld oder vom Projektleiter, nie aus dem Anfragetext. |
+| Geschwärzten Vertrag laden | n8n-Instanz | Der Vertrag wird per API aus der Vertragsablage geholt. Die Kunden-ID ist im Workflow fest verdrahtet, das Modell kann sie weder wählen noch ändern. |
+| Kundenanfrage schwärzen | n8n-Instanz | Regelbasiert, bevor das Modell die Anfrage sieht, damit auch sensible Angaben des Kunden nicht hinausgehen. |
+| Cloud-LLM prüft die Anfrage | Cloud-LLM-API | Inklusive oder extra, mit Vertragsstelle. Nur Geschwärztes verlässt die n8n-Instanz. |
+| Prüfen und rechnen | n8n-Instanz | Code statt Modell: Gehört die genannte Vertragsstelle zum geladenen Vertrag? Preis nach Regel, Kontingent. |
+| Projektleiter gibt frei | Slack oder Mail | Der Workflow hält an, bis der Projektleiter antwortet (n8n Send and Wait, Verfügbarkeit je Kanal noch zu prüfen). |
+| Weiterleitung | Slack oder Mail | Nach der festen Tabelle der Entscheidungsfolge an Entwicklung (Senior), Vertrieb oder Geschäftsführer. |
+
+Datenhaltung (Produkt offen): Kundentabelle (Kunde zu Vertrag), Vertragsablage (geschwärzte Kopien), Kontingent (Buchungsliste).
+
+**Festgelegt (Knut):** n8n als Plattform. Ein Cloud-LLM per API. Der Vertrag wird per API abgerufen statt per klassischem RAG. Die Freigabe läuft über Slack oder Mail. Die Kunden-ID bestimmt der Workflow deterministisch, nicht das Modell. Die Kundenanfrage wird vor dem Modell geschwärzt. Das Projekt wird wie eine echte Firma behandelt: personenbezogene Daten werden auch in der Demo geschwärzt oder herausgenommen.
+
+**Vorschlag, noch nicht beschlossen:**
+- Die Verträge einmal vorab geschwärzt in die Vertragsablage legen (Knuts Variante, im Diagramm gezeichnet), statt bei jedem Lauf zu schwärzen. Dann muss jede Vertragsänderung die geschwärzte Kopie neu erzeugen.
+- Das Kontingent als Buchungsliste je Vertrag führen (Datum, Ticket-ID, Stunden, Prüfer). Der Rest wird berechnet, nicht vom Modell. Gebucht wird erst nach der Freigabe, die Ticket-ID verhindert eine Doppelbuchung.
+
+**Offen:**
+- Einheit des Kontingents: Stunden (der Projektleiter trägt sie bei der Freigabe ein, denn der Agent schätzt keine Stunden) oder Euro.
+- Eingang als Ticket oder weitergeleitete Mail, und Slack oder Mail für die Freigabe.
+- Hosting der n8n-Instanz, Produkt der Datenhaltung, Standort der Vertragsablage.
+- Cloud-Anbieter: mehrere Cloud-Modelle an derselben Testmenge vergleichen. Die DSGVO-Frage (Übermittlung an Anbieter außerhalb der EU) gehört in die Governance, die Einordnung ist nicht geprüft.
+- Grenze der Schwärzung: Eine Regel findet bekannte Muster (Namen aus der Kundentabelle, Mailadressen, Telefonnummern, Kontodaten), nicht jede Angabe im Freitext. Das gehört als Testfall und als offene Grenze in den Evaluationsbericht (Annahme).
+- Abgleich dieses Bogens: Die Abschnitte zu RAG, Vektor-Speicher und Chunking stammen aus der Zeit vor dem Abruf-Entwurf und sind mit ihm noch nicht abgeglichen.
+
 ## Tool-Alternativen (noch nicht erprobt)
 
 Für den Tool-Vergleich braucht die Gruppe je Baustein zwei bis drei echte Alternativen und Kriterien (Funktion, Datenschutz, Bedienung, Integration, Kosten). Kandidaten, nicht geprüft:
 
 | Baustein | Alternativen |
 |---|---|
-| Sprachmodell | lokal (LM Studio) gegen Cloud-Modell, gemessen an derselben Testmenge |
+| Sprachmodell | Cloud, per API angesteuert (Entscheidung Knut, siehe Architektur). Verglichen werden mehrere Cloud-Modelle an derselben Testmenge, Anbieter offen |
 | Vektor-Speicher für RAG | n8n-eigener Speicher, Qdrant, Supabase mit pgvector |
 | Tabelle und Datenhaltung | Google Sheets, Supabase, Airtable |
 | Ticketsystem-Anbindung | Jira, Linear, GitHub Issues |
