@@ -8,7 +8,7 @@ Sammelstelle für Festlegungen und Textstellen, die später im n8n-Workflow oder
 
 ## Softwarepflegevertrag (Cloud): Verfahren für Änderungswünsche
 
-Quelle: [Softwarepflegevertrag_Cloud_v5.docx](vertraege/Softwarepflegevertrag_Cloud_v5.docx), Ziffer 6 und Anlage 2. Michi, Stand 2026-10-14. `[●]` sind dort noch offene Platzhalter.
+Quelle: [30_Vorlage_Softwarepflegevertrag_Cloud_v5.docx](vorlagen/30_Vorlage_Softwarepflegevertrag_Cloud_v5.docx), Ziffer 6 und Anlage 2 — also die Vorlage, nicht der Vertrag eines bestimmten Kunden. Michi, Stand 2026-10-14. `[●]` sind dort noch offene Platzhalter.
 
 ### Kategorien (Ziffer 6.2 und Anlage 2 Abschnitt 1)
 
@@ -79,8 +79,24 @@ Offen: Wie entsteht der Sicherheitswert, und ist er kalibriert? Ein selbst beric
 | Ziffer 8.5 | Hosting- und KI-Dienstleister, Sitz, Auftragsverarbeitung | offen, betrifft den Workflow direkt |
 | Anlage 1 | Programmtabelle (gepflegte Software, Blacklist) | offen |
 
-Aufwandsgrenze der Kategorie A ist inzwischen festgelegt: 1.000 EUR je Änderung (Ziffer 6.2).
+Aufwandsgrenze der Kategorie A: in der Vorlage 1.000 EUR je Änderung (Ziffer 6.2). **Wichtig: der Wert ist je Kunde verschieden** — Kunde B hat 2.500 EUR mit Freigabe ab 1.500 EUR, der Wartungsvertrag Plus (Kunden C und D) 500 EUR. Die Schwellen gehören also in eine Konfiguration je Kunde, nicht in den Workflow fest verdrahtet. Werte je Kunde siehe die Kurzfassungen unter [kunden/](kunden/).
 
 ## Redaktioneller Hinweis zum Vertrag
 
 Die Änderungstabelle am Anfang des Vertrags nennt „Ziffer 7.6: Vergütung der Änderungen nach Ziffer 6". Im Vertragstext steht das aber in Ziffer 7.4, Ziffer 7.6 ist die Umsatzsteuer. Beim nächsten Durchgang korrigieren.
+
+## Kunden A bis E: Vertragsart und Konfiguration
+
+Quelle: die Verträge und Kurzfassungen unter [kunden/](kunden/), Stand 2026-10-17. Alle Firmen und Zahlen sind erfunden.
+
+| Kunde | Vertragsart | Pauschale | Laufzeit | Grenze Kategorie A |
+|---|---|---|---|---|
+| A — klein | Softwarepflege (Cloud) | 3.200 EUR/Monat | 24 Monate | 1.000 EUR |
+| B — groß | Softwarepflege (Cloud) | 8.000 EUR/Monat | 36 Monate | 2.500 EUR, Freigabe ab 1.500 EUR |
+| C — klein | Wartung Plus | 1.500 EUR/Monat, 60 Stunden Kontingent | 12 Monate | 500 EUR |
+| D — groß | Wartung Plus | 9.500 EUR/Monat, 200 Stunden Kontingent | 36 Monate | 500 EUR |
+| E — klein | Softwareerstellung | 63.000 EUR netto in 4 Bausteinen | bis 30.07.2027 | Änderungspuffer, Freigabe ab 500 EUR |
+
+*Für die Umsetzung:* Drei Vertragsarten, fünf Kunden — das Verfahren nach Ziffer 6 ist in allen Verträgen gleich aufgebaut, **die Zahlen darin sind es nicht**. Der Workflow braucht also pro Kunde einen Satz Parameter (Vertragsart, Grenze A, Freigabegrenze, Servicezeiten, Reaktions- und Behebungszeiten) und darf keine Schwelle fest verdrahten. Die anonymisierten Kurzfassungen je Kunde sind dafür die passende Quelle, weil sie genau diese Werte in gleicher Gliederung enthalten.
+
+Offen: Die Vorauswahl, welcher Vertrag zu einer eingehenden Kundenäußerung gehört, muss vor der Einordnung stehen. Ohne Kundenzuordnung kann der Agent gar nicht prüfen.

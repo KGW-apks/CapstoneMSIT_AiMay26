@@ -14,6 +14,8 @@ Sprint 1, Entwurfsphase (2026-10-15), Architektur liegt als Entwurf vor. Es ist 
 - `docs/fiktive-firma.md`: das fiktive Softwarehaus mit Rollen, Abteilungen, Personen, Kunden, Vertragsarten und Regeln
 - `docs/kandidatenbogen.md`: der Use Case als ausgefüllter Kandidatenbogen (Prozess, KI-Stellen, Erfolgskriterien, Daten, Risiken, Plan)
 - `docs/notizen.md`: Sammelstelle für Festlegungen und Textstellen, die später im Workflow umgesetzt werden (Arbeitsdatei, wächst weiter)
+- `docs/kunden/firma-a` bis `firma-e`: je Kunde Vertrag, Beschreibung und anonymisierte Kurzfassung für den Agenten (Word und Markdown)
+- `docs/vorlagen/`: die drei Standardverträge (Pflege, Erstellung, Wartung Plus)
 - `docs/schaubilder/organigramm`: Organigramm des fiktiven Softwarehauses (PNG und SVG)
 - `docs/schaubilder/agent-aufgaben`: Aufgaben und Ausgänge des Agenten (PNG und SVG)
 - `docs/schaubilder/architektur`: Ablauf des Agenten und die Umgebung jedes Schritts (PNG und SVG)
