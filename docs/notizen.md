@@ -10,7 +10,7 @@ Sammelstelle für Festlegungen und Textstellen, die später im n8n-Workflow oder
 
 Quelle: [30_Vorlage_Softwarepflegevertrag_Cloud_v5.docx](vorlagen/30_Vorlage_Softwarepflegevertrag_Cloud_v5.docx), Ziffer 6 und Anlage 2 — also die Vorlage, nicht der Vertrag eines bestimmten Kunden. Michi, Stand 2026-10-14. `[●]` sind dort noch offene Platzhalter.
 
-### Kategorien (Ziffer 6.2 und Anlage 2 Abschnitt 1)
+### Kategorien bei Pflege und Wartung Plus (Ziffer 6.2 und Anlage 2 Abschnitt 1)
 
 | Kategorie | Merkmale | Folge (Ziffer 6.3) |
 |---|---|---|
@@ -97,6 +97,23 @@ Quelle: die Verträge und Kurzfassungen unter [kunden/](kunden/), Stand 2026-10-
 | D — groß | Wartung Plus | 9.500 EUR/Monat, 200 Stunden Kontingent | 36 Monate | 500 EUR |
 | E — klein | Softwareerstellung | 63.000 EUR netto in 4 Bausteinen | bis 30.07.2027 | Änderungspuffer, Freigabe ab 500 EUR |
 
-*Für die Umsetzung:* Drei Vertragsarten, fünf Kunden — das Verfahren nach Ziffer 6 ist in allen Verträgen gleich aufgebaut, **die Zahlen darin sind es nicht**. Der Workflow braucht also pro Kunde einen Satz Parameter (Vertragsart, Grenze A, Freigabegrenze, Servicezeiten, Reaktions- und Behebungszeiten) und darf keine Schwelle fest verdrahten. Die anonymisierten Kurzfassungen je Kunde sind dafür die passende Quelle, weil sie genau diese Werte in gleicher Gliederung enthalten.
+*Für die Umsetzung:* Drei Vertragsarten, fünf Kunden — das Verfahren ist überall gleich aufgebaut, **die Zahlen und die gültigen Kategorien sind es nicht** (siehe Kategorie E unten). Der Workflow braucht also pro Kunde einen Satz Parameter (Vertragsart, Grenze A, Freigabegrenze, Servicezeiten, Reaktions- und Behebungszeiten) und darf keine Schwelle fest verdrahten. Die anonymisierten Kurzfassungen je Kunde sind dafür die passende Quelle, weil sie genau diese Werte in gleicher Gliederung enthalten.
 
 Offen: Die Vorauswahl, welcher Vertrag zu einer eingehenden Kundenäußerung gehört, muss vor der Einordnung stehen. Ohne Kundenzuordnung kann der Agent gar nicht prüfen.
+
+## Kategorie E: nur im Erstellungsvertrag
+
+Quelle: [10_Softwareerstellungsvertrag_Kunde_E_v1.docx](kunden/firma-e/10_Softwareerstellungsvertrag_Kunde_E_v1.docx) Ziffer VII.2 und die [Kurzfassung](kunden/firma-e/Softwareerstellungsvertrag_E_Kurzfassung_anonymisiert_v1.md), Stand 2026-10-22.
+
+Die Kategorientabelle weiter oben gilt für Pflege und Wartung Plus. **Der Softwareerstellungsvertrag hat eine vierte Kategorie**, Pflege- und Wartungsvertrag sagen dagegen ausdrücklich „Kategorien A bis C".
+
+> E — erforderliche Änderung: Änderung, die erforderlich ist, um den mit dem Vertragsgegenstand verbundenen Erfolg zu erreichen oder zu sichern. Ob eine Änderung erforderlich ist, entscheidet nicht das System, sondern ein Mitarbeiter des AN.
+
+Sie stammt aus dem IHK-Original: die Regel „erforderliche Änderungen ohne Zusatzentgelt" ist als Kategorie E erhalten geblieben. Folge daher ohne Zusatzentgelt (Änderungspuffer).
+
+*Für die Umsetzung:* Die gültigen Kategorien hängen von der Vertragsart ab, nicht vom Workflow. Ein E darf nur bei einem Erstellungsvertrag angenommen werden, bei Pflege und Wartung Plus ist es eine ungültige Einordnung. Gehört damit in dieselbe Konfiguration je Kunde wie die Schwellen.
+
+Offen, und vor der Abgabe zu klären:
+
+- **Im Vertrag:** Ziffer VII.3 (Folgen der Einordnung) regelt A, B und C, nicht E. Ziffer VII.4 (menschliche Prüfung) nennt nur B und C, obwohl die Definition von E einen Mitarbeiter verlangt. Die Kurzfassung hält das in der Spalte Freigabe als „im Vertrag nicht gesondert geregelt" fest.
+- **Im Workflow:** `KATEGORIEN = ['A', 'B', 'C', 'E']` gilt für alle Kunden, und ein E fällt in der Kontingentprüfung in den Zweig der Kategorie A, wird also ohne menschliche Prüfung freigegeben. Das widerspricht der Definition von E.
