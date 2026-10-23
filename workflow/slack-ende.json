@@ -13,7 +13,7 @@
       "parameters": {
         "inputSource": "passthrough"
       },
-      "notes": "Aufruf aus dem Hauptworkflow nach Log und Verschieben der Mail, ohne Warten. Felder: slackWeg, ticketId, kundeId, klasse, grund, urteil, kategorie, sicherheit, begruendung, fundstelle, zitatOk, kontingentText, anfrage, hauptAusfuehrung."
+      "notes": "Aufruf aus dem Hauptworkflow nach Log und Verschieben der Mail, ohne Warten. Felder: slackWeg, ticketId, kundeId, klasse, grund, urteil, kategorie, sicherheit, begruendung, fundstelle, zitatOk, kontingentText, kundenfreigabeText, klasseBegruendung, anfrage, hauptAusfuehrung."
     },
     {
       "id": "5d48012b-91a2-4845-92ed-1d95588819c0",
@@ -130,7 +130,7 @@
     },
     {
       "id": "7923b103-c777-4af9-90c4-6a491dbafcc4",
-      "name": "Slack: Bugreport an Senior",
+      "name": "Slack: Bugreport an #bugreport",
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
       "position": [
@@ -144,7 +144,7 @@
         }
       },
       "onError": "continueErrorOutput",
-      "notes": "Bugreport geht direkt an den Senior, ohne Freigabe. Gesendet wird der Originaltext der Mail (nicht geschwärzt).",
+      "notes": "Bugreport geht ohne Freigabe an #bugreport. Gesendet wird der Originaltext der Mail (nicht geschwärzt).",
       "parameters": {
         "authentication": "oAuth2",
         "select": "channel",
@@ -159,7 +159,7 @@
     },
     {
       "id": "b2aade30-121d-4ea6-afbe-f8097d51bbfd",
-      "name": "Slack: Inklusive an Senior",
+      "name": "Slack: Inklusive an #senior",
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
       "position": [
@@ -173,7 +173,7 @@
         }
       },
       "onError": "continueErrorOutput",
-      "notes": "Inklusive Änderung geht ohne Freigabe an die Senior-Entwicklung, wie im Entwurf vorgesehen.",
+      "notes": "Inklusive Änderung geht ohne Freigabe an die Senior-Entwicklung (#senior).",
       "parameters": {
         "authentication": "oAuth2",
         "select": "channel",
@@ -182,13 +182,13 @@
           "mode": "name",
           "value": "#senior"
         },
-        "text": "={{ 'Inklusive laut Vertrag, Ticket ' + $json.ticketId + ' (Kunde ' + $json.kundeId + ')\\n' + 'Fundstelle: ' + ($json.fundstelle ?? '-') + '\\n' + 'Kontingent: ' + ($json.kontingentText || '-') + '\\n\\n' + 'Originalmail:\\n' + $json.anfrage }}",
+        "text": "={{ 'Inklusive laut Vertrag, Ticket ' + $json.ticketId + ' (Kunde ' + $json.kundeId + ')\\n' + 'Fundstelle: ' + ($json.fundstelle ?? '-') + '\\n' + 'Kontingent: ' + ($json.kontingentText || '-') + '\\n' + ($json.kundenfreigabeText ? 'Kundenfreigabe: ' + $json.kundenfreigabeText + '\\n' : '') + '\\n' + 'Originalmail:\\n' + $json.anfrage }}",
         "otherOptions": {}
       }
     },
     {
       "id": "41b2206a-c945-4137-9cec-5d5cd328aacf",
-      "name": "Slack: Sonstiges informieren",
+      "name": "Slack: Sonstiges an #anfragen_review",
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
       "position": [
@@ -225,7 +225,7 @@
         608
       ],
       "parameters": {
-        "jsCode": "// Eine Slack-Karte für Eskalation, unsichere Klassifikation und Zusatzleistung.\n// Neues Angebot (Kategorie B oder C, Urteil Zusatzleistung): nach der Freigabe geht der Fall an den Vertrieb.\nconst j = $input.first().json;\nconst vertrieb = j.urteil === 'zusatzleistung' && ['B', 'C'].includes(j.kategorie);\nconst zeilen = [\n  'Freigabe nötig: Ticket ' + j.ticketId + ' (Kunde ' + j.kundeId + ')',\n  'Einordnung des Systems: ' + (j.urteil ?? 'keine') + (j.kategorie ? ', Kategorie ' + j.kategorie : '') + (j.sicherheit != null ? ', Sicherheit ' + j.sicherheit : ''),\n  'Anlass: ' + (j.grund || 'Zusatzleistung'),\n  'Begründung: ' + (j.begruendung ?? '-'),\n  'Fundstelle: ' + (j.fundstelle ?? '-') + (j.zitatOk === true ? ' (Zitat im Vertrag belegt)' : j.zitatOk === false ? ' (Zitat NICHT belegt)' : ''),\n  'Kontingent: ' + (j.kontingentText || '-'),\n  '',\n  'Originalmail:',\n  j.anfrage\n];\nreturn [{ json: { ...j, vertrieb, slackText: zeilen.join('\\n') } }];\n"
+        "jsCode": "// Eine Slack-Karte für Eskalation, unsichere Klassifikation und Zusatzleistung.\n// Neues Angebot (Kategorie B oder C, Urteil Zusatzleistung): Vorschlag des Systems ist der Vertrieb, sonst der Senior. Die Projektleitung entscheidet im Formular.\nconst j = $input.first().json;\nconst vertrieb = j.urteil === 'zusatzleistung' && ['B', 'C'].includes(j.kategorie);\nconst zeilen = [\n  'Freigabe nötig: Ticket ' + j.ticketId + ' (Kunde ' + j.kundeId + ')',\n  'Klasse der Anfrage: ' + (j.klasse || '-') + (j.klasseBegruendung ? ' (' + j.klasseBegruendung + ')' : ''),\n  'Einordnung des Systems: ' + (j.urteil ?? 'keine') + (j.kategorie ? ', Kategorie ' + j.kategorie : '') + (j.sicherheit != null ? ', Sicherheit ' + j.sicherheit : ''),\n  'Vorschlag des Systems: ' + (vertrieb ? 'An Vertrieb (neues Angebot)' : 'An Senior'),\n  'Anlass: ' + (j.grund || 'Zusatzleistung'),\n  'Begründung: ' + (j.begruendung ?? '-'),\n  'Fundstelle: ' + (j.fundstelle ?? '-') + (j.zitatOk === true ? ' (Zitat im Vertrag belegt)' : j.zitatOk === false ? ' (Zitat NICHT belegt)' : ''),\n  'Kontingent: ' + (j.kontingentText || '-'),\n  ...(j.kundenfreigabeText ? ['Kundenfreigabe: ' + j.kundenfreigabeText] : []),\n  '',\n  'Originalmail:',\n  j.anfrage\n];\nreturn [{ json: { ...j, vertrieb, slackText: zeilen.join('\\n') } }];\n"
       }
     },
     {
@@ -238,25 +238,57 @@
           "mode": "name",
           "value": "#anfragen_review"
         },
-        "message": "={{ $json.slackText }}",
-        "approvalOptions": {
-          "values": {
-            "approvalType": "double",
-            "approveLabel": "Freigeben",
-            "disapproveLabel": "Ablehnen"
-          }
+        "message": "={{ (() => { try { return $json.slackText; } catch (e) { return 'Freigabe nötig. Die Details stehen in der Slack-Karte, von der du gekommen bist.'; } })() }}",
+        "responseType": "customForm",
+        "defineForm": "fields",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Entscheidung",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Ablehnen"
+                  },
+                  {
+                    "option": "An Senior"
+                  },
+                  {
+                    "option": "An Vertrieb"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Name",
+              "fieldType": "text",
+              "placeholder": "Wer entscheidet?",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Begründung",
+              "fieldType": "textarea",
+              "requiredField": false
+            }
+          ]
         },
-        "captureResponder": true,
         "options": {
           "limitWaitTime": {
             "values": {
-              "resumeAmount": 8
+              "limitType": "afterTimeInterval",
+              "resumeAmount": 8,
+              "resumeUnit": "hours"
             }
-          }
+          },
+          "messageButtonLabel": "Entscheiden",
+          "responseFormTitle": "Freigabe durch die Projektleitung",
+          "responseFormButtonLabel": "Absenden"
         }
       },
       "id": "60c464e1-506f-4f83-8f80-2c50b0ef6c66",
-      "name": "Slack: Freigabe durch Projektleitung",
+      "name": "Slack: Freigabe anfragen in #anfragen_review",
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
       "position": [
@@ -270,88 +302,11 @@
         }
       },
       "onError": "continueErrorOutput",
-      "notes": "Send and Wait mit Freigeben und Ablehnen, Wartezeit 8 Stunden. approvers ist leer, jeder im Kanal darf klicken."
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "loose",
-            "version": 1
-          },
-          "conditions": [
-            {
-              "id": "f7953934-bc17-4ca9-abdb-deef9b9cb626",
-              "leftValue": "={{ $json.data?.approved === true }}",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              },
-              "rightValue": ""
-            }
-          ],
-          "combinator": "and"
-        },
-        "looseTypeValidation": true,
-        "options": {}
-      },
-      "id": "28f4ef2d-5314-493b-a3a7-eefe76cdedc4",
-      "name": "Freigegeben?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        960,
-        608
-      ],
-      "notes": "Wahr nur bei ausdrücklicher Freigabe. Fristablauf zählt als nicht freigegeben."
-    },
-    {
-      "id": "53338273-8ff5-487f-a654-641fb2789417",
-      "name": "Freigabe festhalten",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.5,
-      "position": [
-        1184,
-        512
-      ],
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "644d2a02-82f5-4276-8258-ac65515b9e19",
-              "name": "aktion",
-              "value": "={{ $('Freigabekarte aufbereiten').first().json.vertrieb ? 'Slack: freigegeben, an Vertrieb weiterleiten' : 'Slack: freigegeben durch Mitarbeiter' }}",
-              "type": "string"
-            },
-            {
-              "id": "16bad991-5eac-41ab-97de-164507ca8186",
-              "name": "empfaenger",
-              "value": "={{ $('Freigabekarte aufbereiten').first().json.vertrieb ? 'Vertrieb' : 'Projektleitung' }}",
-              "type": "string"
-            },
-            {
-              "id": "62a5e117-fcb6-444e-a303-11ca6e9ec927",
-              "name": "grund",
-              "value": "={{ ($('Freigabekarte aufbereiten').first().json.grund || 'Zusatzleistung') + '; Freigabe durch ' + ($json.data?.responder?.name ?? $json.data?.responder?.id ?? 'unbekannt') }}",
-              "type": "string"
-            },
-            {
-              "id": "63a827ca-0a22-4de5-9089-eb4e2c9e0657",
-              "name": "vertrieb",
-              "value": "={{ $('Freigabekarte aufbereiten').first().json.vertrieb === true }}",
-              "type": "boolean"
-            }
-          ]
-        },
-        "options": {}
-      }
+      "notes": "Send and Wait mit Formular (Ablehnen, An Senior, An Vertrieb, Name, Begründung), Wartezeit 8 Stunden. Beim Öffnen der Formularseite wertet n8n den Text erneut aus, ohne Eingangsdaten; dann greift der feste Hinweistext."
     },
     {
       "id": "9d340010-4f3f-4ac0-ae3d-7e7f2c0a4437",
-      "name": "Ablehnung festhalten",
+      "name": "Ablehnung oder Fristablauf festhalten",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
@@ -364,7 +319,7 @@
             {
               "id": "35d1d5d8-42ee-4b7b-8166-40e0ccfc97e7",
               "name": "aktion",
-              "value": "Slack: abgelehnt oder Frist abgelaufen",
+              "value": "={{ $json.data?.Entscheidung === 'Ablehnen' ? 'Slack: abgelehnt' : 'Slack: Frist abgelaufen, keine Entscheidung' }}",
               "type": "string"
             },
             {
@@ -376,7 +331,7 @@
             {
               "id": "54341325-5099-4cda-91b9-9c6e9ec75b4e",
               "name": "grund",
-              "value": "={{ ($('Freigabekarte aufbereiten').first().json.grund || 'Zusatzleistung') + '; keine Freigabe (abgelehnt von ' + ($json.data?.responder?.name ?? $json.data?.responder?.id ?? 'unbekannt') + ' oder Frist abgelaufen)' }}",
+              "value": "={{ (() => { const k = $('Freigabekarte aufbereiten').first().json; const d = $json.data ?? {}; return (k.grund || 'Zusatzleistung') + (d.Entscheidung === 'Ablehnen' ? '; abgelehnt durch ' + (d.Name || 'unbekannt') + (d['Begründung'] ? '; Begründung: ' + d['Begründung'] : '') : '; keine Entscheidung innerhalb von 8 Stunden'); })() }}",
               "type": "string"
             }
           ]
@@ -385,48 +340,13 @@
       }
     },
     {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "loose",
-            "version": 1
-          },
-          "conditions": [
-            {
-              "id": "3fca5341-322c-473e-b9df-e2266aa7cdac",
-              "leftValue": "={{ $json.vertrieb === true }}",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              },
-              "rightValue": ""
-            }
-          ],
-          "combinator": "and"
-        },
-        "looseTypeValidation": true,
-        "options": {}
-      },
-      "id": "ab204aae-69b3-45fb-bb1c-e9ae0a5d0b48",
-      "name": "An Vertrieb?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        1408,
-        512
-      ]
-    },
-    {
       "id": "44a0eb6a-c181-4e9f-bbc7-3ecadf2851b4",
-      "name": "Slack: Weiterleitung an Vertrieb",
+      "name": "Slack: Freigegeben an #vertrieb",
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
       "position": [
-        1632,
-        416
+        1184,
+        320
       ],
       "credentials": {
         "slackOAuth2Api": {
@@ -435,7 +355,7 @@
         }
       },
       "onError": "continueErrorOutput",
-      "notes": "Nach der Freigabe eines neuen Angebots (Kategorie B oder C).",
+      "notes": "Wenn die Projektleitung im Formular An Vertrieb wählt: neues Angebot nötig.",
       "parameters": {
         "authentication": "oAuth2",
         "select": "channel",
@@ -444,7 +364,7 @@
           "mode": "name",
           "value": "#vertrieb"
         },
-        "text": "={{ 'Neues Angebot nötig: Ticket ' + $('Freigabekarte aufbereiten').first().json.ticketId + ' (Kunde ' + $('Freigabekarte aufbereiten').first().json.kundeId + ')\\n' + 'Kategorie ' + $('Freigabekarte aufbereiten').first().json.kategorie + '\\n' + 'Fundstelle: ' + $('Freigabekarte aufbereiten').first().json.fundstelle + '\\n\\n' + 'Originalmail:\\n' + $('Freigabekarte aufbereiten').first().json.anfrage }}",
+        "text": "={{ (() => { const k = $('Freigabekarte aufbereiten').first().json; const d = ($('Slack: Freigabe anfragen in #anfragen_review').first().json.data ?? {}); return 'Neues Angebot nötig: Ticket ' + k.ticketId + ' (Kunde ' + k.kundeId + ')\\n' + 'Kategorie ' + (k.kategorie || '-') + '\\n' + 'Fundstelle: ' + (k.fundstelle ?? '-') + '\\n' + 'Entscheidung der Projektleitung: ' + (d.Entscheidung ?? '-') + ' durch ' + (d.Name || 'unbekannt') + (d.Entscheidung !== (k.vertrieb ? 'An Vertrieb' : 'An Senior') ? ' (überstimmt den Vorschlag des Systems: ' + (k.vertrieb ? 'An Vertrieb' : 'An Senior') + ')' : '') + (d['Begründung'] ? '\\nBegründung: ' + d['Begründung'] : '') + '\\n\\n' + 'Originalmail:\\n' + k.anfrage; })() }}",
         "otherOptions": {}
       }
     },
@@ -463,19 +383,19 @@
             {
               "id": "8faee31b-e243-459d-aaa3-d6ab04a757fb",
               "name": "aktion",
-              "value": "={{ $('Fall übernehmen').first().json.slackWeg === 'freigabe' ? ($('Freigabe festhalten').first().json.vertrieb ? 'Slack: freigegeben, an Vertrieb gemeldet' : 'Slack: freigegeben, an Senior gemeldet') : ({ bugreport: 'Slack: Bugreport an Senior gemeldet', inklusive: 'Slack: inklusive Änderung an Senior gemeldet', sonstiges: 'Slack: Projektleitung informiert' })[$('Fall übernehmen').first().json.slackWeg] }}",
+              "value": "={{ $('Fall übernehmen').first().json.slackWeg === 'freigabe' ? (($('Slack: Freigabe anfragen in #anfragen_review').first().json.data ?? {}).Entscheidung === 'An Vertrieb' ? 'Slack: freigegeben, an Vertrieb gemeldet' : 'Slack: freigegeben, an Senior gemeldet') : ({ bugreport: 'Slack: Bugreport an #bugreport gemeldet', inklusive: 'Slack: inklusive Änderung an Senior gemeldet', sonstiges: 'Slack: Projektleitung informiert' })[$('Fall übernehmen').first().json.slackWeg] }}",
               "type": "string"
             },
             {
               "id": "f4326f62-3d66-4bba-9776-3c034ddb64a0",
               "name": "empfaenger",
-              "value": "={{ $('Fall übernehmen').first().json.slackWeg === 'freigabe' ? ($('Freigabe festhalten').first().json.vertrieb ? 'Vertrieb' : 'Senior-Entwicklung') : ({ bugreport: 'Senior-Entwicklung', inklusive: 'Senior-Entwicklung', sonstiges: 'Projektleitung' })[$('Fall übernehmen').first().json.slackWeg] }}",
+              "value": "={{ $('Fall übernehmen').first().json.slackWeg === 'freigabe' ? (($('Slack: Freigabe anfragen in #anfragen_review').first().json.data ?? {}).Entscheidung === 'An Vertrieb' ? 'Vertrieb' : 'Senior-Entwicklung') : ({ bugreport: 'Senior-Entwicklung', inklusive: 'Senior-Entwicklung', sonstiges: 'Projektleitung' })[$('Fall übernehmen').first().json.slackWeg] }}",
               "type": "string"
             },
             {
               "id": "5ed65739-86bf-45d1-beff-46aaf05f97c8",
               "name": "grund",
-              "value": "={{ $('Fall übernehmen').first().json.slackWeg === 'freigabe' ? $('Freigabe festhalten').first().json.grund : ($('Fall übernehmen').first().json.grund ?? '') }}",
+              "value": "={{ $('Fall übernehmen').first().json.slackWeg === 'freigabe' ? (() => { const k = $('Freigabekarte aufbereiten').first().json; const d = ($('Slack: Freigabe anfragen in #anfragen_review').first().json.data ?? {}); const vorschlag = k.vertrieb ? 'An Vertrieb' : 'An Senior'; return (k.grund || 'Zusatzleistung') + '; Entscheidung: ' + d.Entscheidung + ' durch ' + (d.Name || 'unbekannt') + (d.Entscheidung !== vorschlag ? '; überstimmt den Vorschlag des Systems (' + vorschlag + ')' : '') + (d['Begründung'] ? '; Begründung: ' + d['Begründung'] : ''); })() : ($('Fall übernehmen').first().json.grund ?? '') }}",
               "type": "string"
             }
           ]
@@ -485,7 +405,7 @@
     },
     {
       "id": "39c50883-4fcb-46cd-9421-339c1e27c0e2",
-      "name": "Eskalation: Slack fehlgeschlagen",
+      "name": "Fehler: Slack-Versand",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
@@ -536,7 +456,10 @@
             "empfaenger": "={{ $json.empfaenger ?? '' }}",
             "grund": "={{ ($json.grund ? $json.grund + ' ' : '') + '(Slack-Ende, Lauf ' + $execution.id + ')' }}",
             "ausfuehrung": "={{ $('Fall übernehmen').first().json.hauptAusfuehrung ?? '' }}",
-            "kontingent": "={{ $('Fall übernehmen').first().json.kontingentText ?? '' }}"
+            "kontingent": "={{ $('Fall übernehmen').first().json.kontingentText ?? '' }}",
+            "urteil": "={{ $('Fall übernehmen').first().json.urteil ?? '' }}",
+            "kategorie": "={{ $('Fall übernehmen').first().json.kategorie ?? '' }}",
+            "klasse_begruendung": "={{ $('Fall übernehmen').first().json.klasseBegruendung ?? '' }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -629,6 +552,36 @@
               "type": "string",
               "readOnly": false,
               "removed": false
+            },
+            {
+              "id": "urteil",
+              "displayName": "urteil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "kategorie",
+              "displayName": "kategorie",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "klasse_begruendung",
+              "displayName": "klasse_begruendung",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -648,12 +601,12 @@
     },
     {
       "id": "034cc2db-f041-4a43-9b4e-64903480682b",
-      "name": "Slack: Freigegeben an Senior",
+      "name": "Slack: Freigegeben an #senior",
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
       "position": [
-        1632,
-        640
+        1184,
+        512
       ],
       "parameters": {
         "authentication": "oAuth2",
@@ -663,7 +616,7 @@
           "mode": "name",
           "value": "#senior"
         },
-        "text": "={{ (() => { const k = $('Freigabekarte aufbereiten').first().json; const r = $('Slack: Freigabe durch Projektleitung').first().json.data?.responder; return 'Freigegeben, bitte umsetzen: Ticket ' + k.ticketId + ' (Kunde ' + k.kundeId + ')\\n' + 'Einordnung: ' + (k.urteil ?? '-') + (k.kategorie ? ', Kategorie ' + k.kategorie : '') + '\\n' + 'Fundstelle: ' + (k.fundstelle ?? '-') + '\\n' + 'Kontingent: ' + (k.kontingentText || '-') + '\\n' + 'Freigabe durch: ' + (r?.name ?? r?.id ?? 'unbekannt') + '\\n\\n' + 'Originalmail:\\n' + k.anfrage; })() }}",
+        "text": "={{ (() => { const k = $('Freigabekarte aufbereiten').first().json; const d = ($('Slack: Freigabe anfragen in #anfragen_review').first().json.data ?? {}); return 'Freigegeben, bitte umsetzen: Ticket ' + k.ticketId + ' (Kunde ' + k.kundeId + ')\\n' + 'Einordnung des Systems: ' + (k.urteil ?? '-') + (k.kategorie ? ', Kategorie ' + k.kategorie : '') + '\\n' + 'Entscheidung der Projektleitung: ' + (d.Entscheidung ?? '-') + ' durch ' + (d.Name || 'unbekannt') + (d.Entscheidung !== (k.vertrieb ? 'An Vertrieb' : 'An Senior') ? ' (überstimmt den Vorschlag des Systems: ' + (k.vertrieb ? 'An Vertrieb' : 'An Senior') + ')' : '') + (d['Begründung'] ? '\\nBegründung: ' + d['Begründung'] : '') + '\\n' + 'Fundstelle: ' + (k.fundstelle ?? '-') + '\\n' + 'Kontingent: ' + (k.kontingentText || '-') + '\\n' + (k.kundenfreigabeText ? 'Kundenfreigabe: ' + k.kundenfreigabeText + '\\n' : '') + '\\n' + 'Originalmail:\\n' + k.anfrage; })() }}",
         "otherOptions": {}
       },
       "credentials": {
@@ -672,8 +625,77 @@
           "name": "Slack account"
         }
       },
-      "notes": "Nach der Freigabe ohne neues Angebot (nicht Kategorie B oder C) geht der Fall zur Umsetzung an die Senior-Entwicklung.",
+      "notes": "Wenn die Projektleitung im Formular An Senior wählt: Umsetzung durch die Senior-Entwicklung.",
       "onError": "continueErrorOutput"
+    },
+    {
+      "id": "a356cbc3-f28d-4cc1-98d4-3d1850a920f7",
+      "name": "Entscheidung?",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        960,
+        608
+      ],
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "e1a0f6c2-5b1d-4d1e-9a51-0b3c6f2d7a01",
+                    "leftValue": "={{ $json.data?.Entscheidung }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "rightValue": "An Senior"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "An Senior"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "e1a0f6c2-5b1d-4d1e-9a51-0b3c6f2d7a02",
+                    "leftValue": "={{ $json.data?.Entscheidung }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "rightValue": "An Vertrieb"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "An Vertrieb"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "Ablehnen oder Frist"
+        }
+      },
+      "notes": "Formularantwort der Projektleitung: An Senior, An Vertrieb; Ablehnen und Fristablauf (8 Stunden) gehen in die Ablehnung."
     }
   ],
   "connections": {
@@ -692,21 +714,21 @@
       "main": [
         [
           {
-            "node": "Slack: Bugreport an Senior",
+            "node": "Slack: Bugreport an #bugreport",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Slack: Inklusive an Senior",
+            "node": "Slack: Inklusive an #senior",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Slack: Sonstiges informieren",
+            "node": "Slack: Sonstiges an #anfragen_review",
             "type": "main",
             "index": 0
           }
@@ -720,7 +742,7 @@
         ]
       ]
     },
-    "Slack: Bugreport an Senior": {
+    "Slack: Bugreport an #bugreport": {
       "main": [
         [
           {
@@ -731,14 +753,14 @@
         ],
         [
           {
-            "node": "Eskalation: Slack fehlgeschlagen",
+            "node": "Fehler: Slack-Versand",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Slack: Inklusive an Senior": {
+    "Slack: Inklusive an #senior": {
       "main": [
         [
           {
@@ -749,14 +771,14 @@
         ],
         [
           {
-            "node": "Eskalation: Slack fehlgeschlagen",
+            "node": "Fehler: Slack-Versand",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Slack: Sonstiges informieren": {
+    "Slack: Sonstiges an #anfragen_review": {
       "main": [
         [
           {
@@ -767,7 +789,7 @@
         ],
         [
           {
-            "node": "Eskalation: Slack fehlgeschlagen",
+            "node": "Fehler: Slack-Versand",
             "type": "main",
             "index": 0
           }
@@ -778,61 +800,32 @@
       "main": [
         [
           {
-            "node": "Slack: Freigabe durch Projektleitung",
+            "node": "Slack: Freigabe anfragen in #anfragen_review",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Slack: Freigabe durch Projektleitung": {
+    "Slack: Freigabe anfragen in #anfragen_review": {
       "main": [
         [
           {
-            "node": "Freigegeben?",
+            "node": "Entscheidung?",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Eskalation: Slack fehlgeschlagen",
+            "node": "Fehler: Slack-Versand",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Freigegeben?": {
-      "main": [
-        [
-          {
-            "node": "Freigabe festhalten",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Ablehnung festhalten",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Freigabe festhalten": {
-      "main": [
-        [
-          {
-            "node": "An Vertrieb?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Ablehnung festhalten": {
+    "Ablehnung oder Fristablauf festhalten": {
       "main": [
         [
           {
@@ -843,25 +836,7 @@
         ]
       ]
     },
-    "An Vertrieb?": {
-      "main": [
-        [
-          {
-            "node": "Slack: Weiterleitung an Vertrieb",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Slack: Freigegeben an Senior",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Slack: Weiterleitung an Vertrieb": {
+    "Slack: Freigegeben an #vertrieb": {
       "main": [
         [
           {
@@ -872,7 +847,7 @@
         ],
         [
           {
-            "node": "Eskalation: Slack fehlgeschlagen",
+            "node": "Fehler: Slack-Versand",
             "type": "main",
             "index": 0
           }
@@ -890,7 +865,7 @@
         ]
       ]
     },
-    "Eskalation: Slack fehlgeschlagen": {
+    "Fehler: Slack-Versand": {
       "main": [
         [
           {
@@ -901,7 +876,7 @@
         ]
       ]
     },
-    "Slack: Freigegeben an Senior": {
+    "Slack: Freigegeben an #senior": {
       "main": [
         [
           {
@@ -912,7 +887,32 @@
         ],
         [
           {
-            "node": "Eskalation: Slack fehlgeschlagen",
+            "node": "Fehler: Slack-Versand",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Entscheidung?": {
+      "main": [
+        [
+          {
+            "node": "Slack: Freigegeben an #senior",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Slack: Freigegeben an #vertrieb",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ablehnung oder Fristablauf festhalten",
             "type": "main",
             "index": 0
           }
