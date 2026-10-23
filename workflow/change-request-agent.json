@@ -5,7 +5,7 @@
       "parameters": {
         "httpMethod": "POST",
         "path": "capstone-change-request-v2",
-        "responseMode": "responseNode",
+        "authentication": "headerAuth",
         "options": {}
       },
       "id": "6f7dfe48-ba2d-4998-8986-377370a63728",
@@ -13,9 +13,15 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.2,
       "position": [
-        -240,
-        1696
-      ]
+        -224,
+        2912
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Header Auth account"
+        }
+      }
     },
     {
       "parameters": {
@@ -73,7 +79,7 @@
       "typeVersion": 3.5,
       "position": [
         896,
-        1136
+        1472
       ]
     },
     {
@@ -125,7 +131,7 @@
       "typeVersion": 2.3,
       "position": [
         1120,
-        1136
+        1472
       ]
     },
     {
@@ -167,7 +173,7 @@
       "typeVersion": 2,
       "position": [
         1344,
-        1072
+        1392
       ],
       "onError": "continueErrorOutput"
     },
@@ -215,7 +221,7 @@
       "typeVersion": 3.5,
       "position": [
         1568,
-        960
+        1296
       ]
     },
     {
@@ -249,7 +255,7 @@
       "typeVersion": 2.3,
       "position": [
         1792,
-        960
+        1296
       ]
     },
     {
@@ -267,7 +273,7 @@
       "typeVersion": 3.1,
       "position": [
         2016,
-        912
+        1248
       ],
       "retryOnFail": true,
       "maxTries": 3,
@@ -291,8 +297,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        2032,
-        1152
+        2024,
+        1480
       ],
       "credentials": {
         "openRouterApi": {
@@ -310,8 +316,8 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        2160,
-        1152
+        2152,
+        1480
       ]
     },
     {
@@ -355,7 +361,7 @@
       "typeVersion": 2.3,
       "position": [
         2368,
-        816
+        1152
       ]
     },
     {
@@ -441,7 +447,7 @@
       "typeVersion": 3.4,
       "position": [
         2592,
-        752
+        1088
       ]
     },
     {
@@ -499,8 +505,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        5184,
-        0
+        6528,
+        96
       ]
     },
     {
@@ -548,6 +554,12 @@
               "name": "zeit",
               "value": "={{ $now.toISO() }}",
               "type": "string"
+            },
+            {
+              "id": "r8",
+              "name": "zielordner",
+              "value": "={{ ($json.aktion === 'abgelehnt' || String($json.grund ?? '').startsWith('Kundenstamm')) ? 'Fehler' : 'Verarbeitet' }}",
+              "type": "string"
             }
           ]
         },
@@ -559,8 +571,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        5408,
-        1040
+        7200,
+        1168
       ]
     },
     {
@@ -584,7 +596,7 @@
       "typeVersion": 3.5,
       "position": [
         2816,
-        720
+        1056
       ]
     },
     {
@@ -602,8 +614,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        3024,
-        592
+        3040,
+        1056
       ],
       "retryOnFail": true,
       "maxTries": 3,
@@ -626,8 +638,8 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1.1,
       "position": [
-        3248,
-        496
+        3264,
+        992
       ],
       "onError": "continueErrorOutput"
     },
@@ -662,7 +674,7 @@
       "typeVersion": 2.3,
       "position": [
         3488,
-        560
+        880
       ]
     },
     {
@@ -680,7 +692,7 @@
       "typeVersion": 3.1,
       "position": [
         3712,
-        448
+        832
       ],
       "retryOnFail": true,
       "maxTries": 3,
@@ -704,8 +716,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        3728,
-        736
+        3720,
+        1064
       ],
       "credentials": {
         "openRouterApi": {
@@ -723,8 +735,8 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        3856,
-        736
+        3848,
+        1064
       ]
     },
     {
@@ -737,7 +749,7 @@
       "typeVersion": 2,
       "position": [
         4064,
-        608
+        912
       ],
       "onError": "continueErrorOutput"
     },
@@ -772,7 +784,7 @@
       "typeVersion": 2.3,
       "position": [
         4960,
-        512
+        768
       ]
     },
     {
@@ -807,8 +819,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        5184,
-        416
+        5408,
+        560
       ]
     },
     {
@@ -844,7 +856,7 @@
       "typeVersion": 3.5,
       "position": [
         5184,
-        608
+        944
       ]
     },
     {
@@ -903,7 +915,7 @@
       "typeVersion": 3.5,
       "position": [
         3776,
-        1152
+        1728
       ]
     },
     {
@@ -961,8 +973,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        5184,
-        1328
+        6528,
+        1968
       ]
     },
     {
@@ -1021,7 +1033,7 @@
       "typeVersion": 3.5,
       "position": [
         2592,
-        1472
+        2064
       ]
     },
     {
@@ -1080,7 +1092,7 @@
       "typeVersion": 3.5,
       "position": [
         2080,
-        1712
+        2304
       ]
     },
     {
@@ -1138,8 +1150,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        5184,
-        1888
+        6976,
+        2480
       ]
     },
     {
@@ -1198,22 +1210,7 @@
       "typeVersion": 3.5,
       "position": [
         4288,
-        224
-      ]
-    },
-    {
-      "parameters": {
-        "options": {
-          "responseCode": "={{ $json.aktion === \"abgelehnt\" ? 400 : 200 }}"
-        }
-      },
-      "id": "167135bd-f661-4e18-801a-69256ba47bca",
-      "name": "Antwort senden",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.5,
-      "position": [
-        5856,
-        1040
+        368
       ]
     },
     {
@@ -1339,8 +1336,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        5648,
-        1216
+        7424,
+        1264
       ],
       "onError": "continueRegularOutput"
     },
@@ -1399,7 +1396,7 @@
       "typeVersion": 3,
       "position": [
         4288,
-        640
+        960
       ],
       "retryOnFail": true,
       "maxTries": 3,
@@ -1426,7 +1423,7 @@
       "typeVersion": 1.1,
       "position": [
         4512,
-        560
+        880
       ],
       "onError": "continueErrorOutput"
     },
@@ -1440,7 +1437,7 @@
       "typeVersion": 2,
       "position": [
         4736,
-        560
+        816
       ],
       "onError": "continueErrorOutput"
     },
@@ -1500,76 +1497,7 @@
       "typeVersion": 3.5,
       "position": [
         4960,
-        864
-      ]
-    },
-    {
-      "parameters": {
-        "rule": {
-          "interval": [
-            {
-              "field": "minutes",
-              "minutesInterval": 1
-            }
-          ]
-        }
-      },
-      "id": "760c4aac-c8eb-42e2-a221-9eb186918b04",
-      "name": "Postfach jede Minute prüfen",
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.4,
-      "position": [
-        -688,
-        1504
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "folderMessage",
-        "folderId": {
-          "__rl": true,
-          "mode": "id",
-          "value": "<OUTLOOK_ORDNER_ID_AGENT>",
-          "cachedResultName": "Agent"
-        },
-        "limit": 1,
-        "output": "fields",
-        "fields": [
-          "subject",
-          "body",
-          "from",
-          "sender",
-          "receivedDateTime",
-          "internetMessageId"
-        ],
-        "options": {}
-      },
-      "id": "be0fcbbc-a6ea-4d4f-b320-e1f18193ac48",
-      "name": "Älteste Mail im Ordner Agent holen",
-      "type": "n8n-nodes-base.microsoftOutlook",
-      "typeVersion": 2,
-      "position": [
-        -464,
-        1504
-      ],
-      "credentials": {
-        "microsoftOutlookOAuth2Api": {
-          "id": "",
-          "name": "Microsoft Outlook account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "// Mail aus dem Ordner Agent in das Eingangsformat bringen. Die Kunden-ID wird erst danach im Kundenstamm nachgeschlagen.\n// Eine Mail pro Lauf: die Nodes danach lesen mit .first() und setzen genau einen Fall voraus.\nconst m = $input.first().json;\nconst betreff = String(m.subject ?? '');\nconst roh = String(m.body?.content ?? m.bodyPreview ?? '');\nconst istHtml = String(m.body?.contentType ?? '').toLowerCase() === 'html' || /<[a-z][\\s\\S]*>/i.test(roh);\nconst text = istHtml\n  ? roh.replace(/<style[\\s\\S]*?<\\/style>/gi, ' ').replace(/<script[\\s\\S]*?<\\/script>/gi, ' ')\n      .replace(/<br\\s*\\/?>|<\\/p>|<\\/div>|<\\/tr>|<\\/li>/gi, '\\n').replace(/<[^>]+>/g, ' ')\n      .replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\").replace(/&amp;/g, '&')\n  : roh;\nconst anfrage = (betreff + '\\n\\n' + text).replace(/[ \\t]+/g, ' ').replace(/\\n\\s*\\n+/g, '\\n\\n').trim();\nconst absender = String(m.from?.emailAddress?.address ?? m.sender?.emailAddress?.address ?? '').toLowerCase();\nreturn [{ json: { anfrage, absender, quelle: 'Outlook', mailId: m.id } }];"
-      },
-      "id": "c305e9cb-054f-4237-9438-2a4f64f5e656",
-      "name": "Mail aufbereiten",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -240,
-        1504
+        1392
       ]
     },
     {
@@ -1594,8 +1522,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -16,
-        1696
+        0,
+        2864
       ],
       "retryOnFail": true,
       "maxTries": 3,
@@ -1621,8 +1549,8 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1.1,
       "position": [
-        208,
-        1232
+        224,
+        1584
       ],
       "onError": "continueErrorOutput"
     },
@@ -1639,8 +1567,8 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1.1,
       "position": [
-        208,
-        1456
+        224,
+        2832
       ],
       "onError": "continueErrorOutput"
     },
@@ -1651,8 +1579,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        480,
-        1184
+        448,
+        1520
       ]
     },
     {
@@ -1710,13 +1638,13 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        880,
-        1648
+        896,
+        2768
       ]
     },
     {
       "parameters": {
-        "jsCode": "// Kundenstamm nachschlagen. Die Kunden-ID kommt nie vom Modell: bei Mails aus der Absenderadresse (erst genaue Adresse, dann Domain),\n// beim Webhook-Test aus dem Body. In beiden Fällen gilt sie nur, wenn sie im Kundenstamm steht, sonst bleibt kundeId leer (Ablehnung).\nconst norm = s => String(s ?? '').trim();\nlet ein;\ntry {\n  ein = $('Mail aufbereiten').first().json;\n} catch (e) {\n  const w = $('Anfrage per Webhook (Test)').first().json;\n  const b = w.body ?? w;\n  ein = { ticketId: b.ticketId, kundeId: b.kundeId, quelle: b.quelle, anfrage: b.anfrage };\n}\nconst zeilen = $input.all().map(i => i.json);\nconst kunden = zeilen.filter(r => r['Kunden-ID'] !== undefined && r['Firma'] !== undefined);\nconst absender = zeilen.filter(r => r['Domain oder Adresse'] !== undefined);\nconst adresse = norm(ein.absender).toLowerCase();\nconst domain = adresse.split('@')[1] ?? '';\nconst eintrag = r => norm(r['Domain oder Adresse']).toLowerCase();\nlet id = '';\nif (norm(ein.kundeId)) {\n  id = norm(ein.kundeId).toUpperCase();\n} else if (adresse) {\n  const genau = absender.find(r => eintrag(r).includes('@') && !eintrag(r).startsWith('@') && eintrag(r) === adresse);\n  const dom = absender.find(r => { const d = eintrag(r).replace(/^@/, ''); return !d.includes('@') && d !== '' && (domain === d || domain.endsWith('.' + d)); });\n  const treffer = genau ?? dom;\n  id = treffer ? norm(treffer['Kunden-ID']).toUpperCase() : '';\n}\nconst k = kunden.find(r => norm(r['Kunden-ID']).toUpperCase() === id);\nconst dateiId = k ? norm(k['Vertragsdatei-ID']) : '';\nconst kontingentTab = k ? norm(k['Kontingent-Tab']) : '';\nconst ok = Boolean(k) && dateiId !== '' && kontingentTab !== '';\nreturn [{ json: {\n  ticketId: ein.ticketId,\n  kundeId: ok ? id : '',\n  quelle: ein.quelle,\n  anfrage: ein.anfrage,\n  mailId: ein.mailId ?? '',\n  dateiId: ok ? dateiId : '',\n  kontingentTab: ok ? kontingentTab : ''\n} }];"
+        "jsCode": "// Kundenstamm nachschlagen. Die Kunden-ID kommt nie vom Modell: bei Mails aus der Absenderadresse (erst genaue Adresse, dann Domain),\n// beim Webhook-Test aus dem Body. In beiden Fällen gilt sie nur, wenn sie im Kundenstamm steht, sonst bleibt kundeId leer (Ablehnung).\n// Drei Eingänge: Schedule-Pfad (Mail aufbereiten), Power-Automate-Flow (absender, mailId, Base64-Felder), Test (kundeId, anfrage).\nconst norm = s => String(s ?? '').trim();\nconst b64 = s => Buffer.from(String(s ?? ''), 'base64').toString('utf8');\nconst htmlZuText = roh => String(roh ?? '').replace(/<style[\\s\\S]*?<\\/style>/gi, ' ').replace(/<script[\\s\\S]*?<\\/script>/gi, ' ')\n  .replace(/<br\\s*\\/?>|<\\/p>|<\\/div>|<\\/tr>|<\\/li>/gi, '\\n').replace(/<[^>]+>/g, ' ')\n  .replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\").replace(/&amp;/g, '&');\nconst bereinigen = s => s.replace(/[ \\t]+/g, ' ').replace(/\\n\\s*\\n+/g, '\\n\\n').trim();\nlet ein;\ntry {\n  ein = $('Mail aufbereiten').first().json;\n} catch (e) {\n  const w = $('Anfrage per Webhook (Test)').first().json;\n  const b = w.body ?? w;\n  if (b.absender !== undefined || b.anfrageHtmlB64 !== undefined) {\n    const betreff = b64(b.betreffB64);\n    const text = htmlZuText(b64(b.anfrageHtmlB64));\n    const treffer = String(b.absender ?? '').toLowerCase().match(/[a-z0-9._%+\\-]+@[a-z0-9.\\-]+/);\n    ein = { ticketId: b.ticketId, quelle: b.quelle ?? 'Outlook', anfrage: bereinigen(betreff + '\\n\\n' + text), absender: treffer ? treffer[0] : '', mailId: b.mailId };\n  } else {\n    ein = { ticketId: b.ticketId, kundeId: b.kundeId, quelle: b.quelle, anfrage: b.anfrage };\n  }\n}\nconst zeilen = $input.all().map(i => i.json);\nconst kunden = zeilen.filter(r => r['Kunden-ID'] !== undefined && r['Firma'] !== undefined);\nconst absender = zeilen.filter(r => r['Domain oder Adresse'] !== undefined);\nconst adresse = norm(ein.absender).toLowerCase();\nconst domain = adresse.split('@')[1] ?? '';\nconst eintrag = r => norm(r['Domain oder Adresse']).toLowerCase();\nlet id = '';\nif (norm(ein.kundeId)) {\n  id = norm(ein.kundeId).toUpperCase();\n} else if (adresse) {\n  const genau = absender.find(r => eintrag(r).includes('@') && !eintrag(r).startsWith('@') && eintrag(r) === adresse);\n  const dom = absender.find(r => { const d = eintrag(r).replace(/^@/, ''); return !d.includes('@') && d !== '' && (domain === d || domain.endsWith('.' + d)); });\n  const treffer = genau ?? dom;\n  id = treffer ? norm(treffer['Kunden-ID']).toUpperCase() : '';\n}\nconst k = kunden.find(r => norm(r['Kunden-ID']).toUpperCase() === id);\nconst dateiId = k ? norm(k['Vertragsdatei-ID']) : '';\nconst kontingentTab = k ? norm(k['Kontingent-Tab']) : '';\nconst ok = Boolean(k) && dateiId !== '' && kontingentTab !== '';\nreturn [{ json: {\n  ticketId: ein.ticketId,\n  kundeId: ok ? id : '',\n  quelle: ein.quelle,\n  anfrage: ein.anfrage,\n  mailId: ein.mailId ?? '',\n  dateiId: ok ? dateiId : '',\n  kontingentTab: ok ? kontingentTab : ''\n} }];"
       },
       "id": "02e34adb-ed18-4186-8d1f-ac969bcf659d",
       "name": "Kunde bestimmen",
@@ -1724,9 +1652,136 @@
       "typeVersion": 2,
       "position": [
         672,
-        1184
+        1520
       ],
       "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "messageId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Eingang normalisieren').first().json.mailId }}"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ ($json.aktion === 'abgelehnt' || String($json.grund ?? '').startsWith('Kundenstamm')) ? '<OUTLOOK_ORDNER_ID_FEHLER>' : '<OUTLOOK_ORDNER_ID_VERARBEITET>' }}"
+        }
+      },
+      "id": "167d2288-17f5-4471-9a37-66cc3decd20f",
+      "name": "Mail verschieben",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        7424,
+        1072
+      ],
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "a32b6841-0900-4af6-ba33-4db3d63a9450",
+      "name": "Postfach jede Minute prüfen",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -672,
+        2720
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "folderMessage",
+        "folderId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "<OUTLOOK_ORDNER_ID_AGENT>",
+          "cachedResultName": "Agent"
+        },
+        "limit": 1,
+        "output": "fields",
+        "fields": [
+          "subject",
+          "body",
+          "from",
+          "sender",
+          "receivedDateTime",
+          "internetMessageId"
+        ],
+        "options": {}
+      },
+      "id": "44700fbd-28e2-4695-bcca-df8e8ad80474",
+      "name": "Älteste Mail im Ordner Agent holen",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        -448,
+        2720
+      ],
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Mail aus dem Ordner Agent in das Eingangsformat bringen. Die Kunden-ID wird erst danach im Kundenstamm nachgeschlagen.\n// Eine Mail pro Lauf: die Nodes danach lesen mit .first() und setzen genau einen Fall voraus.\nconst m = $input.first().json;\nconst betreff = String(m.subject ?? '');\nconst roh = String(m.body?.content ?? m.bodyPreview ?? '');\nconst istHtml = String(m.body?.contentType ?? '').toLowerCase() === 'html' || /<[a-z][\\s\\S]*>/i.test(roh);\nconst text = istHtml\n  ? roh.replace(/<style[\\s\\S]*?<\\/style>/gi, ' ').replace(/<script[\\s\\S]*?<\\/script>/gi, ' ')\n      .replace(/<br\\s*\\/?>|<\\/p>|<\\/div>|<\\/tr>|<\\/li>/gi, '\\n').replace(/<[^>]+>/g, ' ')\n      .replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\").replace(/&amp;/g, '&')\n  : roh;\nconst anfrage = (betreff + '\\n\\n' + text).replace(/[ \\t]+/g, ' ').replace(/\\n\\s*\\n+/g, '\\n\\n').trim();\nconst absender = String(m.from?.emailAddress?.address ?? m.sender?.emailAddress?.address ?? '').toLowerCase();\nreturn [{ json: { anfrage, absender, quelle: 'Outlook', mailId: m.id } }];"
+      },
+      "id": "0cbd402b-c28a-4c59-af8d-4463a0b3c597",
+      "name": "Mail aufbereiten",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        2720
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "#bugreport"
+        },
+        "text": "={{ 'Bugreport, Ticket ' + $json.ticketId + ' (Kunde ' + $json.kundeId + ')\\n\\n' + $('Eingang normalisieren').first().json.anfrage }}",
+        "otherOptions": {}
+      },
+      "id": "7636a99f-ede8-4be4-a90d-68440c9ff5e5",
+      "name": "Slack: Bugreport an Senior",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        6752,
+        96
+      ],
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "",
+          "name": "Slack account"
+        }
+      },
+      "onError": "continueErrorOutput",
+      "notes": "Bugreport geht direkt an den Senior, ohne Freigabe. Gesendet wird der Originaltext der Mail (nicht geschwärzt)."
     },
     {
       "parameters": {
@@ -1735,18 +1790,18 @@
             "caseSensitive": true,
             "leftValue": "",
             "typeValidation": "loose",
-            "version": 3
+            "version": 1
           },
           "conditions": [
             {
-              "leftValue": "={{ (() => { try { return $('Mail aufbereiten').first().json.mailId !== '' && $('Mail aufbereiten').first().json.mailId !== undefined; } catch (e) { return false; } })() }}",
+              "id": "8638bcc9-4a83-4bb3-9879-8d3a41aaef25",
+              "leftValue": "={{ $json.urteil === 'zusatzleistung' }}",
               "operator": {
                 "type": "boolean",
                 "operation": "true",
                 "singleValue": true
               },
-              "rightValue": "",
-              "id": "ap1"
+              "rightValue": ""
             }
           ],
           "combinator": "and"
@@ -1754,43 +1809,414 @@
         "looseTypeValidation": true,
         "options": {}
       },
-      "id": "9438b64c-c357-4621-86ab-fadbef4e88f6",
-      "name": "Aus Postfach?",
+      "id": "072c006e-0edd-4ed8-90c3-0761613b090a",
+      "name": "Zusatzleistung?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        5632,
+        5408,
         944
+      ],
+      "notes": "Wahr: Zusatzleistung, ein Mitarbeiter gibt per Slack frei. Falsch: inklusive, geht wie bisher ohne Freigabe weiter."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Bündelt die drei Wege zur Freigabe (Eskalation, unsichere Klassifikation, Zusatzleistung) zu einer Slack-Karte.\n// Neues Angebot (Kategorie B oder C, Urteil Zusatzleistung): nach der Freigabe geht der Fall an den Vertrieb.\nconst j = $input.first().json;\nconst ein = $('Eingang normalisieren').first().json;\nconst ticketId = j.ticketId ?? ein.ticketId;\nconst kundeId = j.kundeId ?? ein.kundeId;\nconst vertrieb = j.urteil === 'zusatzleistung' && ['B', 'C'].includes(j.kategorie);\nconst zeilen = [\n  'Freigabe nötig: Ticket ' + ticketId + ' (Kunde ' + kundeId + ')',\n  'Einordnung des Systems: ' + (j.urteil ?? 'keine') + (j.kategorie ? ', Kategorie ' + j.kategorie : '') + (j.sicherheit != null ? ', Sicherheit ' + j.sicherheit : ''),\n  'Anlass: ' + (j.grund || 'Zusatzleistung'),\n  'Begründung: ' + (j.begruendung ?? '-'),\n  'Fundstelle: ' + (j.fundstelle ?? '-') + (j.zitatOk === true ? ' (Zitat im Vertrag belegt)' : j.zitatOk === false ? ' (Zitat NICHT belegt)' : ''),\n  'Kontingent: ' + (j.kontingentText ?? '-'),\n  '',\n  'Originalmail:',\n  ein.anfrage\n];\nreturn [{ json: { ...j, ticketId, kundeId, klasse: j.klasse ?? '', vertrieb, slackText: zeilen.join('\\n') } }];\n"
+      },
+      "id": "54a05103-a4db-4abf-9d32-b5c22371daab",
+      "name": "Freigabekarte aufbereiten",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5632,
+        768
+      ],
+      "notes": "Sammelstelle vor der Slack-Freigabe. Setzt vertrieb=true bei Zusatzleistung der Kategorie B oder C (Annahme: beides heißt neues Angebot)."
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "sendAndWait",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "#anfragen_review"
+        },
+        "message": "={{ $json.slackText }}",
+        "approvalOptions": {
+          "values": {
+            "approvalType": "double",
+            "approveLabel": "Freigeben",
+            "disapproveLabel": "Ablehnen"
+          }
+        },
+        "captureResponder": true,
+        "options": {
+          "limitWaitTime": {
+            "values": {
+              "resumeAmount": 8
+            }
+          }
+        }
+      },
+      "id": "2c7e093d-b538-4e51-9644-6804c435042c",
+      "name": "Slack: Freigabe durch Projektleitung",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        5856,
+        768
+      ],
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "",
+          "name": "Slack account"
+        }
+      },
+      "onError": "continueErrorOutput",
+      "notes": "Send and Wait mit Freigeben und Ablehnen, Wartezeit 8 Stunden. approvers ist leer, jeder im Kanal darf klicken."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "f7953934-bc17-4ca9-abdb-deef9b9cb626",
+              "leftValue": "={{ $json.data?.approved === true }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "c4a25a41-34d4-48e9-acc4-20ac5bf4273a",
+      "name": "Freigegeben?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        6080,
+        848
+      ],
+      "notes": "Wahr nur bei ausdrücklicher Freigabe. Fristablauf zählt als nicht freigegeben."
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "ticketId",
+              "value": "={{ $('Freigabekarte aufbereiten').first().json.ticketId }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "kundeId",
+              "value": "={{ $('Freigabekarte aufbereiten').first().json.kundeId }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "klasse",
+              "value": "={{ $('Freigabekarte aufbereiten').first().json.klasse }}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "aktion",
+              "value": "={{ $('Freigabekarte aufbereiten').first().json.vertrieb ? 'freigegeben: an Vertrieb weiterleiten' : 'freigegeben durch Mitarbeiter' }}",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "empfaenger",
+              "value": "={{ $('Freigabekarte aufbereiten').first().json.vertrieb ? 'Vertrieb' : 'Projektleitung' }}",
+              "type": "string"
+            },
+            {
+              "id": "6",
+              "name": "grund",
+              "value": "={{ ($('Freigabekarte aufbereiten').first().json.grund || 'Zusatzleistung') + '; Freigabe durch ' + ($json.responder?.name ?? $json.responder?.id ?? 'unbekannt') }}",
+              "type": "string"
+            },
+            {
+              "id": "7",
+              "name": "freigabe",
+              "value": "freigegeben",
+              "type": "string"
+            },
+            {
+              "id": "8",
+              "name": "kontingentText",
+              "value": "={{ $('Freigabekarte aufbereiten').first().json.kontingentText ?? '' }}",
+              "type": "string"
+            },
+            {
+              "id": "9",
+              "name": "vertrieb",
+              "value": "={{ $('Freigabekarte aufbereiten').first().json.vertrieb === true }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c1b3b48a-0283-464c-964f-295b6c6b1857",
+      "name": "Freigabe festhalten",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        6304,
+        768
+      ],
+      "notes": "Freigabe ist erteilt. Wer geklickt hat, steht im Feld grund (Form der Slack-Antwort ungeprüft)."
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "ticketId",
+              "value": "={{ $('Freigabekarte aufbereiten').first().json.ticketId }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "kundeId",
+              "value": "={{ $('Freigabekarte aufbereiten').first().json.kundeId }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "klasse",
+              "value": "={{ $('Freigabekarte aufbereiten').first().json.klasse }}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "aktion",
+              "value": "abgelehnt durch Mitarbeiter oder Frist abgelaufen",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "empfaenger",
+              "value": "Projektleitung",
+              "type": "string"
+            },
+            {
+              "id": "6",
+              "name": "grund",
+              "value": "={{ ($('Freigabekarte aufbereiten').first().json.grund || 'Zusatzleistung') + '; keine Freigabe (abgelehnt von ' + ($json.responder?.name ?? $json.responder?.id ?? 'unbekannt') + ' oder Frist abgelaufen)' }}",
+              "type": "string"
+            },
+            {
+              "id": "7",
+              "name": "freigabe",
+              "value": "nicht freigegeben",
+              "type": "string"
+            },
+            {
+              "id": "8",
+              "name": "kontingentText",
+              "value": "={{ $('Freigabekarte aufbereiten').first().json.kontingentText ?? '' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "952d7e1a-28a4-4a3e-b43f-f637eca7cd6a",
+      "name": "Ablehnung festhalten",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        6976,
+        1008
+      ],
+      "notes": "aktion ist bewusst nicht exakt 'abgelehnt': das würde die Mail in den Ordner Fehler schieben, der für ungültige Eingaben gedacht ist."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "3fca5341-322c-473e-b9df-e2266aa7cdac",
+              "leftValue": "={{ $json.vertrieb === true }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "ea644fc0-fbba-43e2-9920-13d806373792",
+      "name": "An Vertrieb?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        6528,
+        768
       ]
     },
     {
       "parameters": {
-        "operation": "move",
-        "messageId": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
           "__rl": true,
-          "mode": "id",
-          "value": "={{ $('Mail aufbereiten').first().json.mailId }}"
+          "mode": "name",
+          "value": "#vertrieb"
         },
-        "folderId": {
-          "__rl": true,
-          "mode": "id",
-          "value": "={{ ($json.aktion === 'abgelehnt' || String($json.grund ?? '').startsWith('Kundenstamm')) ? '<OUTLOOK_ORDNER_ID_FEHLER>' : '<OUTLOOK_ORDNER_ID_VERARBEITET>' }}"
-        }
+        "text": "={{ 'Neues Angebot nötig: Ticket ' + $json.ticketId + ' (Kunde ' + $json.kundeId + ')\\n' + 'Kategorie ' + $('Freigabekarte aufbereiten').first().json.kategorie + '\\n' + 'Fundstelle: ' + $('Freigabekarte aufbereiten').first().json.fundstelle + '\\n\\n' + 'Originalmail:\\n' + $('Eingang normalisieren').first().json.anfrage }}",
+        "otherOptions": {}
       },
-      "id": "7dec98aa-b452-4393-883c-bfc26fb55e29",
-      "name": "Mail verschieben",
-      "type": "n8n-nodes-base.microsoftOutlook",
-      "typeVersion": 2,
+      "id": "626d16cb-0d3a-4aca-a6f3-990c4d169b67",
+      "name": "Slack: Weiterleitung an Vertrieb",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
       "position": [
-        5856,
-        848
+        6752,
+        704
       ],
       "credentials": {
-        "microsoftOutlookOAuth2Api": {
+        "slackOAuth2Api": {
           "id": "",
-          "name": "Microsoft Outlook account"
+          "name": "Slack account"
         }
-      }
+      },
+      "onError": "continueErrorOutput",
+      "notes": "Der Vertrieb übernimmt die kommerzielle Seite."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Slack-Knoten ersetzen die Daten durch ihre eigene Antwort. Hier kommt der Zustand vor dem Versand zurück,\n// damit 'Ergebnis vereinheitlichen' wieder Ticket, Aktion und Empfänger sieht.\nconst quelle = ['Freigabe festhalten', 'Bugreport an Entwicklung weiterleiten', 'Sonstiges an Projektleitung'].find(n => $(n).isExecuted);\nreturn [{ json: $(quelle).first().json }];\n"
+      },
+      "id": "105038b3-82bb-4573-a815-155be4e42c77",
+      "name": "Zustand nach Slack-Versand",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        6976,
+        0
+      ],
+      "notes": "Gemeinsam für Bugreport, Sonstiges und Vertrieb."
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "ticketId",
+              "value": "={{ $('Eingang normalisieren').first().json.ticketId }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "kundeId",
+              "value": "={{ $('Eingang normalisieren').first().json.kundeId }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "klasse",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "aktion",
+              "value": "eskalieren",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "empfaenger",
+              "value": "Projektleitung",
+              "type": "string"
+            },
+            {
+              "id": "6",
+              "name": "grund",
+              "value": "={{ 'Slack-Versand fehlgeschlagen: ' + ($json.error ? (typeof $json.error === 'string' ? $json.error : ($json.error.message ?? JSON.stringify($json.error))) : 'Slack nicht erreichbar') }}",
+              "type": "string"
+            },
+            {
+              "id": "7",
+              "name": "freigabe",
+              "value": "offen, von Hand nachzuholen",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6e662935-a216-481d-a4fd-e61e7bd27b06",
+      "name": "Eskalation: Slack fehlgeschlagen",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        6976,
+        192
+      ],
+      "notes": "Sammelt die Fehlerausgänge aller Slack-Knoten, sonst ginge ein Ticket bei einem Slack-Ausfall still verloren."
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "#anfragen_review"
+        },
+        "text": "={{ 'Sonstiges, Ticket ' + $json.ticketId + ' (Kunde ' + $json.kundeId + ')\\n\\n' + $('Eingang normalisieren').first().json.anfrage }}",
+        "otherOptions": {}
+      },
+      "id": "03071806-9ccf-41ae-9465-4e8c88881f9f",
+      "name": "Slack: Sonstiges informieren",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        6752,
+        1968
+      ],
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "",
+          "name": "Slack account"
+        }
+      },
+      "onError": "continueErrorOutput",
+      "notes": "Sonstiges (Rückruf, Frage, Reklamation) informiert nur, ohne Freigabe und ohne Warten."
     }
   ],
   "connections": {
@@ -1950,7 +2376,7 @@
       "main": [
         [
           {
-            "node": "Ergebnis vereinheitlichen",
+            "node": "Slack: Bugreport an Senior",
             "type": "main",
             "index": 0
           }
@@ -1966,7 +2392,7 @@
             "index": 0
           },
           {
-            "node": "Aus Postfach?",
+            "node": "Mail verschieben",
             "type": "main",
             "index": 0
           }
@@ -2118,7 +2544,7 @@
       "main": [
         [
           {
-            "node": "Ergebnis vereinheitlichen",
+            "node": "Freigabekarte aufbereiten",
             "type": "main",
             "index": 0
           }
@@ -2129,7 +2555,7 @@
       "main": [
         [
           {
-            "node": "Ergebnis vereinheitlichen",
+            "node": "Zusatzleistung?",
             "type": "main",
             "index": 0
           }
@@ -2151,7 +2577,7 @@
       "main": [
         [
           {
-            "node": "Ergebnis vereinheitlichen",
+            "node": "Slack: Sonstiges informieren",
             "type": "main",
             "index": 0
           }
@@ -2162,7 +2588,7 @@
       "main": [
         [
           {
-            "node": "Ergebnis vereinheitlichen",
+            "node": "Freigabekarte aufbereiten",
             "type": "main",
             "index": 0
           }
@@ -2285,39 +2711,6 @@
         ]
       ]
     },
-    "Postfach jede Minute prüfen": {
-      "main": [
-        [
-          {
-            "node": "Älteste Mail im Ordner Agent holen",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Älteste Mail im Ordner Agent holen": {
-      "main": [
-        [
-          {
-            "node": "Mail aufbereiten",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Mail aufbereiten": {
-      "main": [
-        [
-          {
-            "node": "Kundenstamm laden",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Kundenstamm laden": {
       "main": [
         [
@@ -2417,18 +2810,214 @@
         ]
       ]
     },
-    "Aus Postfach?": {
+    "Postfach jede Minute prüfen": {
       "main": [
         [
           {
-            "node": "Mail verschieben",
+            "node": "Älteste Mail im Ordner Agent holen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Älteste Mail im Ordner Agent holen": {
+      "main": [
+        [
+          {
+            "node": "Mail aufbereiten",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mail aufbereiten": {
+      "main": [
+        [
+          {
+            "node": "Kundenstamm laden",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack: Bugreport an Senior": {
+      "main": [
+        [
+          {
+            "node": "Zustand nach Slack-Versand",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Antwort senden",
+            "node": "Eskalation: Slack fehlgeschlagen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Zusatzleistung?": {
+      "main": [
+        [
+          {
+            "node": "Freigabekarte aufbereiten",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ergebnis vereinheitlichen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Freigabekarte aufbereiten": {
+      "main": [
+        [
+          {
+            "node": "Slack: Freigabe durch Projektleitung",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack: Freigabe durch Projektleitung": {
+      "main": [
+        [
+          {
+            "node": "Freigegeben?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Eskalation: Slack fehlgeschlagen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Freigegeben?": {
+      "main": [
+        [
+          {
+            "node": "Freigabe festhalten",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ablehnung festhalten",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Freigabe festhalten": {
+      "main": [
+        [
+          {
+            "node": "An Vertrieb?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ablehnung festhalten": {
+      "main": [
+        [
+          {
+            "node": "Ergebnis vereinheitlichen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "An Vertrieb?": {
+      "main": [
+        [
+          {
+            "node": "Slack: Weiterleitung an Vertrieb",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ergebnis vereinheitlichen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack: Weiterleitung an Vertrieb": {
+      "main": [
+        [
+          {
+            "node": "Zustand nach Slack-Versand",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Eskalation: Slack fehlgeschlagen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Zustand nach Slack-Versand": {
+      "main": [
+        [
+          {
+            "node": "Ergebnis vereinheitlichen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Eskalation: Slack fehlgeschlagen": {
+      "main": [
+        [
+          {
+            "node": "Ergebnis vereinheitlichen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack: Sonstiges informieren": {
+      "main": [
+        [
+          {
+            "node": "Zustand nach Slack-Versand",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Eskalation: Slack fehlgeschlagen",
             "type": "main",
             "index": 0
           }
@@ -2439,6 +3028,7 @@
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": true,
+    "errorWorkflow": "7m9StfmV5K3kJT7J",
     "saveDataErrorExecution": "all",
     "saveDataSuccessExecution": "all",
     "executionTimeout": 120,
