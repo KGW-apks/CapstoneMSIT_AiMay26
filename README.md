@@ -16,6 +16,7 @@ Sprint 1, Entwurfsphase (2026-10-15), Architektur liegt als Entwurf vor. Es ist 
 - `docs/notizen.md`: Sammelstelle für Festlegungen und Textstellen, die später im Workflow umgesetzt werden (Arbeitsdatei, wächst weiter)
 - `docs/kunden/firma-a` bis `firma-e`: je Kunde Vertrag, Beschreibung und anonymisierte Kurzfassung für den Agenten (Word und Markdown)
 - `docs/workflow-ende.md`: Festlegung, wie ein Fall abgeschlossen wird (Freigabe, Antworttexte, Protokoll)
+- `docs/tests/testbatterie-change-request-agent.docx`: 20 Testfälle für die Kunden A bis E mit Ergebnissen vom 23.10.2026, Befunden und Änderungsvorschlägen, abgeglichen mit dem Workflow-Stand 42ab6d2
 - `workflow/change-request-agent-mit-ende-entwurf.json`: der Agent mitsamt diesem Ende, zum Importieren in n8n
 - `docs/vorlagen/`: die drei Standardverträge (Pflege, Erstellung, Wartung Plus)
 - `docs/schaubilder/organigramm`: Organigramm des fiktiven Softwarehauses (PNG und SVG)
