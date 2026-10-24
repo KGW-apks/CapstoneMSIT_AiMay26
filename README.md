@@ -5,7 +5,7 @@ Abschlussprojekt der MSIT mit IHK-Zertifizierung
 Change-Request-Agent für ein fiktives Softwarehaus. Ein n8n-Workflow ordnet Kundenäußerungen ein (Überlegung, Wunsch, Auftrag, Fehler, Reklamation), prüft sie gegen den Vertrag des Kunden und benennt die zuständige Rolle. Ein Mensch entscheidet jeden Fall.
 
 ## Gruppe
-Knut, Michi, Sebastian
+Knut, Michi
 
 ## Stand
 Sprint 1, Entwurfsphase (2026-10-15), Architektur liegt als Entwurf vor. Es ist noch nichts gebaut.
