@@ -21,7 +21,8 @@ Stand 2026-10-26: Kapitel 1 bis 4 der Projektarbeit liegen vor und sind von der 
 - `docs/kunden/firma-a` bis `firma-e`: je Kunde Vertrag, Beschreibung und anonymisierte Kurzfassung für den Agenten (Word und Markdown)
 - `docs/workflow-ende.md`: Festlegung, wie ein Fall abgeschlossen wird (Freigabe, Antworttexte, Protokoll)
 - `docs/tests/testbatterie-change-request-agent.docx`: 20 Testfälle für die Kunden A bis E mit Ergebnissen vom 23.10.2026, Befunden und Änderungsvorschlägen, abgeglichen mit dem Workflow-Stand 42ab6d2
-- `workflow/change-request-agent.json`: der Hauptworkflow des Agenten, zum Importieren in n8n
+- `workflow/change-request-agent.json`: der Hauptworkflow des Agenten, zum Importieren in n8n. Er trennt eine Mail in einzelne Anliegen
+- `workflow/anliegen-bearbeiten.json`: der Sub-Workflow, der je Anliegen klassifiziert, den Vertrag prüft und an das Slack-Ende übergibt
 - `workflow/slack-ende.json`: der Sub-Workflow für Weitergabe und Freigabe über Slack
 - `docs/vorlagen/`: die drei Standardverträge (Pflege, Erstellung, Wartung Plus)
 - `docs/schaubilder/organigramm`: Organigramm des fiktiven Softwarehauses (PNG und SVG)
