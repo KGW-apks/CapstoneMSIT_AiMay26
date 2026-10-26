@@ -2,28 +2,33 @@
 Abschlussprojekt der MSIT mit IHK-Zertifizierung
 
 ## Projekt
-Change-Request-Agent für ein fiktives Softwarehaus. Ein n8n-Workflow ordnet Kundenäußerungen ein (Überlegung, Wunsch, Auftrag, Fehler, Reklamation), prüft sie gegen den Vertrag des Kunden und benennt die zuständige Rolle. Ein Mensch entscheidet jeden Fall.
+Change-Request-Agent für ein fiktives Softwarehaus. Ein n8n-Workflow ordnet Kundenäußerungen ein (Fehlermeldung, Überlegung, Wunsch, Auftrag, Sonstiges), prüft sie gegen den Vertrag des Kunden und benennt die zuständige Rolle. Ein Mensch entscheidet jeden Fall.
 
 ## Gruppe
 Knut, Michi
 
 ## Stand
-Sprint 1, Entwurfsphase (2026-10-15), Architektur liegt als Entwurf vor. Es ist noch nichts gebaut.
+Stand 2026-10-26: Kapitel 1 bis 4 der Projektarbeit liegen vor und sind von der Gruppe gegengelesen. Der Workflow läuft in einer lokalen n8n-Instanz im Testbetrieb: Eingang über einen Postfach-Ordner, Freigabe über Slack.
 
 ## Inhalt
+- `docs/kapitel-1-ist-und-soll.pdf`: Kapitel 1, Ist- und Soll-Situation mit den Erfolgskriterien K1 bis K6
+- `docs/kapitel-2-einsatzbereiche.pdf`: Kapitel 2, mögliche KI-Einsatzbereiche und der gewählte Umfang
+- `docs/kapitel-3-tool-vergleich.pdf`: Kapitel 3, Vergleich von drei Aufbauvarianten mit ersten Messungen
+- `docs/kapitel-4-tool-auswahl-und-einsatzplanung.pdf`: Kapitel 4, begründete Auswahl und Einsatzplanung mit Pilotphase
 - `docs/fiktive-firma.md`: das fiktive Softwarehaus mit Rollen, Abteilungen, Personen, Kunden, Vertragsarten und Regeln
 - `docs/kandidatenbogen.md`: der Use Case als ausgefüllter Kandidatenbogen (Prozess, KI-Stellen, Erfolgskriterien, Daten, Risiken, Plan)
 - `docs/notizen.md`: Sammelstelle für Festlegungen und Textstellen, die später im Workflow umgesetzt werden (Arbeitsdatei, wächst weiter)
 - `docs/kunden/firma-a` bis `firma-e`: je Kunde Vertrag, Beschreibung und anonymisierte Kurzfassung für den Agenten (Word und Markdown)
 - `docs/workflow-ende.md`: Festlegung, wie ein Fall abgeschlossen wird (Freigabe, Antworttexte, Protokoll)
 - `docs/tests/testbatterie-change-request-agent.docx`: 20 Testfälle für die Kunden A bis E mit Ergebnissen vom 23.10.2026, Befunden und Änderungsvorschlägen, abgeglichen mit dem Workflow-Stand 42ab6d2
-- `workflow/change-request-agent-mit-ende-entwurf.json`: der Agent mitsamt diesem Ende, zum Importieren in n8n
+- `workflow/change-request-agent.json`: der Hauptworkflow des Agenten, zum Importieren in n8n
+- `workflow/slack-ende.json`: der Sub-Workflow für Weitergabe und Freigabe über Slack
 - `docs/vorlagen/`: die drei Standardverträge (Pflege, Erstellung, Wartung Plus)
 - `docs/schaubilder/organigramm`: Organigramm des fiktiven Softwarehauses (PNG und SVG)
 - `docs/schaubilder/agent-aufgaben`: Aufgaben und Ausgänge des Agenten (PNG und SVG)
 - `docs/schaubilder/architektur`: Ablauf des Agenten und die Umgebung jedes Schritts (PNG und SVG)
 
-Die Dokumente sind Entwürfe aus Sprint 1, mit KI-Unterstützung (Claude Code) erstellt und von der Gruppe noch nicht abgestimmt.
+Alle Dokumente sind mit KI-Unterstützung (Claude Code) erstellt. Die Kapitel 1 bis 4 sind von der Gruppe gegengelesen, die übrigen Dokumente sind Entwürfe aus Sprint 1.
 
 ## Mitarbeit
 Jede Person arbeitet in ihrem eigenen Branch, `main` pflegt Knut. Regeln und Einrichtung in [CONTRIBUTING.md](CONTRIBUTING.md). Zwei GitHub Actions wachen darüber (`.github/workflows/`): die Main-Wache und der Privatsphäre-Check.
