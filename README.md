@@ -19,9 +19,13 @@ Stand 2026-10-27: Kapitel 1 bis 5 der Projektarbeit liegen vor und sind von der 
 - `docs/fiktive-firma.md`: das fiktive Softwarehaus mit Rollen, Abteilungen, Personen, Kunden, Vertragsarten und Regeln
 - `docs/kandidatenbogen.md`: der Use Case als ausgefüllter Kandidatenbogen (Prozess, KI-Stellen, Erfolgskriterien, Daten, Risiken, Plan)
 - `docs/notizen.md`: Sammelstelle für Festlegungen und Textstellen, die später im Workflow umgesetzt werden (Arbeitsdatei, wächst weiter)
-- `docs/kunden/firma-a` bis `firma-e`: je Kunde Vertrag, Beschreibung und anonymisierte Kurzfassung für den Agenten (Word und Markdown)
+- `docs/kunden/firma-a` bis `firma-e`: je Kunde Vertrag, Beschreibung und anonymisierte Kurzfassung (Word und Markdown). `kurzfassung-agent.md` ist die Fassung, die der Agent im Betrieb aus Google Drive liest
 - `docs/workflow-ende.md`: Festlegung, wie ein Fall abgeschlossen wird (Freigabe, Antworttexte, Protokoll)
-- `docs/tests/testbatterie-change-request-agent.docx`: 20 Testfälle für die Kunden A bis E mit Ergebnissen vom 23.10.2026, Befunden und Änderungsvorschlägen, abgeglichen mit dem Workflow-Stand 42ab6d2
+- `docs/tests/testdokumentation-gesamt.docx` (und `.pdf`): alle drei Testbatterien mit 60 Testmails, Ergebnisse aller Runden vom 23. bis 26.10.2026, Gegenüberstellungen, Fehlerarten und Grenzen der Tests
+- `docs/auswertung/fehlerfaelle-und-loesungsvorschlaege.docx`: fehlgeschlagene Testfälle nach Fehlerart mit einfachen Lösungsvorschlägen und Stand nach dem zweiten Lauf
+- `docs/auswertung/zeit-und-kostenvergleich.xlsx`: Annahmen, Stoppuhr-Vorlage und Gegenüberstellung vorher und nachher (Grundlage für Kapitel 5)
+- `docs/auswertung/token-verbrauch-2026-10-25.md`: gemessene Token und Laufzeit der 32 Testmails vom 25.10.2026
+- `docs/vertraege/`: Vergleich der Vertragsarten (20), Anwendung auf den Use Case (21) und Übersicht der Kundenverträge A bis E (40)
 - `workflow/change-request-agent.json`: der Hauptworkflow des Agenten, zum Importieren in n8n. Er trennt eine Mail in einzelne Anliegen
 - `workflow/anliegen-bearbeiten.json`: der Sub-Workflow, der je Anliegen klassifiziert, den Vertrag prüft und an das Slack-Ende übergibt
 - `workflow/slack-ende.json`: der Sub-Workflow für Weitergabe und Freigabe über Slack
