@@ -8,7 +8,7 @@ Change-Request-Agent für ein fiktives Softwarehaus. Ein n8n-Workflow ordnet Kun
 Knut, Michael
 
 ## Stand
-Stand 2026-10-26: Kapitel 1 bis 4 der Projektarbeit liegen vor und sind von der Gruppe gegengelesen. Der Workflow läuft in einer lokalen n8n-Instanz im Testbetrieb: Eingang über einen Postfach-Ordner, Freigabe über Slack.
+Stand 2026-10-27: Kapitel 1 bis 5 der Projektarbeit liegen vor und sind von der Gruppe gegengelesen. Der Workflow läuft in einer lokalen n8n-Instanz im Testbetrieb: Eingang über einen Postfach-Ordner, Freigabe über Slack.
 
 ## Inhalt
 - `docs/kapitel-1-ist-und-soll.pdf`: Kapitel 1, Ist- und Soll-Situation mit den Erfolgskriterien K1 bis K6
@@ -30,7 +30,7 @@ Stand 2026-10-26: Kapitel 1 bis 4 der Projektarbeit liegen vor und sind von der 
 - `docs/schaubilder/agent-aufgaben`: Aufgaben und Ausgänge des Agenten (PNG und SVG)
 - `docs/schaubilder/architektur`: Ablauf des Agenten und die Umgebung jedes Schritts (PNG und SVG)
 
-Alle Dokumente sind mit KI-Unterstützung (Claude Code) erstellt. Die Kapitel 1 bis 4 sind von der Gruppe gegengelesen, die übrigen Dokumente sind Entwürfe aus Sprint 1.
+Alle Dokumente sind mit KI-Unterstützung (Claude Code) erstellt. Die Kapitel 1 bis 5 sind von der Gruppe gegengelesen, die übrigen Dokumente sind Entwürfe aus Sprint 1.
 
 ## Mitarbeit
 Jede Person arbeitet in ihrem eigenen Branch, `main` pflegt Knut. Regeln und Einrichtung in [CONTRIBUTING.md](CONTRIBUTING.md). Zwei GitHub Actions wachen darüber (`.github/workflows/`): die Main-Wache und der Privatsphäre-Check.
