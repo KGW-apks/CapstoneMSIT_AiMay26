@@ -941,7 +941,9 @@
             "kontingent": "={{ $json.kontingentText ?? \"\" }}",
             "urteil": "={{ $json.urteil ?? '' }}",
             "kategorie": "={{ $json.kategorie ?? '' }}",
-            "klasse_begruendung": "={{ $('Anfrage klassifizieren').isExecuted ? ($('Anfrage klassifizieren').first(0).json.output?.begruendung ?? '') : '' }}"
+            "klasse_begruendung": "={{ $('Anfrage klassifizieren').isExecuted ? ($('Anfrage klassifizieren').first(0).json.output?.begruendung ?? '') : '' }}",
+            "begruendung": "={{ $json.begruendung ?? '' }}",
+            "sicherheit": "={{ $json.sicherheit != null ? String($json.sicherheit) : '' }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -1058,6 +1060,26 @@
             {
               "id": "klasse_begruendung",
               "displayName": "klasse_begruendung",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "begruendung",
+              "displayName": "begruendung",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "sicherheit",
+              "displayName": "sicherheit",
               "required": false,
               "defaultMatch": false,
               "display": true,
