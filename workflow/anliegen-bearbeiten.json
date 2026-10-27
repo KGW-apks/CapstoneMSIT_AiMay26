@@ -825,25 +825,31 @@
               "id": "cbedbc05-206e-4671-b4e3-0ea22d8021f1",
               "name": "aktion",
               "type": "string",
-              "value": "={{ $json.eskalieren ? 'eskalieren' : ($json.urteil === 'inklusive' ? 'inklusive: an Senior weiterleiten' : 'Zusatzleistung, Kategorie ' + $json.kategorie + ': zur Freigabe an Projektleitung') }}"
+              "value": "={{ $json.eskalieren ? 'eskalieren' : ($json.urteil === 'inklusive' ? ($json.kundeId === 'E' ? 'inklusive, Kunde E: zur Freigabe an Projektleitung' : 'inklusive: an Senior weiterleiten') : 'Zusatzleistung, Kategorie ' + $json.kategorie + ': zur Freigabe an Projektleitung') }}"
             },
             {
               "id": "5f7b3eb8-581c-4721-bc61-a29e12b40366",
               "name": "empfaenger",
               "type": "string",
-              "value": "={{ (!$json.eskalieren && $json.urteil === 'inklusive') ? 'Senior-Entwicklung' : 'Projektleitung' }}"
+              "value": "={{ (!$json.eskalieren && $json.urteil === 'inklusive' && $json.kundeId !== 'E') ? 'Senior-Entwicklung' : 'Projektleitung' }}"
             },
             {
               "id": "a45d535a-418b-4523-8978-e0f53112310c",
               "name": "freigabe",
               "type": "string",
-              "value": "={{ (!$json.eskalieren && $json.urteil === 'inklusive') ? 'nicht nötig (Slack-Meldung an Senior)' : 'ausstehend (Slack-Freigabe)' }}"
+              "value": "={{ (!$json.eskalieren && $json.urteil === 'inklusive' && $json.kundeId !== 'E') ? 'nicht nötig (Slack-Meldung an Senior)' : 'ausstehend (Slack-Freigabe)' }}"
             },
             {
               "id": "0369d44a-11eb-47c4-9f5f-59cac9e33e94",
               "name": "slackWeg",
               "type": "string",
-              "value": "={{ (!$json.eskalieren && $json.urteil === 'inklusive') ? 'inklusive' : 'freigabe' }}"
+              "value": "={{ (!$json.eskalieren && $json.urteil === 'inklusive' && $json.kundeId !== 'E') ? 'inklusive' : 'freigabe' }}"
+            },
+            {
+              "id": "7e1f0c2a-4b5d-4e8f-9a1b-2c3d4e5f6a70",
+              "name": "grund",
+              "type": "string",
+              "value": "={{ (!$json.eskalieren && $json.urteil === 'inklusive' && $json.kundeId === 'E') ? 'Kunde E, inklusive: Ob eine Änderung erforderlich ist, entscheidet laut Vertrag VII.2 ein Mitarbeiter, nicht das System' : ($json.grund ?? '') }}"
             }
           ]
         },
