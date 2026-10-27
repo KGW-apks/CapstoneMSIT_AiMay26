@@ -15,6 +15,7 @@ Stand 2026-10-26: Kapitel 1 bis 4 der Projektarbeit liegen vor und sind von der 
 - `docs/kapitel-2-einsatzbereiche.pdf`: Kapitel 2, mögliche KI-Einsatzbereiche und der gewählte Umfang
 - `docs/kapitel-3-tool-vergleich.pdf`: Kapitel 3, Vergleich von drei Aufbauvarianten mit ersten Messungen
 - `docs/kapitel-4-tool-auswahl-und-einsatzplanung.pdf`: Kapitel 4, begründete Auswahl und Einsatzplanung mit Pilotphase
+- `docs/kapitel-5-erfolgskontrolle-kosten-und-nutzen.pdf`: Kapitel 5, Erfolgskontrolle mit Testrunden, Kennzahlen, Kosten und Nutzen
 - `docs/fiktive-firma.md`: das fiktive Softwarehaus mit Rollen, Abteilungen, Personen, Kunden, Vertragsarten und Regeln
 - `docs/kandidatenbogen.md`: der Use Case als ausgefüllter Kandidatenbogen (Prozess, KI-Stellen, Erfolgskriterien, Daten, Risiken, Plan)
 - `docs/notizen.md`: Sammelstelle für Festlegungen und Textstellen, die später im Workflow umgesetzt werden (Arbeitsdatei, wächst weiter)
