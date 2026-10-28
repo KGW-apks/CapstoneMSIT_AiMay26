@@ -18,7 +18,6 @@ Stand 2026-10-28: Die Kapitel 1 bis 6 der Projektarbeit und die Präsentation li
 - `docs/kapitel-5-erfolgskontrolle-kosten-und-nutzen.pdf`: Kapitel 5, Erfolgskontrolle mit Testrunden, Kennzahlen, Kosten und Nutzen
 - `docs/kapitel-6-projektabschluss-und-ausblick.pdf`: Kapitel 6, Projektabschluss mit Stärken, Grenzen, Zielkonflikten, Wirtschaftlichkeit, nächsten Schritten und Reflexion
 - `docs/praesentation/praesentation-change-request-agent.html`: die Präsentation, 22 Folien für rund 30 Minuten, im Browser öffnen, Pfeiltasten zum Blättern, F für Vollbild
-- `docs/praesentation/sprechskript-change-request-agent.html`: das Sprechskript zur Präsentation, je Folie Kernpunkt und Sprechtext
 - `docs/praesentation/backup-durchlauf.mp4`: Backup-Video des Durchlaufs (Mail, n8n, Slack, Freigabe), 77 Sekunden, für den Fall, dass die Live-Demo scheitert
 - `docs/fiktive-firma.md`: das fiktive Softwarehaus mit Rollen, Abteilungen, Personen, Kunden, Vertragsarten und Regeln
 - `docs/kandidatenbogen.md`: der Use Case als ausgefüllter Kandidatenbogen (Prozess, KI-Stellen, Erfolgskriterien, Daten, Risiken, Plan)
