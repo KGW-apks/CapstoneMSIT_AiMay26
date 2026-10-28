@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sprechskript Change-Request-Agent</title>
+<style>
+:root{--text:#1d2633;--muted:#5b6778;--line:#dfe5ec;--accent:#1f9e88;--ki:#6b5bd6;--bg:#f7f9fb;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Segoe UI Variable Text","Segoe UI",system-ui,Arial,sans-serif;font-size:17px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding:48px 32px 80px}
+header h1{font-size:34px;margin:0 0 6px;letter-spacing:-.01em}
+header p{color:var(--muted);margin:0 0 4px;max-width:90ch}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 34px}
+.meta span{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px 14px;font-size:15px;color:var(--muted)}
+.meta b{color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.s{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 24px;break-inside:avoid}
+.s .h{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+.s .n{font-size:22px;font-weight:700;color:var(--accent);min-width:30px}
+.s h2{font-size:19px;margin:0;flex:1}
+.s .t{font-size:14px;color:var(--muted);white-space:nowrap}
+.s .on{font-size:14px;color:var(--muted);border-left:3px solid var(--line);padding-left:10px;margin:0 0 10px}
+.s p{margin:0 0 8px;max-width:90ch}
+.s .go{font-size:15px;color:var(--ki);margin-top:6px}
+.chap{grid-column:1/-1;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:16px 0 0}
+.fq{grid-column:1/-1}
+.fq ul{margin:6px 0 0;padding-left:20px}
+.fq li{margin-bottom:6px}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+@media print{body{background:#fff;font-size:12.5px}.wrap{padding:0;max-width:none}.grid{gap:10px}.s{padding:12px 16px;border-radius:10px}.meta{margin:10px 0 16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Sprechskript: Change-Request-Agent</h1>
+  <p>Ergänzung zur Präsentation. Auf den Folien steht der Kernpunkt, hier stehen die Sätze dazu. Die Präsentation funktioniert auch ohne Skript.</p>
+  <div class="meta">
+    <span><b>22 Folien</b> · rund 30 Minuten</span>
+    <span><b>Steuerung:</b> Pfeiltasten, Leertaste oder Klick · <b>F</b> für Vollbild</span>
+    <span><b>Folie 12</b> hat drei Bilder, jeder Klick zeigt das nächste</span>
+  </div>
+</header>
+
+<div class="grid">
+
+<div class="chap">Einstieg</div>
+
+<div class="s"><div class="h"><span class="n">1</span><h2>Steht das im Vertrag?</h2><span class="t">ca. 0,5 Min.</span></div>
+<p class="on">Titel, Leitsatz in drei Teilen</p>
+<p>Willkommen. Unsere Projektarbeit dreht sich um eine Frage, die in jedem Softwarehaus täglich fällt: Steht das, was der Kunde gerade möchte, im Vertrag, oder ist es eine Zusatzleistung?</p>
+<p>Wir haben dafür einen Agenten geplant und gebaut, der diese Frage vorbereitet. Das Prinzip steht unten auf der Folie: Das Modell schlägt vor, Regeln prüfen, der Mensch entscheidet. Firma, Kunden und Zahlen sind erfunden.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">2</span><h2>Unser Weg in sechs Schritten</h2><span class="t">ca. 0,5 Min.</span></div>
+<p class="on">Sechs Kapitel der Projektarbeit</p>
+<p>Wir gehen den Weg der Projektarbeit entlang: zuerst die Ausgangslage mit Firma, Problem und Zielen. Dann, wo KI überhaupt sinnvoll ist, welche Werkzeuge wir verglichen haben und wie die Einführung geplant ist. Danach zeigen wir, was die Tests ergeben haben, und schließen mit Grenzen und nächsten Schritten.</p>
+</div>
+
+<div class="chap">1 · Ausgangslage</div>
+
+<div class="s"><div class="h"><span class="n">3</span><h2>Nordlicht KI-Werkstatt GmbH</h2><span class="t">ca. 1,5 Min.</span></div>
+<p class="on">9 Mitarbeitende, 4 Abteilungen, 5 Kunden, 3 Vertragsarten, Organigramm</p>
+<p>Die Nordlicht KI-Werkstatt ist ein kleines Softwarehaus mit neun Mitarbeitenden in vier Abteilungen. Sie baut für kleine und mittlere Unternehmen Chatbots, Fachanwendungen und Bilderkennung. Neue Software entsteht über einen Erstellungsvertrag, danach folgt die Betreuung über einen Pflege- oder Wartungsvertrag.</p>
+<p>KI nutzt die Firma bisher nur intern, als Programmier-Assistent in der Entwicklung. Kundenwünsche werden komplett von Hand bearbeitet. Und sie laufen alle bei einer Stelle zusammen: der Projektleitung, die zugleich Senior-Entwicklerin ist.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">4</span><h2>Fünf Kunden, fünf verschiedene Regeln</h2><span class="t">ca. 1,5 Min.</span></div>
+<p class="on">Kunden A bis E mit Vertrag und Kontingent, Prüfung in zwei Stufen, Kategorien A, B, C</p>
+<p>Im Projekt betreut Nordlicht fünf Kunden mit drei Vertragsarten. Und jeder Vertrag rechnet anders: Bei A und B zählen Seiten neuer Dokumente im Monat, bei C und D ein Stundenkonto im Jahr, bei E ein Änderungspuffer in Euro. Auch die Grenze für eine Kleinstveränderung liegt mal bei 1.000, mal bei 2.500 Euro.</p>
+<p>Jeder Wunsch wird in zwei Stufen geprüft. Gehört er zur vereinbarten Leistung, ist er enthalten. Sonst ist er eine Zusatzleistung und bekommt eine Kategorie: A ist eine Kleinstveränderung ohne eigenes Angebot, B braucht die Bestätigung des Kunden, C greift in die Architektur ein und bekommt ein eigenes Angebot.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">5</span><h2>Fast jeder Schritt liegt bei einer Person</h2><span class="t">ca. 1,5 Min.</span></div>
+<p class="on">Sieben Prozessschritte, fünf davon bei der Projektleitung</p>
+<p>So läuft es heute. Ein Wunsch kommt per E-Mail, Ticket oder im Statusgespräch. Ab dann liegt fast alles bei der Projektleitung: Sie liest und legt ein Ticket an, sucht im Vertrag, fragt beim Senior-Entwickler nach dem Aufwand, entscheidet zwischen Auftrag, Kulanz und Ablehnung und schreibt bei Bedarf das Angebot.</p>
+<p>Erst ganz am Ende übernehmen Entwicklung und Buchhaltung. Die Systeme sind alltäglich: E-Mail, Ticketsystem, Verträge in Google Drive, Stundenkonten in Google Sheets und Slack für die interne Abstimmung. Genau diese Systeme nutzt später auch der Agent.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">6</span><h2>Das Problem</h2><span class="t">ca. 1,5 Min.</span></div>
+<p class="on">Die Kernfrage, Wissen im Kopf einer Person, vier Folgen</p>
+<p>Die eigentliche Frage ist immer dieselbe: Steht das im Vertrag, oder ist das eine Zusatzleistung? Das Wissen dafür, also fünf Verträge mit ihren Grenzen, Konten und Kontingenten, steckt heute im Kopf einer einzigen Person.</p>
+<p>Das hat vier Folgen. Es kostet Zeit. Übersehene Zusatzleistungen bedeuten unbezahlte Entwicklerarbeit. Eine übersehene Fehlermeldung gefährdet vertragliche Fristen, etwa 24 Stunden Reaktionszeit. Und das Ergebnis hängt davon ab, wer gerade prüft. Bemerkenswert: Die Verträge sehen eine KI-gestützte Prüfung mit Freigabe und Protokoll bereits vor. Das System dafür gibt es nur noch nicht.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">7</span><h2>Der Agent bereitet vor, der Mensch entscheidet</h2><span class="t">ca. 2 Min.</span></div>
+<p class="on">Sieben Schritte, farbig nach Regel, KI und Mensch</p>
+<p>Unser Soll-Zustand in sieben Schritten. Die Farben zeigen, wer arbeitet: Grün sind feste Regeln, Violett das Sprachmodell, Gelb der Mensch.</p>
+<p>Die Projektleitung schiebt eine Kundenmail in einen Postfach-Ordner. Der Kunde wird über die Absenderadresse bestimmt, nicht erraten. Bevor das Modell irgendetwas sieht, werden Kontaktdaten unkenntlich gemacht. Erst dann arbeitet das Modell: Es trennt die Mail in einzelne Anliegen, ordnet jedes ein und prüft es gegen den Vertrag, mit wörtlichem Zitat und Sicherheitswert. Danach kontrollieren wieder Regeln: Steht das Zitat wirklich im Vertrag, reicht das Kontingent? Am Ende entscheidet die Projektleitung, und alles wird protokolliert.</p>
+<p>Wichtig ist die Grenze unten: Der Agent schreibt nie an Kunden und bucht nichts.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">8</span><h2>Woran wir Erfolg messen</h2><span class="t">ca. 1,5 Min.</span></div>
+<p class="on">Sechs Erfolgskriterien K1 bis K6 mit Zielwerten</p>
+<p>Diese sechs Kriterien haben wir festgelegt, bevor gebaut wurde. K1 ist der strengste Wert: Mindestens 95 Prozent der Zusatzleistungen müssen erkannt werden, denn eine übersehene Zusatzleistung ist der teuerste Fehler. Die Kategorie muss in 80 Prozent der Fälle stimmen, weil sie vor dem Kunden ohnehin bestätigt wird.</p>
+<p>Dazu kommen mindestens 50 Prozent Zeitersparnis, null Kontaktdaten beim Sprachmodell, ein Vorschlag in unter einer Minute und ein ROI größer als 3 je Durchgang. Die Messlatte ist immer die Bearbeitung derselben Fälle von Hand. Diese sechs Werte tauchen am Ende wieder auf.</p>
+</div>
+
+<div class="chap">2 · Einsatzbereiche</div>
+
+<div class="s"><div class="h"><span class="n">9</span><h2>Wo KI hilft, und wo nicht</h2><span class="t">ca. 1,5 Min.</span></div>
+<p class="on">Sechs Einsatzbereiche: zwei im Kern, drei später, einer ausgeschlossen</p>
+<p>Bevor wir über Werkzeuge gesprochen haben, haben wir den ganzen Ablauf über alle Abteilungen nach möglichen KI-Stellen abgesucht. Jede wurde mit vier Fragen geprüft: Welchen Wert bringt sie, liegen die Daten vor, wie riskant ist ein Fehler, und passt das in vier Wochen?</p>
+<p>In den Kern kamen nur zwei: das Einordnen der Kundenäußerung und die Vertragsprüfung, diese nur mit menschlicher Freigabe. Aufwand schätzen, Antwortentwürfe und Auswertungen verschieben wir, weil Daten oder Verlässlichkeit fehlen. Den automatischen Versand von Angeboten schließen wir bewusst aus. Er wäre rechtlich bindend, und die Verträge verlangen ohnehin einen Menschen.</p>
+<p>Genauso wichtig ist die untere Zeile: Schwärzen, Kunden zuordnen und Rechnen sind feste Regeln, keine KI.</p>
+</div>
+
+<div class="chap">3 · Tool-Vergleich</div>
+
+<div class="s"><div class="h"><span class="n">10</span><h2>Drei Aufbauvarianten, sechs Kriterien</h2><span class="t">ca. 2 Min.</span></div>
+<p class="on">Feste Bausteine n8n und Gemini 2.5 Flash, Bewertungsmatrix V1 bis V3, Ausschlussregel</p>
+<p>Zwei Bausteine waren vorgegeben. n8n als Plattform kommt aus dem Kurs, passt aber auch fachlich: Der Ablauf ist als Schaubild sichtbar, Anbindungen an Mail, Drive, Sheets und Slack sind fertig. Das Sprachmodell Gemini 2.5 Flash ist das einzige im Kurszugang, im Ablauf aber austauschbar.</p>
+<p>Verglichen haben wir deshalb drei Aufbauvarianten: V1 mit Cloud-Modell, V2 rein regelbasiert ohne KI und V3 mit einem Modell auf eigener Hardware. Bewertet nach den fünf IHK-Feldern plus Kontrolle und Nachvollziehbarkeit, weil der Agent über Geld mitentscheidet.</p>
+<p>Man sieht den Zielkonflikt sofort: V2 und V3 sind beim Datenschutz besser, V1 bei der Funktion. Vorab galt eine harte Regel: Wer ungeschützte Kundentexte nach außen gibt, scheidet aus.</p>
+</div>
+
+<div class="chap">4 · Einsatzplanung</div>
+
+<div class="s"><div class="h"><span class="n">11</span><h2>Unsere Wahl: V1</h2><span class="t">ca. 1 Min.</span></div>
+<p class="on">Drei Gründe für V1, Beispiel gegen V2, V3 als Rückfallebene</p>
+<p>Wir haben uns für V1 entschieden. Erstens versteht ein Sprachmodell Freitext gegen Vertragstext, und genau dort liegt der teuerste Fehler. Zweitens steckt die Sicherheit im Aufbau, nicht im Modell. Drittens lief V1 schon im Probebetrieb mit allen fünf Verträgen, in rund fünf Sekunden und für rund ein Zehntel Cent je Anfrage.</p>
+<p>Warum nicht V2? Der Satz rechts zeigt es: „Wir brauchen den Export nicht mehr.“ Ein Schlüsselwort findet „Export“, die Verneinung dreht aber die ganze Aussage um. V3 bleibt Rückfallebene, falls das Schwärzen nicht reicht.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">12</span><h2>So sieht der Agent aus</h2><span class="t">ca. 1 Min.</span></div>
+<p class="on">Drei n8n-Workflows nacheinander, Klick wechselt das Bild</p>
+<p>So sieht das in n8n aus. Der Hauptworkflow holt jede Minute neue Mails, bestimmt den Kunden, schwärzt und trennt die Mail in Anliegen.</p>
+<p class="go">Klick: Anliegen bearbeiten</p>
+<p>Für jedes Anliegen läuft dieser zweite Workflow: einordnen, Vertrag laden, prüfen, Zitat und Kontingent kontrollieren, protokollieren. Die vielen Seitenäste sind Fehlerwege: Alles, was unklar ist, geht an einen Menschen, statt still durchzulaufen.</p>
+<p class="go">Klick: Weitergabe in Slack</p>
+<p>Der dritte Teil verteilt das Ergebnis in Slack. Das zeigt die nächste Folie genauer.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">13</span><h2>Wer bekommt was?</h2><span class="t">ca. 1,5 Min.</span></div>
+<p class="on">Vier Wege nach der Prüfung, Freigabekarte, Eskalation, Ausnahme Kunde E</p>
+<p>Jedes Anliegen nimmt einen von vier Wegen. Fehlermeldungen gehen direkt an die Senior-Entwicklung, damit keine Frist verstreicht. Was im Vertrag enthalten ist, geht zur Umsetzung. Sonstiges wie Rückrufbitten landet als Info bei der Projektleitung.</p>
+<p>Zusatzleistungen und alles Unsichere erscheinen als Freigabekarte mit Einordnung, Vertragsstelle und Kontingent. Die Projektleitung entscheidet dort per Klick: ablehnen, an die Entwicklung oder an den Vertrieb.</p>
+<p>Eskaliert wird automatisch, wenn der Sicherheitswert unter der Schwelle liegt, das Zitat nicht im Vertrag steht oder das Kontingent knapp ist. Bei Kunde E gibt es eine Ausnahme, weil sein Vertrag die Entscheidung ausdrücklich einem Mitarbeiter vorbehält.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">14</span><h2>Kundendaten bleiben im Haus</h2><span class="t">ca. 1,5 Min.</span></div>
+<p class="on">Systeme im Haus, nur geschwärzter Text nach außen, fünf Maßnahmen</p>
+<p>Postfach, Drive, Sheets und Slack gehören Nordlicht, n8n läuft auf einem eigenen Rechner. Das Einzige, was Kundentexte außerhalb der Firma verarbeitet, ist das Sprachmodell. Deshalb setzt der Schutz genau dort an.</p>
+<p>Unten sieht man das Prinzip: E-Mail-Adresse und Telefonnummer werden zu Platzhaltern, bevor der Text das Haus verlässt. Scheitert das Schwärzen, geht gar nichts raus. Beim Anbieter ist die Datensammlung abgewählt, und vor dem Pilot wird ein Vertrag zur Auftragsverarbeitung geschlossen. Außerdem gilt der Kundentext als reine Daten: Steht darin „ignoriere den Vertrag“, wird das nicht befolgt.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">15</span><h2>Erst parallel, dann im Vollbetrieb</h2><span class="t">ca. 1,5 Min.</span></div>
+<p class="on">Vier Phasen, Rollen, Technik</p>
+<p>Die Einführung beginnt mit zwei Wochen Vorbereitung: Auftragsverarbeitung, Kundenstamm und Vertragskurzfassungen einpflegen, Slack-Kanäle anlegen, die Vertretung schulen.</p>
+<p>Dann folgt ein Pilot im Parallelbetrieb über mindestens vier Wochen mit allen fünf Kunden. Die Projektleitung entscheidet jeden Fall weiter selbst und vergleicht danach mit dem Vorschlag des Agenten. Das kostet etwas Mehraufwand, liefert aber echte Vergleichswerte. In den Vollbetrieb geht es nur, wenn K1, K2 und K4 erreicht sind.</p>
+<p>Die Projektleitung betreut den Agenten, ein Senior-Entwickler vertritt sie. Technisch reicht n8n als kostenlose Community Edition auf einem vorhandenen Rechner.</p>
+</div>
+
+<div class="chap">5 · Erfolgskontrolle</div>
+
+<div class="s"><div class="h"><span class="n">16</span><h2>60 Test-Mails in fünf Runden</h2><span class="t">ca. 1,5 Min.</span></div>
+<p class="on">Ergebnis je Runde als Balken, Testarten, 90 Läufe</p>
+<p>Getestet haben wir mit 60 verschiedenen Mails an den echten Workflow, verteilt auf fünf Runden, zusammen 90 Läufe. Dabei waren Fehlermeldungen, kleine und große Änderungen, unklare Mails, Mails mit zwei Anliegen und ein Manipulationsversuch.</p>
+<p>Die Balken zeigen den Verlauf: In den ersten Runden gab es noch rote und gelbe Anteile. Nach jeder Runde haben wir nachgebessert. In der letzten Runde liefen dieselben zehn Mails nach den Änderungen erneut, und alle zehn haben bestanden. Der Manipulationsversuch wurde nicht befolgt.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">17</span><h2>Alle sechs Ziele erreicht</h2><span class="t">ca. 1,5 Min.</span></div>
+<p class="on">K1 bis K6: Ziel und Ergebnis, Hinweis auf Laborbedingungen</p>
+<p>Hier die Kriterien von vorhin mit den Ergebnissen. Alle 31 Mails mit Zusatzanteil wurden erkannt, das sind 100 Prozent. Die Kategorie stimmte bei 34 von 36, also 94 Prozent. Die Bearbeitung sinkt von 13 bis 18 Minuten auf rund 4 Minuten. Das Modell sah in keinem Test echte Kontaktdaten, und ein Vorschlag lag im Mittel nach 5,4 Sekunden vor.</p>
+<p>Beim ROI je Durchgang liegen wir über 4.800, weil ein Durchgang nur rund 0,15 US-Cent kostet. Ehrlich dazu: Das sind Laborwerte mit Testfällen aus unserer Gruppe. Die Zeit im echten Betrieb misst erst der Pilot.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">18</span><h2>Was die Tests aufgedeckt haben</h2><span class="t">ca. 1,5 Min.</span></div>
+<p class="on">Drei Fehler mit Maßnahme, angepasster Freigabeweg</p>
+<p>Die Tests waren wertvoll, weil sie Fehler gezeigt haben. Der teuerste: Kam eine Fehlermeldung zusammen mit einem Wunsch in einer Mail, landete sie beim Vertrieb. Die Frist von vier Stunden wäre verstrichen. Seitdem trennt ein eigener Schritt jede Mail in Anliegen.</p>
+<p>Zweitens wurde ein Seitenkontingent nicht gerechnet. Jetzt liefert das Modell die Seitenzahl, und eine Regel rechnet. Drittens hat das Modell Anweisungen aus dem Prompt nicht immer befolgt. Das ist noch offen: Wichtige Regeln sollen in den Programmcode.</p>
+<p>Aus den Ergebnissen haben wir auch den Freigabeweg verschlankt: Nur noch Zusatzleistungen und unsichere Fälle brauchen eine Freigabe. Der Preis ist unten benannt, dafür gibt es eine wöchentliche Stichprobe.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">19</span><h2>Rechnet sich der Agent?</h2><span class="t">ca. 2 Min.</span></div>
+<p class="on">Zeit je Mail, Kosten je Mail, Monate bis der Aufbau bezahlt ist</p>
+<p>Links die Rechnung je Mail: Von Hand 13 bis 18 Minuten, mit Agent rund 4. Das spart je Mail 7 bis 11 Euro Arbeitslohn, gerechnet mit 43 bis 54 Euro je Stunde. Das Modell kostet dabei rund 0,15 US-Cent.</p>
+<p>Rechts das ehrlichere Bild über die Zeit: Nach wie vielen Monaten hat der Agent seinen Aufbau wieder eingespielt? Der Aufbau kostet einmalig rund 3.880 Euro, die Pflege rund 2.910 Euro im Jahr. Wie viele Mails im Monat kommen, ist nicht gemessen. Bei unserer Annahme von 80 Mails ist der Aufbau nach 6 bis 11 Monaten bezahlt, bei 120 schon nach 4 bis 6, bei 40 erst nach über 18 Monaten. Der gestreifte Teil zeigt die Bandbreite, je nachdem ob eine Mail 9 oder 14 Minuten Arbeit spart.</p>
+<p>Nicht eingerechnet sind vermiedene unbezahlte Arbeit und vermiedene Fristverletzungen. Eine einzige übersehene Kleinstveränderung kann bis zu 2.500 Euro kosten.</p>
+</div>
+
+<div class="chap">6 · Ausblick</div>
+
+<div class="s"><div class="h"><span class="n">20</span><h2>Grenzen und Zielkonflikte</h2><span class="t">ca. 1,5 Min.</span></div>
+<p class="on">Vier Grenzen, drei Zielkonflikte mit Entscheidung und Preis</p>
+<p>Zu den Grenzen. Die wichtigste ist die Aussagekraft der Tests: Fälle und Musterlösung stammen aus der Gruppe, das Ergebnis fällt eher günstig aus. Das Modell antwortet nicht immer gleich, die Kategorie schwankte zwischen B und C. Und falsche Einstufungen hatten teils einen hohen Sicherheitswert von 0,9. Deshalb ersetzen Schwellen die Freigabe nicht.</p>
+<p>Rechts die drei Zielkonflikte. Bei jedem haben wir uns entschieden und den Preis benannt: Datenschutz gegen Leistung, Kontrolle gegen Entlastung, Flexibilität gegen Vorhersagbarkeit. Die Linie ist überall dieselbe: Das Modell darf verstehen, verbindlich entscheiden Regeln und Menschen.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">21</span><h2>Jetzt, danach, später</h2><span class="t">ca. 1 Min.</span></div>
+<p class="on">Drei Schritte mit Begründung des Zeitpunkts</p>
+<p>Als Nächstes kommt die Vorbereitung des Piloten. Ohne Vertrag zur Auftragsverarbeitung darf kein echter Kundentext ans Modell. Im selben Zug ziehen wir die wichtigen Regeln in den Programmcode.</p>
+<p>Danach folgt der Pilot im Parallelbetrieb. Erst er zeigt, wie der Agent mit echten Kundenformulierungen umgeht, und macht aus unseren Annahmen Messwerte. Später testen wir andere Sprachmodelle. Der Ablauf ist dafür vorbereitet, und mit den Pilotwerten gibt es einen fairen Vergleich.</p>
+</div>
+
+<div class="s"><div class="h"><span class="n">22</span><h2>Drei Lehren aus dem Projekt</h2><span class="t">ca. 1 Min.</span></div>
+<p class="on">Drei Lehren, Leitsatz, Danke und Fragen</p>
+<p>Drei Dinge nehmen wir mit. Früh testen lohnt sich: Den teuersten Fehler haben erst die Testmails gezeigt. Verbindliches gehört in Regeln: Der Prompt allein hat nicht gereicht. Und Messen verändert Pläne: Unser Freigabeweg sieht heute anders aus als zu Beginn, und das begründen wir mit Zahlen.</p>
+<p>Damit sind wir beim Leitsatz vom Anfang: Das Modell schlägt vor, Regeln prüfen, der Mensch entscheidet. Vielen Dank. Wir freuen uns auf Ihre Fragen.</p>
+</div>
+
+</div>
+</div>
+</body>
+</html>
