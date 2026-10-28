@@ -8,7 +8,7 @@ Change-Request-Agent für ein fiktives Softwarehaus. Ein n8n-Workflow ordnet Kun
 Knut, Michael
 
 ## Stand
-Stand 2026-10-27: Kapitel 1 bis 5 der Projektarbeit liegen vor und sind von der Gruppe gegengelesen. Der Workflow läuft in einer lokalen n8n-Instanz im Testbetrieb: Eingang über einen Postfach-Ordner, Freigabe über Slack.
+Stand 2026-10-28: Kapitel 1 bis 5 der Projektarbeit liegen vor und sind von der Gruppe gegengelesen, Kapitel 6 liegt als Entwurf vor (die Reflexion von Michael steht aus). Der Workflow läuft in einer lokalen n8n-Instanz im Testbetrieb: Eingang über einen Postfach-Ordner, Freigabe über Slack.
 
 ## Inhalt
 - `docs/kapitel-1-ist-und-soll.pdf`: Kapitel 1, Ist- und Soll-Situation mit den Erfolgskriterien K1 bis K6
@@ -16,6 +16,7 @@ Stand 2026-10-27: Kapitel 1 bis 5 der Projektarbeit liegen vor und sind von der 
 - `docs/kapitel-3-tool-vergleich.pdf`: Kapitel 3, Vergleich von drei Aufbauvarianten mit ersten Messungen
 - `docs/kapitel-4-tool-auswahl-und-einsatzplanung.pdf`: Kapitel 4, begründete Auswahl und Einsatzplanung mit Pilotphase
 - `docs/kapitel-5-erfolgskontrolle-kosten-und-nutzen.pdf`: Kapitel 5, Erfolgskontrolle mit Testrunden, Kennzahlen, Kosten und Nutzen
+- `docs/kapitel-6-projektabschluss-und-ausblick.pdf`: Kapitel 6, Projektabschluss mit Stärken, Grenzen, Zielkonflikten, Wirtschaftlichkeit, nächsten Schritten und Reflexion
 - `docs/fiktive-firma.md`: das fiktive Softwarehaus mit Rollen, Abteilungen, Personen, Kunden, Vertragsarten und Regeln
 - `docs/kandidatenbogen.md`: der Use Case als ausgefüllter Kandidatenbogen (Prozess, KI-Stellen, Erfolgskriterien, Daten, Risiken, Plan)
 - `docs/notizen.md`: Sammelstelle für Festlegungen und Textstellen, die später im Workflow umgesetzt werden (Arbeitsdatei, wächst weiter)
