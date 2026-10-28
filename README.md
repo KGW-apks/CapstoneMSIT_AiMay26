@@ -29,8 +29,8 @@ Stand 2026-10-28: Die Kapitel 1 bis 6 der Projektarbeit und die Präsentation li
 - `workflow/slack-ende.json`: der Sub-Workflow für Weitergabe und Freigabe über Slack
 - `docs/vorlagen/`: die drei Standardverträge (Pflege, Erstellung, Wartung Plus)
 - `docs/schaubilder/organigramm`: Organigramm des fiktiven Softwarehauses (PNG und SVG)
-- `docs/schaubilder/agent-aufgaben`: Aufgaben und Ausgänge des Agenten (PNG und SVG)
-- `docs/schaubilder/architektur`: Ablauf des Agenten und die Umgebung jedes Schritts (PNG und SVG)
+- `docs/schaubilder/agent-aufgaben`: Aufgaben und Ausgänge des Agenten (PNG und SVG). **Veraltet** (Entwurf vom 2026-10-13): Es zeigt noch das Buchen auf Stundenkonten und eine andere Betragsgrenze, maßgeblich sind Kapitel 1 und 4
+- `docs/schaubilder/architektur`: Ablauf des Agenten und die Umgebung jedes Schritts (PNG und SVG). **Veraltet** (Entwurf aus Sprint 1): Es zeigt noch die Freigabe jedes Falls und kennt weder die Trennung in Anliegen noch Kundenstamm und Protokoll, maßgeblich sind Kapitel 1 und 4
 
 Alle Dokumente sind mit KI-Unterstützung erstellt.
 
