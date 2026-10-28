@@ -95,7 +95,7 @@ git branch -f {ziel} origin/{ziel}
 
 Die letzte Zeile setzt dein lokales `{ziel}` auf den Stand von GitHub zurück, damit der nächste Push nicht wieder dort landet.
 
-Die Regeln stehen in `CONTRIBUTING.md`. Bitte kommentiere hier kurz mit „verstanden“ und schließe das Issue.
+Die Regel: Jede Person arbeitet nur in ihrem eigenen Branch, `main` pflegt Knut. Bitte kommentiere hier kurz mit „verstanden“ und schließe das Issue.
 """
 
 
@@ -109,7 +109,7 @@ def text_fremd(actor, branch, eigener):
 
 du hast in `{branch}` gepusht. Jede Person arbeitet nur in ihrem eigenen Branch, deiner ist {eigen}. Der Push bleibt stehen, bitte sprecht euch ab und verschiebt die Arbeit in den richtigen Branch.
 
-Die Regeln stehen in `CONTRIBUTING.md`.
+Die Regel: Jede Person arbeitet nur in ihrem eigenen Branch, `main` pflegt Knut.
 """
 
 
