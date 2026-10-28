@@ -19,6 +19,7 @@ Stand 2026-10-28: Kapitel 1 bis 5 der Projektarbeit liegen vor und sind von der 
 - `docs/kapitel-6-projektabschluss-und-ausblick.pdf`: Kapitel 6, Projektabschluss mit Stärken, Grenzen, Zielkonflikten, Wirtschaftlichkeit, nächsten Schritten und Reflexion
 - `docs/praesentation/praesentation-change-request-agent.html`: die Präsentation, 22 Folien für rund 30 Minuten, im Browser öffnen, Pfeiltasten zum Blättern, F für Vollbild
 - `docs/praesentation/sprechskript-change-request-agent.html`: das Sprechskript zur Präsentation, je Folie Kernpunkt und Sprechtext
+- `docs/praesentation/backup-durchlauf.mp4`: Backup-Video des Durchlaufs (Mail, n8n, Slack, Freigabe), 77 Sekunden, für den Fall, dass die Live-Demo scheitert
 - `docs/fiktive-firma.md`: das fiktive Softwarehaus mit Rollen, Abteilungen, Personen, Kunden, Vertragsarten und Regeln
 - `docs/kandidatenbogen.md`: der Use Case als ausgefüllter Kandidatenbogen (Prozess, KI-Stellen, Erfolgskriterien, Daten, Risiken, Plan)
 - `docs/notizen.md`: Sammelstelle für Festlegungen und Textstellen, die später im Workflow umgesetzt werden (Arbeitsdatei, wächst weiter)
